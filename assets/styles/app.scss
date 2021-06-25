@@ -1,0 +1,44 @@
+@import '~bootstrap/scss/bootstrap';
+body{
+  font-family: "Comic Sans MS";
+  font-size: 20px;
+}
+.main-container{
+  padding: 0 30px;
+}
+.navbar a{
+  padding: 0 30px;
+}
+.header-word{
+  font-weight: 600;
+  font-size: 30px;
+}
+.part-of-speech{
+  color: darkgray;
+}
+.meaning-name{
+  font-weight: 400;
+  font-size: 1.2em;
+}
+.expample-sentence{
+  color: darkgray;
+}
+.admin-menu{
+  margin: 0 20%;
+  display: flex;
+  justify-content: center;
+}
+.admin-menu-tile{
+  text-decoration: none;
+  color: white;
+  width: 200px;
+  height: 200px;
+  background-color: plum;
+  margin: 40px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 20px;
+}
+.add-word-container input{
+  width: 200px;
+}

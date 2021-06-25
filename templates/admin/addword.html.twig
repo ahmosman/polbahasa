@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+<div class="add-word-container">
+        <div class="header-word">lock</div>
+        <div class="part-of-speech">rzeczownik</div>
+    <ol>
+        <li>
+            <div class="meaning-name">zamykać</div>
+            <div class="example-sentence">Did you lock the door?</div>
+            <div class="example-sentence">Shall I lock up after you?</div>
+        </li>
+        <li>
+            <div class="meaning-name">zamykać się</div>
+            <div class="example-sentence">He locked himself in a hotel room and wouldn&#039;t let anybody in.</div>
+        </li>
+        <li>
+            <div class="meaning-name">chować (w bezpiecznym miejscu)</div>
+            <div class="example-sentence">He locked the dog in his room.</div>
+            <div class="example-sentence">I locked my diary in a drawer.</div>
+            <div class="example-sentence">I have to lock my jewellery in my boxes.</div>
+        </li>
+    </ol>
+    {{ form(form) }}
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('editword') }}
+{% endblock %}

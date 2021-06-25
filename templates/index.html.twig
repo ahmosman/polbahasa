@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+{% endblock %}
+{% block body %}
+    <div class="main-container">
+        <h2 class="main-title">Super słownik indonezyjskiego</h2>
+    </div>
+
+    {% for c in content%}
+        <div class="header-word">{{ c.name }}</div>
+        <div class="part-of-speech">{{ c.partOfSpeech }}</div>
+        <ol>
+        {% for m in c.meanings %}
+            <li>
+            <div class="meaning-name">{{ m.name }}</div>
+            {% for s in  m.sentences%}
+                <div class="example-sentence">{{ s }}</div>
+            {% endfor %}
+            </li>
+        {% endfor %}
+        </ol>
+    {% endfor %}
+{% endblock %}
