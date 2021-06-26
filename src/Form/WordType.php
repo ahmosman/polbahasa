@@ -20,7 +20,8 @@ class WordType extends AbstractType
             ->add('json',HiddenType::class
             )
             ->add('submit', SubmitType::class,[
-                'label'=>'Zapisz'
+                'label'=>'Zapisz',
+                'attr' => ['class' => 'save-meaning-btn btn btn-primary']
             ])
         ;
     }

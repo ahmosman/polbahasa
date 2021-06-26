@@ -20,7 +20,7 @@ body{
   font-weight: 400;
   font-size: 1.2em;
 }
-.expample-sentence{
+.example-translation{
   color: darkgray;
 }
 .admin-menu{
@@ -39,6 +39,33 @@ body{
   text-align: center;
   border-radius: 20px;
 }
-.add-word-container input{
+.edit-word-section input{
   width: 200px;
+}
+.edit-hover{
+  opacity: 0.5;
+  cursor: pointer;
+}
+.edit-word-footer{
+  display: flex;
+  justify-content: flex-start;
+  position:absolute;
+  bottom: 60px;
+}
+.edit-word-footer button{
+  margin: 0 10px;
+  height: 40px;
+}
+.add-sentence-btn{
+  width: 10px;
+  height: 10px;
+  background-color: hotpink;
+  display: inline-block;
+  position: relative;
+  bottom: 10px;
+}
+
+.sentence-section div{
+  display: inline;
+  margin: 0 10px;
 }

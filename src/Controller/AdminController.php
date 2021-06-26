@@ -26,11 +26,11 @@ class AdminController extends AbstractController
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
-        {
-            dump($form);die;
-            return $this->redirectToRoute('admin');
-        }
+//        if($form->isSubmitted() && $form->isValid())
+//        {
+//            dump($form);die;
+//            return $this->redirectToRoute('admin');
+//        }
         return $this->render('admin/addword.html.twig', [
             'form' => $form->createView(),
         ]);
