@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\PartOfSpeech;
 use App\Entity\Word;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,16 +48,14 @@ class MainController extends AbstractController
 //        file_put_contents("json_word.txt",$json);
         $em = $this->getDoctrine()->getManager();
         $word = $this->getDoctrine()->getRepository(Word::class)->findOneBy(['name'=>$content[0]['name']]) ?? new Word();
-        $json = array($word->getJson());
 
         dump($content);
-        dump($json);
 //        $word->setName($content[0]['name']);
 //        $word->setJson($content);
 //        $em->persist($word);
 //        $em->flush();
 
 
-        return $this->render('index.html.twig',['content' => $json]);
+        return $this->render('index.html.twig',['content' => $content]);
     }
 }

@@ -3,13 +3,13 @@
 {% block title %}Admin{% endblock %}
 
 {% block body %}
-<section class="edit-word-section">
+    <section class="edit-word-section">
+        {{form_start(form)}}
         <div class="header-word">lock</div>
-        <div class="part-of-speech">rzeczownik</div>
-    <ol class="edit-word-ol">
+        {{ form_row(form.partOfSpeech ) }}
+        <ol class="edit-word-ol">
         <li class="meaning-li">
             <div class="meaning-name">zamykać</div>
-            <span class="add-sentence-btn" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
             <div class="sentence-section">
                 <div class="example-sentence">Did you lock the door?</div>
                 <div class="example-translation">Czy zamknąłeś drzwi?</div>
@@ -41,21 +41,41 @@
                 <div class="example-translation">Muszę schować swoją biżuterię w pudełku.</div>
             </div>
         </li>
-
     </ol>
-</section>
-<footer class="edit-word-footer">
-    {{ form(form) }}
-    <button class="add-meaning-btn btn btn-success">Dodaj tłumaczenie</button>
-</footer>
+        <div class="edit-phrase-div1 hidden">
+            <div class="edit-phrase-div2">
+                <div class="edit-phrase-desc"></div>
+                <input type="text" id="phrase-text-in">
+                <div class="edit-phrase-btn-div">
+                    <button type="button" id="edit-phrase-apply" class="btn btn-hotpink">Zatwierdź</button>
+                    <button type="button" id="edit-phrase-cancel" class="btn btn-lightpink">Anuluj</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="edit-word-footer">
+        {{ form_row(form.save ) }}
+        <button type="button" class="add-meaning-btn btn btn-orchid">Dodaj tłumaczenie</button>
+    </footer>
+    {{form_end(form)}}
+
+{# templates for editword.js#}
+    <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
+    <span class="del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
+    <span class="del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
 {% endblock %}
 
 
 
-
-
-
-
 {% block javascripts %}
+    <script>
+        document.querySelector("html").addEventListener('click',()=>{
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip({
+                    trigger : 'hover'
+                });
+            });
+        })
+    </script>
     {{ encore_entry_script_tags('editword') }}
 {% endblock %}

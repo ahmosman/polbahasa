@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\WordRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,9 +25,24 @@ class Word
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity=Meaning::class, mappedBy="Word")
+     */
+    private $meanings;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
      */
-    private $json = [];
+    private $meaningsJson = [];
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $partOfSpeech;
+
+    public function __construct()
+    {
+        $this->meanings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,14 +61,57 @@ class Word
         return $this;
     }
 
-    public function getJson(): ?array
+    /**
+     * @return Collection|Meaning[]
+     */
+    public function getMeanings(): Collection
     {
-        return $this->json;
+        return $this->meanings;
     }
 
-    public function setJson(?array $json): self
+    public function addMeaning(Meaning $meaning): self
     {
-        $this->json = $json;
+        if (!$this->meanings->contains($meaning)) {
+            $this->meanings[] = $meaning;
+            $meaning->setWord($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeaning(Meaning $meaning): self
+    {
+        if ($this->meanings->removeElement($meaning)) {
+            // set the owning side to null (unless already changed)
+            if ($meaning->getWord() === $this) {
+                $meaning->setWord(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    public function getMeaningsJson(): ?array
+    {
+        return $this->meaningsJson;
+    }
+
+    public function setMeaningsJson(?array $meaningsJson): self
+    {
+        $this->meaningsJson = $meaningsJson;
+
+        return $this;
+    }
+
+    public function getPartOfSpeech(): ?string
+    {
+        return $this->partOfSpeech;
+    }
+
+    public function setPartOfSpeech(?string $partOfSpeech): self
+    {
+        $this->partOfSpeech = $partOfSpeech;
 
         return $this;
     }

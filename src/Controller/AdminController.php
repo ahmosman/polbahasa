@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Word;
+use App\Form\MeaningType;
 use App\Form\WordType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -26,7 +27,8 @@ class AdminController extends AbstractController
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-//        if($form->isSubmitted() && $form->isValid())
+//        if($form->isSubmitted() && $form->isValid()
+//        TODO: Znajdź sposób na przekazanie wielu Meanings z Twiga do Word przez formularz dla Word
 //        {
 //            dump($form);die;
 //            return $this->redirectToRoute('admin');

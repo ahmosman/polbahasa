@@ -4,6 +4,9 @@ body{
   font-size: 20px;
 }
 .main-container{
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
   padding: 0 30px;
 }
 .navbar a{
@@ -13,12 +16,11 @@ body{
   font-weight: 600;
   font-size: 30px;
 }
-.part-of-speech{
-  color: darkgray;
-}
+
 .meaning-name{
   font-weight: 400;
   font-size: 1.2em;
+  display: inline;
 }
 .example-translation{
   color: darkgray;
@@ -39,33 +41,143 @@ body{
   text-align: center;
   border-radius: 20px;
 }
-.edit-word-section input{
+
+.part-of-speech{
   width: 200px;
+  color: darkgray;
 }
-.edit-hover{
+.phrase-mouseover{
   opacity: 0.5;
   cursor: pointer;
+}
+.phrase-click{
+  opacity: 0.5;
+  text-decoration: underline;
+}
+
+.edit-word-section{
+  flex: 1;
+
+}
+.edit-phrase-div1{
+  display: flex;
+  justify-content: center;
+}
+.edit-phrase-div2{
+  text-align: center;
 }
 .edit-word-footer{
   display: flex;
   justify-content: flex-start;
-  position:absolute;
-  bottom: 60px;
+  flex-shrink: 0;
 }
 .edit-word-footer button{
   margin: 0 10px;
   height: 40px;
 }
-.add-sentence-btn{
+.add-sentence-btn:hover, .del-sentence-btn:hover, .del-meaning-btn:hover {
+  cursor: pointer;
+}
+
+.add-sentence-btn, .del-sentence-btn, .del-meaning-btn{
   width: 10px;
   height: 10px;
-  background-color: hotpink;
   display: inline-block;
   position: relative;
   bottom: 10px;
+  margin: 0 10px;
 }
-
+.add-sentence-btn{
+  background-color: hotpink;
+}
+.del-sentence-btn{
+  background-color: red;
+}
+.del-meaning-btn{
+  background-color: rebeccapurple;
+}
 .sentence-section div{
   display: inline;
   margin: 0 10px;
+}
+.hidden{
+  display: none;
+}
+.opacity0{
+  opacity: 0;
+}
+
+.edit-phrase-btn-div{
+  margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Custom buttons
+.btn-hotpink{
+  background-color: hotpink;
+}
+.btn-hotpink:hover{
+  background-color: rgba(255, 105, 180, 0.82);
+}
+
+.btn-hotpink:focus,
+.btn-hotpink:active,
+{
+  background-color: rgba(255, 105, 180, 0.82);
+  box-shadow: 0 0 0 3px rgba(232, 167, 200, 0.7);
+}
+.btn-lightpink{
+  background-color: lightpink;
+}
+.btn-lightpink:hover{
+  background-color: rgba(255, 182, 193, 0.71);
+}
+
+.btn-lightpink:focus,
+.btn-lightpink:active,
+{
+  background-color: rgba(255, 182, 193, 0.71);
+  box-shadow: 0 0 0 3px rgba(255, 231, 235, 0.71);
+}
+
+.btn-mediumpurple{
+  background-color: mediumpurple;
+}
+.btn-mediumpurple:hover{
+  background-color: rgba(147, 112, 219, 0.82);
+}
+
+.btn-mediumpurple:focus,
+.btn-mediumpurple:active,
+{
+  background-color: rgba(147, 112, 219, 0.82);
+  box-shadow: 0 0 0 3px rgba(209, 185, 252, 0.75);
+}
+
+.btn-orchid{
+  background-color: orchid;
+}
+.btn-orchid:hover{
+  background-color: rgba(218, 112, 214, 0.93);
+}
+.btn-orchid:focus,
+.btn-orchid:active,
+{
+  background-color: rgba(218, 112, 214, 0.93);
+  box-shadow: 0 0 0 3px rgba(224, 180, 221, 0.73);
 }
