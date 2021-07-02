@@ -63,6 +63,8 @@
     <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
     <span class="del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
     <span class="del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
+    <span class="move-up-btn fas fa-angle-up hidden"></span>
+    <span class="move-down-btn fas fa-angle-down hidden"></span>
 {% endblock %}
 
 
@@ -75,7 +77,16 @@
                     trigger : 'hover'
                 });
             });
-        })
+        });
+        $(window).ready(function() {
+            $("form").on("keypress", function (event) {
+                var keyPressed = event.keyCode || event.which;
+                if (keyPressed === 13) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
     </script>
     {{ encore_entry_script_tags('editword') }}
 {% endblock %}

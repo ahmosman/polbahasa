@@ -75,11 +75,11 @@ body{
   margin: 0 10px;
   height: 40px;
 }
-.add-sentence-btn:hover, .del-sentence-btn:hover, .del-meaning-btn:hover {
+.add-sentence-btn:hover, .del-sentence-btn:hover, .del-meaning-btn:hover, .move-up-btn:hover, .move-down-btn:hover {
   cursor: pointer;
 }
 
-.add-sentence-btn, .del-sentence-btn, .del-meaning-btn{
+.add-sentence-btn, .del-sentence-btn, .del-meaning-btn, .move-up-btn, .move-down-btn{
   width: 10px;
   height: 10px;
   display: inline-block;
@@ -96,11 +96,16 @@ body{
 .del-meaning-btn{
   background-color: rebeccapurple;
 }
+
+.move-up-btn, .move-down-btn{
+  bottom: 7px;
+}
+
 .sentence-section div{
   display: inline;
   margin: 0 10px;
 }
-.hidden{
+.hidden, .hidden:before{
   display: none;
 }
 .opacity0{
@@ -110,7 +115,9 @@ body{
 .edit-phrase-btn-div{
   margin-top: 10px;
 }
-
+#phrase-text-in{
+  width: 600px;
+}
 
 
 
