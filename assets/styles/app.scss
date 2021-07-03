@@ -43,9 +43,15 @@ body{
 }
 
 .part-of-speech{
-  width: 200px;
+  width: 400px;
   color: darkgray;
+  display: inline-block;
 }
+
+.meaning-li{
+  margin: 20px 0;
+}
+
 .phrase-mouseover{
   opacity: 0.5;
   cursor: pointer;
@@ -75,11 +81,11 @@ body{
   margin: 0 10px;
   height: 40px;
 }
-.add-sentence-btn:hover, .del-sentence-btn:hover, .del-meaning-btn:hover, .move-up-btn:hover, .move-down-btn:hover {
+.add-sentence-btn:hover, .del-sentence-btn:hover, .del-meaning-btn:hover, .move-up-btn:hover, .move-down-btn:hover, .del-speech-section-btn:hover {
   cursor: pointer;
 }
 
-.add-sentence-btn, .del-sentence-btn, .del-meaning-btn, .move-up-btn, .move-down-btn{
+.add-sentence-btn, .del-sentence-btn, .del-meaning-btn, .move-up-btn, .move-down-btn, .del-speech-section-btn{
   width: 10px;
   height: 10px;
   display: inline-block;
@@ -93,12 +99,16 @@ body{
 .del-sentence-btn{
   background-color: red;
 }
-.del-meaning-btn{
+.del-meaning-btn, .del-speech-section-btn{
   background-color: rebeccapurple;
 }
 
 .move-up-btn, .move-down-btn{
   bottom: 7px;
+}
+
+.sentence-section{
+  margin: 10px 0;
 }
 
 .sentence-section div{
@@ -187,4 +197,17 @@ body{
 {
   background-color: rgba(218, 112, 214, 0.93);
   box-shadow: 0 0 0 3px rgba(224, 180, 221, 0.73);
+}
+
+.btn-darkviolet{
+  background-color: darkviolet;
+}
+.btn-darkviolet:hover{
+  background-color: rgba(148, 0, 211, 0.78);
+}
+.btn-darkviolet:focus,
+.btn-darkviolet:active,
+{
+  background-color: rgba(148, 0, 211, 0.78);
+  box-shadow: 0 0 0 3px rgba(195, 166, 241, 0.6);
 }

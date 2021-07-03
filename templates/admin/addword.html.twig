@@ -6,42 +6,45 @@
     <section class="edit-word-section">
         {{form_start(form)}}
         <div class="header-word">lock</div>
-        {{ form_row(form.partOfSpeech ) }}
-        <ol class="edit-word-ol">
-        <li class="meaning-li">
-            <div class="meaning-name">zamykać</div>
-            <div class="sentence-section">
-                <div class="example-sentence">Did you lock the door?</div>
-                <div class="example-translation">Czy zamknąłeś drzwi?</div>
-            </div>
-            <div class="sentence-section">
-                <div class="example-sentence">Shall I lock up after you?</div>
-                <div class="example-translation">Czy mam za tobą zamknąć?</div>
-            </div>
-        </li>
-        <li class="meaning-li">
-            <div class="meaning-name">zamykać się</div>
-            <div class="sentence-section">
-                <div class="example-sentence">He locked himself in a hotel room and wouldn&#039;t let anybody in.</div>
-                <div class="example-translation">On zamknął się w pokoju hotelowym i nikogo nie wpuszczał</div>
-            </div>
-        </li>
-        <li class="meaning-li">
-            <div class="meaning-name">chować (w bezpiecznym miejscu)</div>
-            <div class="sentence-section">
-                <div class="example-sentence">He locked the dog in his room.</div>
-                <div class="example-translation">On zamknął psa w swoim pokoju.</div>
-            </div>
-            <div class="sentence-section">
-                <div class="example-sentence">I locked my diary in a drawer.</div>
-                <div class="example-translation">Schowałam swój pamiętnik w szufladzie.</div>
-            </div>
-            <div class="sentence-section">
-                <div class="example-sentence">I have to lock my jewellery in my boxes.</div>
-                <div class="example-translation">Muszę schować swoją biżuterię w pudełku.</div>
-            </div>
-        </li>
-    </ol>
+        <div class="speech-section">
+            <div class="part-of-speech">czasownik</div>
+            <ol class="edit-word-ol">
+                <li class="meaning-li">
+                    <div class="meaning-name">zamykać</div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">Did you lock the door?</div>
+                        <div class="example-translation">Czy zamknąłeś drzwi?</div>
+                    </div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">Shall I lock up after you?</div>
+                        <div class="example-translation">Czy mam za tobą zamknąć?</div>
+                    </div>
+                </li>
+                <li class="meaning-li">
+                    <div class="meaning-name">zamykać się</div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">He locked himself in a hotel room and wouldn&#039;t let anybody in.</div>
+                        <div class="example-translation">On zamknął się w pokoju hotelowym i nikogo nie wpuszczał</div>
+                    </div>
+                </li>
+                <li class="meaning-li">
+                    <div class="meaning-name">chować (w bezpiecznym miejscu)</div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">He locked the dog in his room.</div>
+                        <div class="example-translation">On zamknął psa w swoim pokoju.</div>
+                    </div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">I locked my diary in a drawer.</div>
+                        <div class="example-translation">Schowałam swój pamiętnik w szufladzie.</div>
+                    </div>
+                    <div class="sentence-section">
+                        <div class="example-sentence">I have to lock my jewellery in my boxes.</div>
+                        <div class="example-translation">Muszę schować swoją biżuterię w pudełku.</div>
+                    </div>
+                </li>
+            </ol>
+        </div>
+
         <div class="edit-phrase-div1 hidden">
             <div class="edit-phrase-div2">
                 <div class="edit-phrase-desc"></div>
@@ -55,7 +58,7 @@
     </section>
     <footer class="edit-word-footer">
         {{ form_row(form.save ) }}
-        <button type="button" class="add-meaning-btn btn btn-orchid">Dodaj tłumaczenie</button>
+        <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
     </footer>
     {{form_end(form)}}
 
@@ -63,8 +66,10 @@
     <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
     <span class="del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
     <span class="del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
+    <span class="del-speech-section-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń część mowy"></span>
     <span class="move-up-btn fas fa-angle-up hidden"></span>
     <span class="move-down-btn fas fa-angle-down hidden"></span>
+    <button type="button" class="add-meaning-btn btn btn-orchid hidden">Dodaj tłumaczenie</button>
 {% endblock %}
 
 

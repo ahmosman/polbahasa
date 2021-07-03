@@ -34,11 +34,6 @@ class Word
      */
     private $meaningsJson = [];
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $partOfSpeech;
-
     public function __construct()
     {
         $this->meanings = new ArrayCollection();
@@ -100,18 +95,6 @@ class Word
     public function setMeaningsJson(?array $meaningsJson): self
     {
         $this->meaningsJson = $meaningsJson;
-
-        return $this;
-    }
-
-    public function getPartOfSpeech(): ?string
-    {
-        return $this->partOfSpeech;
-    }
-
-    public function setPartOfSpeech(?string $partOfSpeech): self
-    {
-        $this->partOfSpeech = $partOfSpeech;
 
         return $this;
     }
