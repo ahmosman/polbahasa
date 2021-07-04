@@ -17,7 +17,7 @@ let phraseDescDiv = document.querySelector(".edit-phrase-desc");
 let phraseTextIn = document.querySelector("#phrase-text-in");
 let phraseApplyBtn = document.querySelector("#edit-phrase-apply");
 let phraseCancelBtn = document.querySelector("#edit-phrase-cancel");
-let addspeechSectionBtn = document.querySelector(".add-speech-section-btn");
+let addSpeechSectionBtn = document.querySelector(".add-speech-section-btn");
 
 let phraseClassesToIgnore = ":not(.sentence-section):not(.edit-phrase-div1):not(.edit-phrase-div1 *):not(.mb-3)";
 let phraseClasses = ['.header-word','.part-of-speech','.meaning-name','.example-sentence','.example-translation'];
@@ -403,76 +403,161 @@ function getChildrenWithClass(element, nameOfClass, singleIsNotCollection = true
 
 function getWordJson()
 {
- let meaningsJsonStr = "{";
- let meaningsLi = document.querySelectorAll(".meaning-li");
- for (let m=0; m<meaningsLi.length; m++){
-     meaningsJsonStr += `"${m}":{`;
-     let meaningName = getChildrenWithClass(meaningsLi[m],'meaning-name');
-     meaningsJsonStr += `"name": "${meaningName.textContent}","examples":{`;
-     let examples = getChildrenWithClass(meaningsLi[m],'sentence-section',false);
-    for(let e=0; e<examples.length; e++){
-        let sentence = getChildrenWithClass(examples[e],'example-sentence');
-        let translation = getChildrenWithClass(examples[e], 'example-translation');
-        meaningsJsonStr += `"${e}": { "sentence":"${sentence.textContent}","translation":"${translation.textContent}"`;
-        //comma for end of example
-        meaningsJsonStr += e < examples.length-1 ? '},' : '}';
-    }
-    //closing all examples
-     meaningsJsonStr += '}';
-     //comma for end of meaning
-     meaningsJsonStr += m < meaningsLi.length-1 ? '},' : '}';
- }
- //closing all meanings
- meaningsJsonStr += '}';
+let word = document.querySelector(".header-word");
+let speechSections = document.querySelectorAll(".speech-section");
 
+let jsonStr = `{ "word": "${word.textContent}", "speechSection": {`;
+
+//adding part of speech sections
+for (let sp = 0; sp < speechSections.length; sp++){
+    jsonStr += `"${sp}": {`;
+    let partOfSpeech = getChildrenWithClass(speechSections[sp], "part-of-speech");
+
+    //adding part of speech
+    jsonStr += `"partOfSpeech": "${partOfSpeech.textContent}", "meanings":{`;
+
+    //adding meanings
+    let editWordOl = getChildrenWithClass(speechSections[sp],"edit-word-ol");
+    let meaningsLi = getChildrenWithClass(editWordOl, "meaning-li", false);
+    for (let m=0; m<meaningsLi.length; m++){
+        jsonStr += `"${m}":{`;
+        let meaningName = getChildrenWithClass(meaningsLi[m],'meaning-name');
+        console.log(typeof(meaningsLi[m].id));
+        jsonStr += `"id": "${meaningsLi[m].id}",`;
+        jsonStr += `"meaningName": "${meaningName.textContent}","examples":{`;
+
+        //adding examples with translation
+        let examples = getChildrenWithClass(meaningsLi[m],'sentence-section',false);
+        for(let e=0; e<examples.length; e++){
+            let sentence = getChildrenWithClass(examples[e],'example-sentence');
+            let translation = getChildrenWithClass(examples[e], 'example-translation');
+            jsonStr += `"${e}": { "sentence":"${sentence.textContent}","translation":"${translation.textContent}"`;
+            //comma for end of example
+            jsonStr += e < examples.length-1 ? '},' : '}';
+        }
+        //closing all examples
+        jsonStr += '}';
+        //comma for end of meaning
+        jsonStr += m < meaningsLi.length-1 ? '},' : '}';
+    }
+    //closing all meanings
+    jsonStr += '}';
+    //comma for end of meaning speech section
+    jsonStr += sp < speechSections.length-1 ? '},': '}';
+}
+//closing all speech sections
+    jsonStr += '}';
+//closing word json
+    jsonStr += '}';
 
  let test = {
-    "0":{
-        'name': 'zamykać się',
-        'examples': {
-            "0": {
-                'sentence': "He locked himself in a hotel room and wouldn&#039;t let anybody in.",
-                'tranlation': "On zamknął się w pokoju hotelowym i nikogo nie wpuszczał."
-            },
-            "1":{
-                'sentence': "He locked himself in a hotel room and wouldn&#039;t let anybody in.",
-                'tranlation': "On zamknął się w pokoju hotelowym i nikogo nie wpuszczał."
-            }
-        }
-    }
+     "word": "lock",
+     "speechSection": {
+         "0": {
+             "partOfSpeech": "czasownik",
+             "meanings": {
+                 "0": {
+                     "meaningName": "zamykać",
+                     "examples": {
+                         "0": {
+                             "sentence": "Did you lock the door?",
+                             "translation": "Czy zamknąłeś drzwi?"
+                         },
+                         "1": {
+                             "sentence": "Shall I lock up after you?",
+                             "translation": "Czy mam za tobą zamknąć?"
+                         }
+                     }
+                 },
+                 "1": {
+                     "meaningName": "zamykać się",
+                     "examples": {
+                         "0": {
+                             "sentence": "He locked himself in a hotel room and wouldn&#039;t let anybody in.",
+                             "translation": "On zamknął się w pokoju hotelowym i nikogo nie wpuszczał"
+                         }
+                     }
+                 },
+                 "2": {
+                     "meaningName": "chować (w bezpiecznym miejscu)",
+                     "examples": {
+                         "0": {
+                             "sentence": "He locked the dog in his room.",
+                             "translation": "On zamknął psa w swoim pokoju."
+                         },
+                         "1": {
+                             "sentence": "I locked my diary in a drawer.",
+                             "translation": "Schowałam swój pamiętnik w szufladzie."
+                         },
+                         "2": {
+                             "sentence": "I have to lock my jewellery in my boxes.",
+                             "translation": "Muszę schować swoją biżuterię w pudełku."
+                         }
+                     }
+                 }
+             }
+         },
+         "1": {
+             "partOfSpeech": "rzeczownik",
+             "meanings": {
+                 "0": {
+                     "meaningName": "zamek (np. do drzwi) ",
+                     "examples": {
+                         "0": {
+                             "sentence": "They've installed a triple-lock door.",
+                             "translation": "Oni zainstalowali drzwi z potrójnym zamkiem."
+                         },
+                         "1": {
+                             "sentence": "My key has broken in the lock.",
+                             "translation": "Mój klucz złamał się w zamku."
+                         },
+                         "2": {
+                             "sentence": "This door has no lock.",
+                             "translation": "Te drzwi nie mają zamka."
+                         }
+                     }
+                 }
+             }
+         }
+     }
  }
-// //**MEANINGS JSON**//
-//      for (let m=0; m<meaningNames.length; m++){
-//          let sentences = getSiblingsWithClass(meaningNames[m],'example-sentence');
-//          meaningsJsonStr += `"${m}": {"name": "${meaningNames[m].textContent}","sentences": {`; //**SENTENCES**//
-//          for (let s=0; s<sentences.length; s++){
-//              meaningsJsonStr += `"${s}": "${sentences[s].textContent}"${s<sentences.length-1 ? ',' : ''}`
-//          }
-//          meaningsJsonStr += `}`;
-//          //**SENTENCES**//
-//
-//          meaningsJsonStr += `}${m<meaningNames.length-1 ? ',' : ''}`;
-//      }
-//      meaningsJsonStr += `}`;
-// //**MEANINGS JSON**//
- console.log(meaningsJsonStr);
+console.log(test);
 
- let meaningsJson = JSON.parse(meaningsJsonStr);
- console.log(meaningsJson);
-return meaningsJsonStr;
+ console.log(jsonStr);
+
+ let json = JSON.parse(jsonStr);
+ console.log(json);
+return jsonStr;
 }
 
 
+function saveWord(){
+    let wordNameIn = document.querySelector("#word_name");
+    let wordName = document.querySelector(".header-word");
+    wordNameIn.value = wordName.textContent;
 
+    let wordJsonIn = document.querySelector("#word_json");
+    wordJsonIn.value = getWordJson();
+
+}
 
 
 let saveBtn = document.querySelector(".save-meaning-btn");
 
 saveBtn.addEventListener('mouseover', getWordJson);
-addspeechSectionBtn.addEventListener('click',addSpeechSection);
+saveBtn.addEventListener('click',saveWord);
+addSpeechSectionBtn.addEventListener('click',addSpeechSection);
 
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-//TODO: Przycisk przesuwania zdań w górę i w dół
+$(window).ready(function() {
+    $("body").on("keypress", function (event) {
+        var keyPressed = event.keyCode || event.which;
+        if (keyPressed === 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});

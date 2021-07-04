@@ -1,23 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Admin{% endblock %}
+{% block title %}Edytuj {{ word.name }}{% endblock %}
 
 {% block body %}
     <section class="edit-word-section">
         {{form_start(form)}}
-        <div class="header-word"><i>Wprowadź wyrażenie</i></div>
+        <div class="header-word">{{ word.name }}</div>
+{% for speechSection in speechSections %}
+    {% if speechSection is not empty %}
         <div class="speech-section">
-            <div class="part-of-speech"><i>Wprowadź część mowy</i></div>
+            <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
             <ol class="edit-word-ol">
-                <li class="meaning-li">
-                    <div class="meaning-name"><i>Wprowadź tłumaczenie</i></div>
-                    <div class="sentence-section">
-                        <div class="example-sentence"><i>Wprowadź zdanie</i></div>
-                        <div class="example-translation"><i>Wprowadź tłumaczenie</i></div>
-                    </div>
-                </li>
+                {% for meaning in speechSection %}
+                    <li class="meaning-li">
+                        <div class="meaning-name">{{ meaning.name }}</div>
+                        {% for example in meaning.examples %}
+                            <div class="sentence-section">
+                                <div class="example-sentence">{{ example.sentence }}</div>
+                                <div class="example-translation">{{ example.translation }}</div>
+                            </div>
+                        {% endfor %}
+                    </li>
+                {% endfor %}
             </ol>
         </div>
+    {% endif %}
+{% endfor %}
 
     </section>
     <footer class="edit-word-footer">

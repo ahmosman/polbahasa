@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista słów{% endblock %}
+{% block body %}
+    <div class="admin-word-list-container">
+        <table class="admin-word-table">
+            <tr>
+                <th>Wyrażenie</th>
+                <th>ID</th>
+                <th>Akcje</th>
+            </tr>
+
+            {% for word in words%}
+                <tr>
+                    <td>{{ word.name }}</td>
+                    <td class="word-id-td">{{ word.id }}</td>
+                    <td class="word-action-td">
+                        <a href="{{ path('preview',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
+                        <a href="{{ path('editword',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
+                        <a href="" class="btn btn-danger">Usuń</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

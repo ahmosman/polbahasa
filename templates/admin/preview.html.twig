@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ word.name }}{% endblock %}
+
+{% block body %}
+    <section class="edit-word-section">
+        <div class="header-word">{{ word.name }}</div>
+{% for speechSection in speechSections %}
+    {% if speechSection is not empty %}
+        <div class="speech-section">
+            <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+            <ol class="edit-word-ol">
+                {% for meaning in speechSection %}
+                    <li class="meaning-li">
+                        <div class="meaning-name">{{ meaning.name }}</div>
+                        {% for example in meaning.examples %}
+                            <div class="sentence-section">
+                                <div class="example-sentence">{{ example.sentence }}</div>
+                                <div class="example-translation">{{ example.translation }}</div>
+                            </div>
+                        {% endfor %}
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    {% endif %}
+{% endfor %}
+    </section>
+{% endblock %}
+

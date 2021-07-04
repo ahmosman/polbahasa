@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\WordRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,18 +26,44 @@ class Word
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Meaning::class, mappedBy="Word")
+     * @ORM\OneToMany(targetEntity=Meaning::class, mappedBy="word")
      */
     private $meanings;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $meaningsJson = [];
+    private $json;
 
     public function __construct()
     {
         $this->meanings = new ArrayCollection();
+    }
+
+    public function getSpeechSections(): array{
+
+        $nouns = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('partOfSpeech','rzeczownik'))
+        ;
+        $verbs = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('partOfSpeech','czasownik'))
+        ;
+        $adjectives = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('partOfSpeech','przymiotnik'))
+        ;
+        $adverbs = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('partOfSpeech','przysłówek'))
+        ;
+
+        $speechSections = [
+            $this->meanings->matching($nouns),
+            $this->meanings->matching($verbs),
+            $this->meanings->matching($adjectives),
+            $this->meanings->matching($adverbs)
+        ];
+        arsort($speechSections);
+
+        return $speechSections;
     }
 
     public function getId(): ?int
@@ -86,15 +113,14 @@ class Word
         return $this;
     }
 
-
-    public function getMeaningsJson(): ?array
+    public function getJson(): ?string
     {
-        return $this->meaningsJson;
+        return $this->json;
     }
 
-    public function setMeaningsJson(?array $meaningsJson): self
+    public function setJson(?string $json): self
     {
-        $this->meaningsJson = $meaningsJson;
+        $this->json = $json;
 
         return $this;
     }

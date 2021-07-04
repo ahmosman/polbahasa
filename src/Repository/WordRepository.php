@@ -19,6 +19,20 @@ class WordRepository extends ServiceEntityRepository
         parent::__construct($registry, Word::class);
     }
 
+    public function findAllOrderBy( string $orderByWhat, string $ascOrDesc){
+        return $this->findBy([],[$orderByWhat => $ascOrDesc]);
+    }
+
+    public function findWordsToList(){
+        return $this->createQueryBuilder('w')
+            ->select('w.id','w.name')
+            ->orderBy('w.name','asc')
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
     // /**
     //  * @return Word[] Returns an array of Word objects
     //  */

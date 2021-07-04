@@ -72,11 +72,12 @@ body{
 .edit-phrase-div2{
   text-align: center;
 }
-.edit-word-footer{
+.edit-word-btn-div{
   display: flex;
   justify-content: flex-start;
   flex-shrink: 0;
 }
+
 .edit-word-footer button{
   margin: 0 10px;
   height: 40px;
@@ -128,9 +129,24 @@ body{
 #phrase-text-in{
   width: 600px;
 }
+.admin-word-list-container{
+  display: flex;
+  justify-content: center;
+  margin: 2% 0;
+}
 
+.admin-word-table{
+  border-collapse: collapse;
+  width: 70%;
+}
 
-
+.admin-word-table td, .admin-word-table th{
+  border: 2px solid #d08cf3;
+  padding: 8px;
+}
+.word-id-td, .word-action-td{
+  width: 20%;
+}
 
 
 
