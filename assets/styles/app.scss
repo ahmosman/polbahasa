@@ -129,15 +129,20 @@ body{
 #phrase-text-in{
   width: 600px;
 }
-.admin-word-list-container{
+.admin-word-list-container-1{
   display: flex;
   justify-content: center;
   margin: 2% 0;
 }
+.admin-word-list-container-2{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
 
 .admin-word-table{
   border-collapse: collapse;
-  width: 70%;
+  width: 100%;
 }
 
 .admin-word-table td, .admin-word-table th{
@@ -147,8 +152,14 @@ body{
 .word-id-td, .word-action-td{
   width: 20%;
 }
-
-
+.admin-word-table .btn{
+  margin: 5px 0;
+}
+.add-word-btn{
+  width: 200px;
+  margin: 20px;
+  align-self: flex-end;
+}
 
 
 

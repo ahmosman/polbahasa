@@ -2,7 +2,8 @@
 
 {% block title %}Lista słów{% endblock %}
 {% block body %}
-    <div class="admin-word-list-container">
+    <div class="admin-word-list-container-1">
+        <div class="admin-word-list-container-2">
         <table class="admin-word-table">
             <tr>
                 <th>Wyrażenie</th>
@@ -15,12 +16,14 @@
                     <td>{{ word.name }}</td>
                     <td class="word-id-td">{{ word.id }}</td>
                     <td class="word-action-td">
-                        <a href="{{ path('preview',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
-                        <a href="{{ path('editword',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
-                        <a href="" class="btn btn-danger">Usuń</a>
+                        <a href="{{ path('preview_word',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
+                        <a href="{{ path('edit_word',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
+                        <a href="{{ path('delete_word',{name: word.name}) }}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć {{ word.name }}')">Usuń</a>
                     </td>
                 </tr>
             {% endfor %}
         </table>
+            <a href="{{ path('addword') }}" class="btn btn-darkviolet add-word-btn">Dodaj wyrażenie</a>
+        </div>
     </div>
 {% endblock %}

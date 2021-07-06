@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\MeaningsRepository;
+use App\Repository\MeaningRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=MeaningsRepository::class)
+ * @ORM\Entity(repositoryClass=MeaningRepository::class)
  */
 class Meaning
 {
@@ -29,6 +29,7 @@ class Meaning
 
     /**
      * @ORM\ManyToOne(targetEntity=Word::class, inversedBy="meanings")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $word;
 

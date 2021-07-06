@@ -379,16 +379,6 @@ function editPhrase(phrase){
     }
 }
 
-function getSiblingsWithClass(element, nameOfClass){
-
-    let siblings = element.parentElement.children;
-    let filteredSiblings = [];
-    for (const sibling of siblings) {
-        if(sibling.classList.contains(nameOfClass))
-            filteredSiblings.push(sibling);
-    }
-    return filteredSiblings;
-}
 function getChildrenWithClass(element, nameOfClass, singleIsNotCollection = true){
     let filteredChildren = [];
     for (const child of element.children) {
@@ -446,82 +436,12 @@ for (let sp = 0; sp < speechSections.length; sp++){
     jsonStr += sp < speechSections.length-1 ? '},': '}';
 }
 //closing all speech sections
-    jsonStr += '}';
+    jsonStr += '},';
+//adding meanings id to delete
+    jsonStr += `"toDeleteMeaningsId": ${getMeaningsIdToDelete()}`;
 //closing word json
     jsonStr += '}';
 
- let test = {
-     "word": "lock",
-     "speechSection": {
-         "0": {
-             "partOfSpeech": "czasownik",
-             "meanings": {
-                 "0": {
-                     "meaningName": "zamykać",
-                     "examples": {
-                         "0": {
-                             "sentence": "Did you lock the door?",
-                             "translation": "Czy zamknąłeś drzwi?"
-                         },
-                         "1": {
-                             "sentence": "Shall I lock up after you?",
-                             "translation": "Czy mam za tobą zamknąć?"
-                         }
-                     }
-                 },
-                 "1": {
-                     "meaningName": "zamykać się",
-                     "examples": {
-                         "0": {
-                             "sentence": "He locked himself in a hotel room and wouldn&#039;t let anybody in.",
-                             "translation": "On zamknął się w pokoju hotelowym i nikogo nie wpuszczał"
-                         }
-                     }
-                 },
-                 "2": {
-                     "meaningName": "chować (w bezpiecznym miejscu)",
-                     "examples": {
-                         "0": {
-                             "sentence": "He locked the dog in his room.",
-                             "translation": "On zamknął psa w swoim pokoju."
-                         },
-                         "1": {
-                             "sentence": "I locked my diary in a drawer.",
-                             "translation": "Schowałam swój pamiętnik w szufladzie."
-                         },
-                         "2": {
-                             "sentence": "I have to lock my jewellery in my boxes.",
-                             "translation": "Muszę schować swoją biżuterię w pudełku."
-                         }
-                     }
-                 }
-             }
-         },
-         "1": {
-             "partOfSpeech": "rzeczownik",
-             "meanings": {
-                 "0": {
-                     "meaningName": "zamek (np. do drzwi) ",
-                     "examples": {
-                         "0": {
-                             "sentence": "They've installed a triple-lock door.",
-                             "translation": "Oni zainstalowali drzwi z potrójnym zamkiem."
-                         },
-                         "1": {
-                             "sentence": "My key has broken in the lock.",
-                             "translation": "Mój klucz złamał się w zamku."
-                         },
-                         "2": {
-                             "sentence": "This door has no lock.",
-                             "translation": "Te drzwi nie mają zamka."
-                         }
-                     }
-                 }
-             }
-         }
-     }
- }
-console.log(test);
 
  console.log(jsonStr);
 
@@ -530,6 +450,24 @@ console.log(test);
 return jsonStr;
 }
 
+function getMeaningsIdToDelete(){
+    let currentMeanings = document.querySelectorAll('.meaning-li');
+    let currentMeaningsId = []
+    let earlyMeaningsId = [];
+
+    for (const meaning of meaningsLi) {
+        earlyMeaningsId.push(meaning.id);
+    }
+     for (const meaning of currentMeanings) {
+         currentMeaningsId.push(meaning.id);
+    }
+
+    let toDelete = earlyMeaningsId.filter((el)=>{
+         return !currentMeaningsId.includes(el);
+     });
+    console.log(JSON.stringify(toDelete));
+    return JSON.stringify(toDelete);
+}
 
 function saveWord(){
     let wordNameIn = document.querySelector("#word_name");

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,32 +39,6 @@ class Word
     public function __construct()
     {
         $this->meanings = new ArrayCollection();
-    }
-
-    public function getSpeechSections(): array{
-
-        $nouns = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('partOfSpeech','rzeczownik'))
-        ;
-        $verbs = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('partOfSpeech','czasownik'))
-        ;
-        $adjectives = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('partOfSpeech','przymiotnik'))
-        ;
-        $adverbs = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('partOfSpeech','przysłówek'))
-        ;
-
-        $speechSections = [
-            $this->meanings->matching($nouns),
-            $this->meanings->matching($verbs),
-            $this->meanings->matching($adjectives),
-            $this->meanings->matching($adverbs)
-        ];
-        arsort($speechSections);
-
-        return $speechSections;
     }
 
     public function getId(): ?int

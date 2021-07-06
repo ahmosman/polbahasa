@@ -12,7 +12,7 @@
             <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
             <ol class="edit-word-ol">
                 {% for meaning in speechSection %}
-                    <li class="meaning-li">
+                    <li class="meaning-li" id="{{ meaning.id }}">
                         <div class="meaning-name">{{ meaning.name }}</div>
                         {% for example in meaning.examples %}
                             <div class="sentence-section">

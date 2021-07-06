@@ -6,7 +6,9 @@ use App\Entity\Meaning;
 use App\Entity\Word;
 use App\Form\MeaningType;
 use App\Form\WordType;
+use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
+use App\Service\SpeechSections;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +21,13 @@ class AdminController extends AbstractController
 {
     private $em;
     private $twig;
+    private $speechSections;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em){
+    public function __construct(Environment $twig, EntityManagerInterface $em, SpeechSections $speechSections)
+    {
         $this->twig = $twig;
         $this->em = $em;
+        $this->speechSections = $speechSections;
     }
 
     #[Route('/', name: 'admin')]
@@ -33,7 +38,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/show', name: 'admin_show')]
+    #[Route('/show', name: 'admin_show_words')]
     public function show(WordRepository $wordRepository): Response{
 
         return new Response( $this->twig->render('admin/show.html.twig',
@@ -71,7 +76,8 @@ class AdminController extends AbstractController
             }
             $em->persist($word);
             $em->flush();
-            return $this->redirectToRoute('admin');
+            $this->addFlash('success','Pomyślnie dodano wyrażenie');
+            return $this->redirectToRoute('admin_show_words');
         }
 
         return $this->render('admin/addword.html.twig', [
@@ -79,20 +85,42 @@ class AdminController extends AbstractController
         ]);
 
     }
-    #[Route('/editword/{name}', name: 'editword')]
-    public function editword(Request $request, Word $word): Response
+    #[Route('/editword/{name}', name: 'edit_word')]
+    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository): Response
     {
 
-        $speechSections = $word->getSpeechSections();
-        dump($speechSections);
+        $speechSections = $this->speechSections->getSpeechSections($word);
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
-//        if($form->isSubmitted() && $form->isValid())
-//        {
-//
-//        }
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $wordJson = json_decode($form['json']->getData(),true);
+            $word->setJson("");
+            $speechSections = $wordJson['speechSection'];
+            foreach ($speechSections as $sp){
+                $partOfSpeech = $sp['partOfSpeech'];
+                $meanings = $sp['meanings'];
+                foreach ($meanings as $m){
+                    $meaning = $meaningRepository->find($m['id']) ?? new Meaning();
+                    $meaning->setWord($word);
+                    $meaning->setName($m['meaningName']);
+                    $meaning->setPartOfSpeech($partOfSpeech);
+                    $meaning->setExamples($m['examples']);
+                    $em->persist($meaning);
+                }
+            }
+            $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
+            foreach ($meaningsToDeleteId as $mDelId){
+                $meaning = $meaningRepository->find($mDelId);
+                $em->remove($meaning);
+            }
+            $em->persist($word);
+            $em->flush();
+            $this->addFlash('success','Pomyślnie edytowano wyrażenie');
+            return $this->redirectToRoute('admin_show_words');
+        }
 
         return $this->render('admin/editword.html.twig', [
             'form' => $form->createView(),
@@ -100,11 +128,20 @@ class AdminController extends AbstractController
             'speechSections' => $speechSections
         ]);
     }
+    #[Route('/delete/{name}', name: 'delete_word')]
+    public function delete(Word $word): Response{
+        $word->getMeanings()->clear();
+        $this->em->remove($word);
+        $this->em->flush();
+        $this->addFlash('success','Pomyślnie usunięto wyrażenie');
 
-    #[Route('/preview/{name}', name: 'preview')]
+        return $this->redirectToRoute('admin_show_words');
+
+    }
+    #[Route('/preview/{name}', name: 'preview_word')]
     public function preview(Word $word): Response
     {
-        $speechSections = $word->getSpeechSections();
+        $speechSections = $this->speechSections->getSpeechSections($word);
 
 
         return new Response( $this->twig->render('admin/preview.html.twig', [
