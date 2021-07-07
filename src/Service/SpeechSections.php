@@ -43,6 +43,7 @@ class SpeechSections
         {
             $criteria = Criteria::create()
                 ->andWhere(Criteria::expr()->eq('partOfSpeech',$pos))
+                ->orderBy(['orderValue'=>'ASC'])
             ;
             array_push($speechSections, $word->getMeanings()->matching($criteria));
         }

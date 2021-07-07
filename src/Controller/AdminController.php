@@ -108,6 +108,7 @@ class AdminController extends AbstractController
                     $meaning->setName($m['meaningName']);
                     $meaning->setPartOfSpeech($partOfSpeech);
                     $meaning->setExamples($m['examples']);
+                    $meaning->setOrderValue(intval($m['order']));
                     $em->persist($meaning);
                 }
             }

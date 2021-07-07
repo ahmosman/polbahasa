@@ -3,45 +3,50 @@
 {% block title %}Edytuj {{ word.name }}{% endblock %}
 
 {% block body %}
-    <section class="edit-word-section">
-        {{form_start(form)}}
-        <div class="header-word">{{ word.name }}</div>
-{% for speechSection in speechSections %}
-    {% if speechSection is not empty %}
-        <div class="speech-section">
-            <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
-            <ol class="edit-word-ol">
-                {% for meaning in speechSection %}
-                    <li class="meaning-li" id="{{ meaning.id }}">
-                        <div class="meaning-name">{{ meaning.name }}</div>
-                        {% for example in meaning.examples %}
-                            <div class="sentence-section">
-                                <div class="example-sentence">{{ example.sentence }}</div>
-                                <div class="example-translation">{{ example.translation }}</div>
-                            </div>
-                        {% endfor %}
-                    </li>
-                {% endfor %}
-            </ol>
-        </div>
-    {% endif %}
-{% endfor %}
-
-    </section>
-    <footer class="edit-word-footer">
-        <div class="edit-phrase-div1 hidden">
-            <div class="edit-phrase-div2">
-                <div class="edit-phrase-desc"></div>
-                <input type="text" id="phrase-text-in">
-                <div class="edit-phrase-btn-div">
-                    <button type="button" id="edit-phrase-apply" class="btn btn-hotpink">Zatwierdź</button>
-                    <button type="button" id="edit-phrase-cancel" class="btn btn-lightpink">Anuluj</button>
+    <div class="edit-main-div">
+        <section class="edit-word-section">
+            {{form_start(form)}}
+            <div class="header-word">{{ word.name }}</div>
+            {% for speechSection in speechSections %}
+                {% if speechSection is not empty %}
+                    <div class="speech-section">
+                        <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                        <ol class="edit-word-ol">
+                            {% for meaning in speechSection %}
+                                <li class="meaning-li" id="{{ meaning.id }}">
+                                    <div class="meaning-name">{{ meaning.name }}</div>
+                                    {% for example in meaning.examples %}
+                                        <div class="sentence-section">
+                                            <div class="example-sentence">{{ example.sentence }}</div>
+                                            <div class="example-translation">{{ example.translation }}</div>
+                                        </div>
+                                    {% endfor %}
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </section>
+        <section class="editing-input-section">
+            <div class="edit-phrase-div1 hidden">
+                <div class="edit-phrase-div2">
+                    <div class="edit-phrase-desc"></div>
+                    <input type="text" id="phrase-text-in">
+                    <div class="edit-phrase-btn-div">
+                        <button type="button" id="edit-phrase-apply" class="btn btn-hotpink">Zatwierdź</button>
+                        <button type="button" id="edit-phrase-cancel" class="btn btn-lightpink">Anuluj</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+    </div>
+    <footer class="edit-word-footer">
+
         <div class="edit-word-btn-div">
             {{ form_row(form.save ) }}
             <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
+            <button type="button" class="undo-btn btn btn-mediumpurple">Cofnij</button>
         </div>
     </footer>
     {{form_end(form)}}

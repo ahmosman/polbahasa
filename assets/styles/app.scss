@@ -61,10 +61,6 @@ body{
   text-decoration: underline;
 }
 
-.edit-word-section{
-  flex: 1;
-
-}
 .edit-phrase-div1{
   display: flex;
   justify-content: center;
@@ -160,10 +156,17 @@ body{
   margin: 20px;
   align-self: flex-end;
 }
+.edit-main-div{
+  display: flex;
+  justify-content: flex-start;
+  flex: 1;
+}
 
-
-
-
+.editing-input-section{
+  position: fixed;
+  top: 45vh;
+  right: 40vh;
+}
 
 
 

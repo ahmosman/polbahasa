@@ -38,6 +38,11 @@ class Meaning
      */
     private $partOfSpeech;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $orderValue;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Meaning
     public function setPartOfSpeech(?string $partOfSpeech): self
     {
         $this->partOfSpeech = $partOfSpeech;
+
+        return $this;
+    }
+
+    public function getOrderValue(): ?int
+    {
+        return $this->orderValue;
+    }
+
+    public function setOrderValue(?int $orderValue): self
+    {
+        $this->orderValue = $orderValue;
 
         return $this;
     }

@@ -8,27 +8,30 @@ let moveDownBtnTmpl = document.querySelector(".move-down-btn");
 let addMeaningBtnTmpl = document.querySelector(".add-meaning-btn");
 
 let meaningsLi = document.querySelectorAll(".meaning-li");
-let meaningNames = document.querySelectorAll(".meaning-name");
 let examples = document.querySelectorAll(".sentence-section");
 let speechSections = document.querySelectorAll(".speech-section");
-
+let editWordSection = document.querySelector(".edit-word-section");
+let parentEditWordSection = editWordSection.parentNode;
+let nextSiblingEditWordSection = editWordSection.nextElementSibling;
 let editPhraseDiv = document.querySelector(".edit-phrase-div1");
 let phraseDescDiv = document.querySelector(".edit-phrase-desc");
 let phraseTextIn = document.querySelector("#phrase-text-in");
 let phraseApplyBtn = document.querySelector("#edit-phrase-apply");
 let phraseCancelBtn = document.querySelector("#edit-phrase-cancel");
 let addSpeechSectionBtn = document.querySelector(".add-speech-section-btn");
+let undoBtn = document.querySelector(".undo-btn");
 
 let phraseClassesToIgnore = ":not(.sentence-section):not(.edit-phrase-div1):not(.edit-phrase-div1 *):not(.mb-3)";
 let phraseClasses = ['.header-word','.part-of-speech','.meaning-name','.example-sentence','.example-translation'];
 
+let undoNodes = [];
 //enter updates
 for (const e of examples) {
     addButtonsToExample(e);
 
 }
-for (const mn of meaningNames) {
-    addButtonsToMeaning(mn);
+for (const mli of meaningsLi) {
+    addButtonsToMeaning(mli);
 }
 for (const sp of speechSections) {
     addButtonsToSpeechSection(sp);
@@ -44,22 +47,17 @@ function getButton(template){
     btn.classList.add('opacity0');
     return btn;
 }
-function addButtonsToSpeechSection(speechSection, newSection = false){
-    let partOfSpeech = getChildrenWithClass(speechSection,'part-of-speech');
 
+function addButtonsToSpeechSection(speechSection, newSection = false){
+
+    let partOfSpeech = speechSection.querySelector('.part-of-speech');
     let delSpeechSectionBtn = getButton(delSpeechSectionBtnTmpl);
-    delSpeechSectionBtn.addEventListener('click',deleteParentElement);
 
     let moveUpBtn = getButton(moveUpBtnTmpl);
-    moveUpBtn.addEventListener('click',moveParentElementUp);
-
     let moveDownBtn = getButton(moveDownBtnTmpl);
-    moveDownBtn.addEventListener('click',moveParentElementDown);
 
     let addMeaningBtn = getButton(addMeaningBtnTmpl);
     addMeaningBtn.classList.remove('opacity0');
-
-    addMeaningBtn.addEventListener('click',addMeaning);
     if(newSection) {
         speechSection.appendChild(delSpeechSectionBtn);
         speechSection.appendChild(moveUpBtn);
@@ -72,78 +70,121 @@ function addButtonsToSpeechSection(speechSection, newSection = false){
         speechSection.insertBefore(moveUpBtn, partOfSpeech.nextElementSibling);
         speechSection.insertBefore(delSpeechSectionBtn, partOfSpeech.nextElementSibling);
     }
+    addSpeechSectionEventListeners(speechSection);
+}
+
+function addButtonsToMeaning(meaningLi){
+
+    let addSentenceBtn = getButton(addSentenceBtnTmpl);
+    let delMeaningBtn = getButton(delMeaningBtnTmpl);
+    let moveUpBtn = getButton(moveUpBtnTmpl);
+    let moveDownBtn = getButton(moveDownBtnTmpl);
+    let meaningName = meaningLi.querySelector(".meaning-name");
+    meaningLi.insertBefore(moveDownBtn, meaningName.nextElementSibling);
+    meaningLi.insertBefore(moveUpBtn, meaningName.nextElementSibling);
+    meaningLi.insertBefore(delMeaningBtn, meaningName.nextElementSibling);
+    meaningLi.insertBefore(addSentenceBtn, meaningName.nextElementSibling);
+    addMeaningEventListeners(meaningLi);
+}
+
+function addButtonsToExample(example){
+
+    let delSentenceBtn = getButton(delSentenceBtnTmpl);
+    let moveUpBtn = getButton(moveUpBtnTmpl);
+    let moveDownBtn = getButton(moveDownBtnTmpl);
+
+    example.appendChild(delSentenceBtn);
+    example.appendChild(moveUpBtn);
+    example.appendChild(moveDownBtn);
+    addExampleEventListeners(example);
+}
+
+function addSpeechSectionEventListeners(speechSection){
+
+    let delSpeechSectionBtn = speechSection.querySelector(".del-speech-section-btn");
+    let moveUpBtn = speechSection.querySelector(".move-up-btn");
+    let moveDownBtn = speechSection.querySelector(".move-down-btn");
+    let addMeaningBtn = speechSection.querySelector(".add-meaning-btn");
+
+    delSpeechSectionBtn.addEventListener('click',deleteParentElement);
+    moveUpBtn.addEventListener('click',moveParentElementUp);
+    moveDownBtn.addEventListener('click',moveParentElementDown);
+    addMeaningBtn.addEventListener('click',addMeaning);
 
     speechSection.addEventListener('mouseover',()=>{
         delSpeechSectionBtn.classList.remove('opacity0');
         moveUpBtn.classList.remove("opacity0");
         moveDownBtn.classList.remove("opacity0");
     });
-    speechSection.addEventListener('mouseout',()=>{
+    speechSection.addEventListener('mouseout',speechSection.hideBtn = ()=>{
         delSpeechSectionBtn.classList.add('opacity0');
         moveUpBtn.classList.add("opacity0");
         moveDownBtn.classList.add("opacity0");
-    })
+    });
+    delSpeechSectionBtn.addEventListener('mousedown',()=>{
+        speechSection.hideBtn();
+        $(".tooltip").hide();
+    });
 }
 
-function addButtonsToMeaning(meaningName){
-    let addSentenceBtn = getButton(addSentenceBtnTmpl);
+function addMeaningEventListeners(meaningLi){
+
+    let addSentenceBtn = meaningLi.querySelector(".add-sentence-btn");
+    let delMeaningBtn = meaningLi.querySelector(".del-meaning-btn");
+    let moveUpBtn = meaningLi.querySelector(".move-up-btn");
+    let moveDownBtn = meaningLi.querySelector(".move-down-btn");
+
     addSentenceBtn.addEventListener('click',addSentence);
-
-    let delMeaningBtn = getButton(delMeaningBtnTmpl);
     delMeaningBtn.addEventListener('click',deleteParentElement);
-
-    let moveUpBtn = getButton(moveUpBtnTmpl);
     moveUpBtn.addEventListener('click',moveParentElementUp);
-
-    let moveDownBtn = getButton(moveDownBtnTmpl);
     moveDownBtn.addEventListener('click',moveParentElementDown);
 
-    insertAfter(moveDownBtn,meaningName);
-    insertAfter(moveUpBtn,meaningName);
-    insertAfter(delMeaningBtn,meaningName);
-    insertAfter(addSentenceBtn,meaningName);
-    insertAfter(addSentenceBtn,meaningName);
-
-    let li = meaningName.parentNode;
-    li.addEventListener('mouseover',()=>{
+    meaningLi.addEventListener('mouseover',()=>{
         addSentenceBtn.classList.remove("opacity0");
         delMeaningBtn.classList.remove("opacity0");
         moveUpBtn.classList.remove("opacity0");
         moveDownBtn.classList.remove("opacity0");
     });
-    li.addEventListener('mouseout',()=>{
+    meaningLi.addEventListener('mouseout',meaningLi.hideBtn = ()=>{
         addSentenceBtn.classList.add("opacity0");
         delMeaningBtn.classList.add("opacity0");
         moveUpBtn.classList.add("opacity0");
         moveDownBtn.classList.add("opacity0");
     });
+    delMeaningBtn.addEventListener('mousedown',()=>{
+        meaningLi.hideBtn();
+        $(".tooltip").hide();
+    });
 }
 
-function addButtonsToExample(example){
-    let delSentenceBtn = getButton(delSentenceBtnTmpl);
+function addExampleEventListeners(example){
+
+    let delSentenceBtn = example.querySelector(".del-sentence-btn");
+    let moveUpBtn = example.querySelector(".move-up-btn");
+    let moveDownBtn = example.querySelector(".move-down-btn");
+
     delSentenceBtn.addEventListener('click',deleteParentElement);
-
-    let moveUpBtn = getButton(moveUpBtnTmpl);
     moveUpBtn.addEventListener('click',moveParentElementUp);
-
-    let moveDownBtn = getButton(moveDownBtnTmpl);
     moveDownBtn.addEventListener('click',moveParentElementDown);
-
-    example.appendChild(delSentenceBtn);
-    example.appendChild(moveUpBtn);
-    example.appendChild(moveDownBtn);
 
     example.addEventListener('mouseover',()=>{
         delSentenceBtn.classList.remove("opacity0");
         moveUpBtn.classList.remove("opacity0");
         moveDownBtn.classList.remove("opacity0");
     });
-    example.addEventListener('mouseout',()=>{
+    example.addEventListener('mouseout', example.hideBtn = ()=>{
         delSentenceBtn.classList.add("opacity0");
         moveUpBtn.classList.add("opacity0");
         moveDownBtn.classList.add("opacity0");
     });
+
+    delSentenceBtn.addEventListener('mousedown',()=>{
+        example.hideBtn();
+        $(".tooltip").hide();
+    });
+
 }
+
 function addMeaning(){
     let wordList = this.nextElementSibling;
     let meaningLi = document.createElement("li");
@@ -155,9 +196,10 @@ function addMeaning(){
     updatePhraseDiv(meaningName);
     meaningLi.appendChild(meaningName);
     wordList.appendChild(meaningLi);
-    addButtonsToMeaning(meaningName);
+    addButtonsToMeaning(meaningLi);
     editPhrase(meaningName);
 }
+
 function addSentence(){
     let meaningLi = this.parentNode;
     let example = document.createElement("div");
@@ -197,78 +239,49 @@ function addSpeechSection(){
     addButtonsToSpeechSection(speechSection,true);
     speechSection.appendChild(editWordOl);
 
-    let previousSpeechSection = document.querySelectorAll('.speech-section');
-    previousSpeechSection = previousSpeechSection[previousSpeechSection.length - 1];
-    console.log(previousSpeechSection);
-    if(previousSpeechSection) {
-        previousSpeechSection.parentNode.insertBefore(speechSection, previousSpeechSection.nextElementSibling);
-    }else{
-        insertAfter(speechSection,name);
-    }
+    let previousElement = document.querySelector(".speech-section:last-of-type") ?? name;
+
+    previousElement.parentNode.insertBefore(speechSection, previousElement.nextElementSibling);
+
     editPhrase(partOfSpeech);
 
 }
 
 function deleteParentElement() {
-    $(".tooltip").hide();
+    addUndoNode();
     let parentToDelete = this.parentNode;
     let parentOfParent = parentToDelete.parentNode;
     parentOfParent.removeChild(parentToDelete);
     phraseDescDiv.textContent = '';
     editPhraseDiv.classList.add("hidden");
-
 }
-function deleteElement(element){
-    let parent = element.parentNode;
-    parent.removeChild(element);
-}
-
 
 function moveParentElementUp(){
     let toMove = this.parentNode;
-    console.log(toMove);
-    console.log(toMove.previousElementSibling);
     if(toMove.previousElementSibling !== null && toMove.previousElementSibling.classList.contains(toMove.classList[0]))
         toMove.parentNode.insertBefore(toMove,toMove.previousElementSibling);
     else{
-        let lastChild = getLastChildWithClass(toMove.parentNode, toMove.classList[0]);
+        let lastChild = toMove.parentNode.querySelector(`.${toMove.classList[0]}:last-of-type`);
+        console.log(lastChild);
         if(toMove !== lastChild)
             swapElements(toMove,lastChild);
     }
 
 }
+
 function moveParentElementDown(){
     let toMove = this.parentNode;
-    console.log(toMove);
-    console.log(toMove.nextElementSibling);
     if(toMove.nextElementSibling !== null && toMove.nextElementSibling.classList.contains(toMove.classList[0]))
         toMove.parentNode.insertBefore(toMove.nextElementSibling, toMove);
     else {
-        let firstChild = getFirstChildWithClass(toMove.parentNode, toMove.classList[0]);
+        let firstChild = toMove.parentNode.querySelector(`.${toMove.classList[0]}`);
+        console.log(firstChild);
         if(toMove !== firstChild)
             swapElements(toMove,firstChild);
     }
 }
-function getFirstChildWithClass(element, _class){
-    for (let i = 0; i < element.children.length; i++){
-        if(element.children[i].classList.contains(_class))
-            return element.children[i];
-    }
-    return null;
-}
-function getLastChildWithClass(element, _class){
-    console.log(element.children);
-    for (let i = element.children.length-1; i >= 0; i--){
 
-        console.log(i);
-        console.log(element.children[i]);
-        if(element.children[i].classList.contains(_class))
-            return element.children[i];
-    }
-    return null;
-}
-function swapElements(a,b)
-{
+function swapElements(a,b) {
     let aParent = a.parentNode;
     let bParent = b.parentNode;
     let aHolder = document.createElement("div");
@@ -313,7 +326,7 @@ function editPhrase(phrase){
 
     phrase.classList.add('phrase-click');
     let classname = phrase.classList.item(0);
-    let phraseDesc = "";
+    let phraseDesc;
     let inputDesc = "";
     switch (classname) {
         case 'header-word':
@@ -368,6 +381,7 @@ function editPhrase(phrase){
         editPhraseDiv.classList.add("hidden");
     });
     function applyPhrase(){
+        addUndoNode();
         if(phraseTextIn.value === "")
             phrase.innerHTML = `<i>${inputDesc}</i>`;
         else
@@ -379,20 +393,8 @@ function editPhrase(phrase){
     }
 }
 
-function getChildrenWithClass(element, nameOfClass, singleIsNotCollection = true){
-    let filteredChildren = [];
-    for (const child of element.children) {
-        if(child.classList.contains(nameOfClass))
-            filteredChildren.push(child);
-    }
-    if(singleIsNotCollection){
-        filteredChildren = filteredChildren.length > 1 ? filteredChildren : filteredChildren[0];
-    }
-    return filteredChildren;
-}
+function getWordJson() {
 
-function getWordJson()
-{
 let word = document.querySelector(".header-word");
 let speechSections = document.querySelectorAll(".speech-section");
 
@@ -400,33 +402,35 @@ let jsonStr = `{ "word": "${word.textContent}", "speechSection": {`;
 
 //adding part of speech sections
 for (let sp = 0; sp < speechSections.length; sp++){
+    let order = 0;
     jsonStr += `"${sp}": {`;
-    let partOfSpeech = getChildrenWithClass(speechSections[sp], "part-of-speech");
+    let partOfSpeech = speechSections[sp].querySelector(".part-of-speech");
 
     //adding part of speech
     jsonStr += `"partOfSpeech": "${partOfSpeech.textContent}", "meanings":{`;
 
     //adding meanings
-    let editWordOl = getChildrenWithClass(speechSections[sp],"edit-word-ol");
-    let meaningsLi = getChildrenWithClass(editWordOl, "meaning-li", false);
+    let editWordOl = speechSections[sp].querySelector(".edit-word-ol");
+    let meaningsLi = editWordOl.querySelectorAll(".meaning-li");
     for (let m=0; m<meaningsLi.length; m++){
         jsonStr += `"${m}":{`;
-        let meaningName = getChildrenWithClass(meaningsLi[m],'meaning-name');
-        console.log(typeof(meaningsLi[m].id));
+        let meaningName = meaningsLi[m].querySelector(".meaning-name");
         jsonStr += `"id": "${meaningsLi[m].id}",`;
         jsonStr += `"meaningName": "${meaningName.textContent}","examples":{`;
 
         //adding examples with translation
-        let examples = getChildrenWithClass(meaningsLi[m],'sentence-section',false);
+        let examples = meaningsLi[m].querySelectorAll(".sentence-section");
         for(let e=0; e<examples.length; e++){
-            let sentence = getChildrenWithClass(examples[e],'example-sentence');
-            let translation = getChildrenWithClass(examples[e], 'example-translation');
+            let sentence = examples[e].querySelector(".example-sentence");
+            let translation = examples[e].querySelector(".example-translation");
             jsonStr += `"${e}": { "sentence":"${sentence.textContent}","translation":"${translation.textContent}"`;
             //comma for end of example
             jsonStr += e < examples.length-1 ? '},' : '}';
         }
         //closing all examples
-        jsonStr += '}';
+        jsonStr += '},';
+        //adding meaning order
+        jsonStr += `"order":"${++order}"`;
         //comma for end of meaning
         jsonStr += m < meaningsLi.length-1 ? '},' : '}';
     }
@@ -479,20 +483,54 @@ function saveWord(){
 
 }
 
+function addUndoNode(){
+    let editWordSection = document.querySelector(".edit-word-section");
+    undoNodes.push(editWordSection.cloneNode(true));
+}
+
+function undoChanges(){
+    if(undoNodes.length){
+
+        let currentEditWordSection = document.querySelector(".edit-word-section");
+        parentEditWordSection.removeChild(currentEditWordSection);
+
+        let toUndoSection = undoNodes.pop();
+        parentEditWordSection.insertBefore(toUndoSection, nextSiblingEditWordSection);
+
+        let speechSections = toUndoSection.querySelectorAll(".speech-section");
+        let meaningsLi = toUndoSection.querySelectorAll(".meaning-li");
+        let examples = toUndoSection.querySelectorAll(".sentence-section");
+        let phraseDivs = getPhraseDivs();
+
+        for (const sp of speechSections)
+            addSpeechSectionEventListeners(sp);
+
+        for (const mLi of meaningsLi)
+            addMeaningEventListeners(mLi);
+
+        for (const e of examples)
+            addExampleEventListeners(e);
+
+        for (const phraseDiv of phraseDivs)
+            updatePhraseDiv(phraseDiv);
+    }
+}
 
 let saveBtn = document.querySelector(".save-meaning-btn");
 
 saveBtn.addEventListener('mouseover', getWordJson);
 saveBtn.addEventListener('click',saveWord);
 addSpeechSectionBtn.addEventListener('click',addSpeechSection);
+undoBtn.addEventListener('click',undoChanges);
 
-function insertAfter(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
+
+
+
+
 
 $(window).ready(function() {
     $("body").on("keypress", function (event) {
-        var keyPressed = event.keyCode || event.which;
+        let keyPressed = event.keyCode || event.which;
         if (keyPressed === 13) {
             event.preventDefault();
             return false;
