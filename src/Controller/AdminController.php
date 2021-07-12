@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Meaning;
 use App\Entity\Word;
-use App\Form\MeaningType;
 use App\Form\WordType;
 use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
@@ -56,9 +55,6 @@ class AdminController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $wordJson = json_decode($form['json']->getData(),true);
-            dump($word);
-            dump($wordJson);
-            dump($wordJson['speechSection'][0]);
             $word->setJson("");
             $speechSections = $wordJson['speechSection'];
             foreach ($speechSections as $sp){
@@ -70,7 +66,6 @@ class AdminController extends AbstractController
                     $meaning->setName($m['meaningName']);
                     $meaning->setPartOfSpeech($partOfSpeech);
                     $meaning->setExamples($m['examples']);
-                    dump($meaning);
                     $em->persist($meaning);
                 }
             }
@@ -85,7 +80,7 @@ class AdminController extends AbstractController
         ]);
 
     }
-    #[Route('/editword/{name}', name: 'edit_word')]
+    #[Route('/editword/{name}', name: 'edit_word', options: ['expose'=>true])]
     public function editword(Request $request, Word $word, MeaningRepository $meaningRepository): Response
     {
 
@@ -129,7 +124,7 @@ class AdminController extends AbstractController
             'speechSections' => $speechSections
         ]);
     }
-    #[Route('/delete/{name}', name: 'delete_word')]
+    #[Route('/delete/{name}', name: 'delete_word', options: ['expose'=>true])]
     public function delete(Word $word): Response{
         $word->getMeanings()->clear();
         $this->em->remove($word);
@@ -139,7 +134,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin_show_words');
 
     }
-    #[Route('/preview/{name}', name: 'preview_word')]
+    #[Route('/preview/{name}', name: 'preview_word', options: ['expose'=>true])]
     public function preview(Word $word): Response
     {
         $speechSections = $this->speechSections->getSpeechSections($word);

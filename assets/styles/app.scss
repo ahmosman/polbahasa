@@ -128,9 +128,12 @@ body{
 .admin-word-list-container-1{
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 2% 0;
 }
 .admin-word-list-container-2{
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -164,12 +167,46 @@ body{
 
 .editing-input-section{
   position: fixed;
-  top: 45vh;
+  top: 35vh;
   right: 40vh;
 }
+.search-form-div{
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
+}
+.search-input-div{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
 
-
+.search-input-div input,.search-input-div input:active,.search-input-div input:focus{
+  padding: 0 30px;
+  width: 500px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 25px;
+  border: 1px solid rgba(227, 227, 227, 0.81);
+  outline: none;
+}
+.search-input-div input:focus{
+  border: 1px solid rgba(228, 89, 236, 0.88);
+}
+.search-submit-btn{
+  outline: none;
+  border: 0;
+  background-color: transparent;
+  position: relative;
+  bottom: 35px;
+  right: 10px;
+}
+.main-title{
+  margin-bottom: 20px;
+}
 
 
 

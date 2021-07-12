@@ -1,0 +1,68 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: "%elasticsearch_host%", port: "%elasticsearch_port%" }
+    indexes:
+        words:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            suggest_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [ lowercase, asciifolding ]
+            use_alias: true
+            index_name: words_index
+            properties:
+                name: {type: completion, analyzer: suggest_analyzer}
+            persistence:
+                driver: orm
+                model: App\Entity\Word
+                provider: ~
+                listener: ~
+                finder: ~
+        meanings:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            suggest_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [ lowercase, asciifolding ]
+            use_alias: true
+            index_name: meanings_index
+            properties:
+                name: { type: completion, analyzer: suggest_analyzer }
+            persistence:
+                driver: orm
+                model: App\Entity\Meaning
+                provider: ~
+                listener: ~
+                finder: ~
+#        suggest:
+#            use_alias: true
+#            settings:
+#                index:
+#                    analysis:
+#                        analyzer:
+#                            suggest_analyzer:
+#                                type: custom
+#                                tokenizer: standard
+#                                filter: [ lowercase, asciifolding ]
+#            properties:
+#                locale:
+#                    type: keyword
+#                suggest:
+#                    type: completion
+#                    analyzer: suggest_analyzer
+#                    contexts:
+#                        - name: locale
+#                          type: category
+#                          path: locale
+
+
+
+
+

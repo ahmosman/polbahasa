@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/word.html.twig' %}
 
-{% block title %}Admin{% endblock %}
+{% block title %}Dodaj wyrażenie{% endblock %}
 
-{% block body %}
+{% block edit_word_section %}
     <section class="edit-word-section">
         {{form_start(form)}}
         <div class="header-word"><i>Wprowadź wyrażenie</i></div>
@@ -18,47 +18,5 @@
                 </li>
             </ol>
         </div>
-
     </section>
-    <footer class="edit-word-footer">
-        <div class="edit-phrase-div1 hidden">
-            <div class="edit-phrase-div2">
-                <div class="edit-phrase-desc"></div>
-                <input type="text" id="phrase-text-in">
-                <div class="edit-phrase-btn-div">
-                    <button type="button" id="edit-phrase-apply" class="btn btn-hotpink">Zatwierdź</button>
-                    <button type="button" id="edit-phrase-cancel" class="btn btn-lightpink">Anuluj</button>
-                </div>
-            </div>
-        </div>
-        <div class="edit-word-btn-div">
-            {{ form_row(form.save ) }}
-            <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
-        </div>
-    </footer>
-    {{form_end(form)}}
-
-{# templates for editword.js#}
-    <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
-    <span class="del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
-    <span class="del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
-    <span class="del-speech-section-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń część mowy"></span>
-    <span class="move-up-btn fas fa-angle-up hidden"></span>
-    <span class="move-down-btn fas fa-angle-down hidden"></span>
-    <button type="button" class="add-meaning-btn btn btn-orchid hidden">Dodaj tłumaczenie</button>
-{% endblock %}
-
-
-
-{% block javascripts %}
-    <script>
-        document.querySelector("html").addEventListener('click',()=>{
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip({
-                    trigger : 'hover'
-                });
-            });
-        });
-    </script>
-    {{ encore_entry_script_tags('editword') }}
 {% endblock %}

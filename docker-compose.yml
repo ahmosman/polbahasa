@@ -1,0 +1,22 @@
+version: '2.2'
+services:
+  elasticsearch:
+    container_name: elasticszukacz
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+    environment:
+      - node.name=elasticszukaczka
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - 9200:9200
+      - 9300:9300
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.13.3
+    ports:
+      - "5601:5601"
+    environment:
+      - "ELASTICSEARCH_URL=http://elasticszukacz"
+    depends_on:
+      - elasticsearch

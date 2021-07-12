@@ -55,8 +55,6 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/webpack-encore-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/stopwatch" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/web-profiler-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-zendframework-bridge" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-eventmanager" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/doctrine-bridge" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/proxy-manager-bridge" />
@@ -81,6 +79,17 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/property-access" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/validator" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/debug-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ezimuel/ringphp" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ezimuel/guzzlestreams" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/react/promise" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/nyholm/dsn" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/ruflin/elastica" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/elastica-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/elasticsearch/elasticsearch" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pagerfanta/pagerfanta" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/willdurand/jsonp-callback-validator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/friendsofsymfony/jsrouting-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/serializer" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
