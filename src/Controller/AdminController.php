@@ -7,7 +7,7 @@ use App\Entity\Word;
 use App\Form\WordType;
 use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
-use App\Service\SpeechSections;
+use App\Service\Dictionary;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class AdminController extends AbstractController
     private $twig;
     private $speechSections;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em, SpeechSections $speechSections)
+    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $speechSections)
     {
         $this->twig = $twig;
         $this->em = $em;
@@ -66,6 +66,7 @@ class AdminController extends AbstractController
                     $meaning->setName($m['meaningName']);
                     $meaning->setPartOfSpeech($partOfSpeech);
                     $meaning->setExamples($m['examples']);
+                    $meaning->setOrderValue(intval($m['order']));
                     $em->persist($meaning);
                 }
             }
@@ -84,7 +85,7 @@ class AdminController extends AbstractController
     public function editword(Request $request, Word $word, MeaningRepository $meaningRepository): Response
     {
 
-        $speechSections = $this->speechSections->getSpeechSections($word);
+        $speechSections = $this->speechSections->getForeignData($word);
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
@@ -138,7 +139,7 @@ class AdminController extends AbstractController
     public function preview(Word $word): Response
     {
         $speechSections = $this->speechSections->getSpeechSections($word);
-
+        dump($speechSections);
 
         return new Response( $this->twig->render('admin/preview.html.twig', [
             'word' => $word,

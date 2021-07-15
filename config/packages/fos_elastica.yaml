@@ -15,7 +15,7 @@ fos_elastica:
             use_alias: true
             index_name: words_index
             properties:
-                name: {type: completion, analyzer: suggest_analyzer}
+                name: {analyzer: suggest_analyzer}
             persistence:
                 driver: orm
                 model: App\Entity\Word
@@ -33,6 +33,44 @@ fos_elastica:
                                 filter: [ lowercase, asciifolding ]
             use_alias: true
             index_name: meanings_index
+            properties:
+                name: {analyzer: suggest_analyzer }
+            persistence:
+                driver: orm
+                model: App\Entity\Meaning
+                provider: ~
+                listener: ~
+                finder: ~
+        words_suggest:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            suggest_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [ lowercase, asciifolding ]
+            use_alias: true
+            index_name: words_suggest_index
+            properties:
+                name: {type: completion, analyzer: suggest_analyzer}
+            persistence:
+                driver: orm
+                model: App\Entity\Word
+                provider: ~
+                listener: ~
+                finder: ~
+        meanings_suggest:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            suggest_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [ lowercase, asciifolding ]
+            use_alias: true
+            index_name: meanings_suggest_index
             properties:
                 name: { type: completion, analyzer: suggest_analyzer }
             persistence:

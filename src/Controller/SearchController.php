@@ -24,4 +24,6 @@ class SearchController extends AbstractController
         $suggestions = $this->suggestions->getForeignSuggestions($q);
         return $this->json($suggestions);
     }
+    //TODO: #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]
+    //przy wprowadzaniu nowego słowa
 }

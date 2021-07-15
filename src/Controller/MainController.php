@@ -2,7 +2,11 @@
 
 namespace App\Controller;
 
+use App\Elasticsearch\Search;
 use App\Elasticsearch\Suggestions;
+use App\Service\Dictionary;
+use Elastica\Query\Fuzzy;
+use Elastica\Query\MultiMatch;
 use Elastica\Util;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,11 +20,15 @@ class MainController extends AbstractController
 {
     private $twig;
     private $suggestions;
+    private $search;
+    private $dictionary;
 
-    public function __construct(Environment $twig, Suggestions $suggestions)
+    public function __construct(Environment $twig, Suggestions $suggestions, Search $search, Dictionary $dictionary)
     {
         $this->twig = $twig;
         $this->suggestions = $suggestions;
+        $this->search = $search;
+        $this->dictionary = $dictionary;
     }
 
     #[Route('/', name: 'main')]
@@ -30,15 +38,21 @@ class MainController extends AbstractController
     }
 
     #[Route('/dictionary', name: 'dictionary')]
-    public function findWord(Request $request, SessionInterface $session, TransformedFinder $wordsFinder): Response
+    public function dictionary(Request $request, SessionInterface $session): Response
     {
-        $q = $request->query->get('q','');
-        $results = !empty($q) ? $wordsFinder->findHybrid(Util::escapeTerm($q)) : [];
-        //dump($results);
-        $suggestions = $this->suggestions->getNativeSuggestions($q);
-        dump($suggestions);
+        $q =  $request->query->get('q','');
+
+        $meanings = $this->search->findMeanings($q);
+        $words = $this->search->findWords($q);
+        $nativeData = $this->dictionary->getNativeData($meanings);
+        $foreignData = $this->dictionary->getForeignData($words);
+//        dump($nativeData);
+//        dump($foreignData);
+        $suggestions = $this->suggestions->getForeignSuggestions($q);
         $session->set('q', $q);
-        return $this->json($suggestions);
-        //return new Response($this->twig->render('dictionary/foreign_to_native.html.twig'));
+        return new Response($this->twig->render('dictionary/search_result.html.twig',[
+            'foreign' => $foreignData,
+            'native' => $nativeData
+        ]));
     }
 }

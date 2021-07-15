@@ -480,7 +480,6 @@ function saveWord(){
 
     let wordJsonIn = document.querySelector("#word_json");
     wordJsonIn.value = getWordJson();
-
 }
 
 function addUndoNode(){

@@ -4,7 +4,6 @@
 
 {% block edit_word_section %}
     <section class="edit-word-section">
-        {{form_start(form)}}
         <div class="header-word">{{ word.name }}</div>
         {% for speechSection in speechSections %}
             {% if speechSection is not empty %}

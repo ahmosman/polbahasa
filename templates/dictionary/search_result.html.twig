@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.session.get('q') }} - Słownik indonezyjsko-polski{% endblock %}
+
+{% block body %}
+    <div class="search-bar-results">
+        {% include 'dictionary/search_input.html.twig' %}
+    </div>
+{% if foreign is not empty %}
+<section class="words-section">
+    {% for  word in foreign%}
+        <div class="header-word">{{ word[0][0].word.name }}</div>
+        {% for speechSection in word %}
+            <div class="speech-section">
+                <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                <ol class="edit-word-ol">
+                    {% for meaning in speechSection %}
+                        <li class="meaning-li">
+                            <div class="meaning-name">{{ meaning.name }}</div>
+                            {% for example in meaning.examples %}
+                                <div class="sentence-section">
+                                    <div class="example-sentence">{{ example.sentence }}</div>
+                                    <div class="example-translation">{{ example.translation }}</div>
+                                </div>
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</section>
+{% endif %}
+{% if native is not empty%}
+    <div class="header-word">{{ app.session.get('q') }}</div>
+    {% for  speechSection in native%}
+        <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
+        <ol class="foreign-word-ol">
+            {% for word in speechSection.words %}
+                <li class="foreign-word">{{ word.name }}</li>
+                <ul class="native-meaning-ul">
+                    {% for meaning in word.meanings %}
+                        <li class="native-meaning">
+                            <div class="native-meaning-name">{{ meaning.name }}</div>
+                            {% for example in meaning.examples %}
+                                <div class="sentence-section">
+                                    <div class="example-sentence">{{ example.sentence }}</div>
+                                    <div class="example-translation">{{ example.translation }}</div>
+                                </div>
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        </ol>
+    {% endfor %}
+{% endif %}
+{% endblock %}
+{#TODO: Dodaj linki przy słowach#}

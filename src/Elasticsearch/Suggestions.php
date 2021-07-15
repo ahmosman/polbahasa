@@ -17,13 +17,13 @@ class Suggestions
     public const WORD_SUGGEST_FIELD = 'name';
 
     public const WORD = [
-        'INDEX' =>  'words_index',
+        'INDEX' =>  'words_suggest_index',
         'SUGGEST_NAME' => 'completion',
         'SUGGEST_FIELD' => 'name'
     ];
 
     public const MEANING = [
-        'INDEX' =>  'meanings_index',
+        'INDEX' =>  'meanings_suggest_index',
         'SUGGEST_NAME' => 'completion',
         'SUGGEST_FIELD' => 'name'
     ];

@@ -170,13 +170,17 @@ body{
   top: 35vh;
   right: 40vh;
 }
-.search-form-div{
+.search-bar-index{
   height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 
+}
+.search-bar-results{
+  display: flex;
+  margin-top: 20px;
 }
 .search-input-div{
   display: flex;
@@ -207,8 +211,12 @@ body{
 .main-title{
   margin-bottom: 20px;
 }
-
-
+.foreign-word{
+  font-weight: bold;
+}
+.native-meaning .sentence-section{
+  font-size: 0.95em;
+}
 
 
 //Custom buttons
