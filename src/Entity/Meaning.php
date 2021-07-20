@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MeaningRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,11 +18,6 @@ class Meaning
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $name;
 
     /**
      * @ORM\Column(type="json", nullable=true)
@@ -43,21 +40,19 @@ class Meaning
      */
     private $orderValue;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=MeaningName::class, mappedBy="meaning")
+     */
+    private $meaningNames;
+
+    public function __construct()
+    {
+        $this->meaningNames = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getExamples(): ?array
@@ -104,6 +99,33 @@ class Meaning
     public function setOrderValue(?int $orderValue): self
     {
         $this->orderValue = $orderValue;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|MeaningName[]
+     */
+    public function getMeaningNames(): Collection
+    {
+        return $this->meaningNames;
+    }
+
+    public function addMeaningName(MeaningName $meaningName): self
+    {
+        if (!$this->meaningNames->contains($meaningName)) {
+            $this->meaningNames[] = $meaningName;
+            $meaningName->addMeaning($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMeaningName(MeaningName $meaningName): self
+    {
+        if ($this->meaningNames->removeElement($meaningName)) {
+            $meaningName->removeMeaning($this);
+        }
 
         return $this;
     }

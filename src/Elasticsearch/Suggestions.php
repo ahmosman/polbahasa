@@ -44,8 +44,20 @@ class Suggestions
         $suggest = new Suggest($completionSuggest);
         $query = (new Query())->setSuggest($suggest);
         $suggests = $suggestIndex->search($query)->getSuggests();
+        $results = [];
+        foreach ($suggests[$data['SUGGEST_NAME']][0]['options'] as $result)
+        {
+            array_push($results, $result['text']);
+        }
+        return $results;
+    }
 
-        return $suggests[$data['SUGGEST_NAME']][0]['options'] ?? [];
+    public function getAllSuggestions(string $q)
+    {
+        $foreign = $this->getForeignSuggestions($q);
+        $native = $this->getNativeSuggestions($q);
+        return  array_merge($foreign,$native);
+
     }
 
     public function getForeignSuggestions(string $q)
@@ -57,5 +69,6 @@ class Suggestions
     {
         return $this->getSuggestions($q,true);
     }
+
 
 }

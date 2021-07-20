@@ -218,6 +218,19 @@ body{
   font-size: 0.95em;
 }
 
+.foreign-word-ol a, .edit-word-ol a{
+  text-decoration: none;
+  color: black;
+}
+
+.foreign-word-ol a:hover, .edit-word-ol a:hover{
+  opacity: 0.5;
+}
+
+
+
+
+
 
 //Custom buttons
 .btn-hotpink{

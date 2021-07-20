@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Meaning;
+use App\Entity\MeaningName;
 use App\Entity\Word;
 use App\Form\WordType;
+use App\Repository\MeaningNameRepository;
 use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
 use App\Service\Dictionary;
@@ -46,9 +48,8 @@ class AdminController extends AbstractController
     }
 
     #[Route('/addword', name: 'addword')]
-    public function addWord(Request $request): Response
+    public function addWord(Request $request, MeaningNameRepository $meaningNameRepository): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
@@ -63,15 +64,23 @@ class AdminController extends AbstractController
                 foreach ($meanings as $m){
                     $meaning = new Meaning();
                     $meaning->setWord($word);
+                    $meaningNames = explode(', ',$m['meaningName']);
                     $meaning->setName($m['meaningName']);
+                    foreach($meaningNames as $mName)
+                    {
+                        $meaningName = $meaningNameRepository->findOneBy(['name'=>$mName]) ?? new MeaningName();
+                        $meaningName->setName($mName);
+                        $meaning->addMeaningName($meaningName);
+                        $this->em->persist($meaningName);
+                    }
                     $meaning->setPartOfSpeech($partOfSpeech);
                     $meaning->setExamples($m['examples']);
                     $meaning->setOrderValue(intval($m['order']));
-                    $em->persist($meaning);
+                    $this->em->persist($meaning);
                 }
             }
-            $em->persist($word);
-            $em->flush();
+            $this->em->persist($word);
+            $this->em->flush();
             $this->addFlash('success','Pomyślnie dodano wyrażenie');
             return $this->redirectToRoute('admin_show_words');
         }
@@ -82,14 +91,13 @@ class AdminController extends AbstractController
 
     }
     #[Route('/editword/{name}', name: 'edit_word', options: ['expose'=>true])]
-    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository): Response
+    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository): Response
     {
 
-        $speechSections = $this->speechSections->getForeignData($word);
+        $speechSections = $this->speechSections->getSpeechSections($word);
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        $em = $this->getDoctrine()->getManager();
         if($form->isSubmitted() && $form->isValid())
         {
             $wordJson = json_decode($form['json']->getData(),true);
@@ -101,20 +109,40 @@ class AdminController extends AbstractController
                 foreach ($meanings as $m){
                     $meaning = $meaningRepository->find($m['id']) ?? new Meaning();
                     $meaning->setWord($word);
+                    $meaningNames = explode(', ',$m['meaningName']);
                     $meaning->setName($m['meaningName']);
+                    $updatedMeaningNames = [];
+                    foreach($meaningNames as $mName)
+                    {
+                        $meaningName = $meaningNameRepository->findOneBy(['name'=>$mName]) ?? new MeaningName();
+                        $meaningName->setName($mName);
+                        $meaning->addMeaningName($meaningName);
+                        array_push($updatedMeaningNames, $meaningName);
+                        $this->em->persist($meaningName);
+                    }
+                    $oldMeaningNames = $meaning->getMeaningNames()->getValues();
+                    foreach ($oldMeaningNames as $oldMName)
+                    {
+                        if(!in_array($oldMName, $updatedMeaningNames))
+                        {
+                            $meaning->removeMeaningName($oldMName);
+                            if(empty($oldMName->getMeaning()->getValues()))
+                                $this->em->remove($oldMName);
+                        }
+                    }
                     $meaning->setPartOfSpeech($partOfSpeech);
                     $meaning->setExamples($m['examples']);
                     $meaning->setOrderValue(intval($m['order']));
-                    $em->persist($meaning);
+                    $this->em->persist($meaning);
                 }
             }
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
             foreach ($meaningsToDeleteId as $mDelId){
                 $meaning = $meaningRepository->find($mDelId);
-                $em->remove($meaning);
+                $this->em->remove($meaning);
             }
-            $em->persist($word);
-            $em->flush();
+            $this->em->persist($word);
+            $this->em->flush();
             $this->addFlash('success','Pomyślnie edytowano wyrażenie');
             return $this->redirectToRoute('admin_show_words');
         }
@@ -127,7 +155,20 @@ class AdminController extends AbstractController
     }
     #[Route('/delete/{name}', name: 'delete_word', options: ['expose'=>true])]
     public function delete(Word $word): Response{
+        $meanings = $word->getMeanings();
+        foreach($meanings as $meaning)
+        {
+            $meaningNames =  $meaning->getMeaningNames();
+            foreach ($meaningNames as $mName)
+            {
+                $meaning->removeMeaningName($mName);
+                dump($mName->getMeaning()->getValues());
+                if(empty($mName->getMeaning()->getValues()))
+                    $this->em->remove($mName);
+            }
+        }
         $word->getMeanings()->clear();
+
         $this->em->remove($word);
         $this->em->flush();
         $this->addFlash('success','Pomyślnie usunięto wyrażenie');

@@ -21,7 +21,16 @@ class SearchController extends AbstractController
     public function autocomplete(Request $request): Response
     {
         $q = $request->query->get('q','');
-        $suggestions = $this->suggestions->getForeignSuggestions($q);
+
+        $all = $request->query->get('all') ?? null;
+
+        if(isset($all))
+            $suggestions = $this->suggestions->getAllSuggestions($q);
+        else
+            $suggestions = $this->suggestions->getNativeSuggestions($q);
+
+        dump(isset($all));
+        dump($suggestions);die;
         return $this->json($suggestions);
     }
     //TODO: #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]

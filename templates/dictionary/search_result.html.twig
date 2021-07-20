@@ -16,7 +16,11 @@
                 <ol class="edit-word-ol">
                     {% for meaning in speechSection %}
                         <li class="meaning-li">
-                            <div class="meaning-name">{{ meaning.name }}</div>
+                            <div class="meaning-name">
+                                {% for meaningName in meaning.meaningNames %}
+                                    <a href="{{path('dictionary')}}?q={{meaningName.name}}">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}, {% endif %}
+                                {% endfor %}
+                            </div>
                             {% for example in meaning.examples %}
                                 <div class="sentence-section">
                                     <div class="example-sentence">{{ example.sentence }}</div>
@@ -37,11 +41,15 @@
         <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
         <ol class="foreign-word-ol">
             {% for word in speechSection.words %}
-                <li class="foreign-word">{{ word.name }}</li>
+                <li class="foreign-word"> <a href="{{path('dictionary')}}?q={{ word.name }}">{{ word.name }}</a></li>
                 <ul class="native-meaning-ul">
                     {% for meaning in word.meanings %}
                         <li class="native-meaning">
-                            <div class="native-meaning-name">{{ meaning.name }}</div>
+                            <div class="native-meaning-name">
+                                {% for meaningName in meaning.meaningNames %}
+                                    <a href="{{path('dictionary')}}?q={{meaningName.name}}">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}, {% endif %}
+                                {% endfor %}
+                            </div>
                             {% for example in meaning.examples %}
                                 <div class="sentence-section">
                                     <div class="example-sentence">{{ example.sentence }}</div>
