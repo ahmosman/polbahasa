@@ -23,6 +23,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('editword', './assets/js/editword.js')
     .addEntry('admin_word_list', './assets/js/admin_word_list.js')
+    .addEntry('search_suggestions', './assets/js/search_suggestions.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

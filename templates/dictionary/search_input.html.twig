@@ -3,4 +3,11 @@
         <input type="text" name="q" placeholder="Wpisz indonezyjskie lub polskie słowo">
         <button type="submit" class="search-submit-btn fas fa-search" title="Szukaj"></button>
     </div>
+    <div class="suggestions-div">
+        <ul class="suggestions-ul">
+        </ul>
+    </div>
 </form>
+{% block javascripts %}
+    {{ encore_entry_script_tags('search_suggestions') }}
+{% endblock %}

@@ -22,7 +22,7 @@ let addSpeechSectionBtn = document.querySelector(".add-speech-section-btn");
 let undoBtn = document.querySelector(".undo-btn");
 
 let phraseClassesToIgnore = ":not(.sentence-section):not(.edit-phrase-div1):not(.edit-phrase-div1 *):not(.mb-3)";
-let phraseClasses = ['.header-word','.part-of-speech','.meaning-name','.example-sentence','.example-translation'];
+let phraseClasses = ['.header-word','.part-of-speech','.foreign-meaning-name','.example-sentence','.example-translation'];
 
 let undoNodes = [];
 //enter updates
@@ -79,7 +79,7 @@ function addButtonsToMeaning(meaningLi){
     let delMeaningBtn = getButton(delMeaningBtnTmpl);
     let moveUpBtn = getButton(moveUpBtnTmpl);
     let moveDownBtn = getButton(moveDownBtnTmpl);
-    let meaningName = meaningLi.querySelector(".meaning-name");
+    let meaningName = meaningLi.querySelector(".foreign-meaning-name");
     meaningLi.insertBefore(moveDownBtn, meaningName.nextElementSibling);
     meaningLi.insertBefore(moveUpBtn, meaningName.nextElementSibling);
     meaningLi.insertBefore(delMeaningBtn, meaningName.nextElementSibling);
@@ -188,9 +188,9 @@ function addExampleEventListeners(example){
 function addMeaning(){
     let wordList = this.nextElementSibling;
     let meaningLi = document.createElement("li");
-    meaningLi.classList.add("meaning-li");
+    meaningLi.classList.add("foreign-meaning-li");
     let meaningName = document.createElement("div");
-    meaningName.classList.add("meaning-name");
+    meaningName.classList.add("foreign-meaning-name");
     meaningName.innerHTML = "<i>Wprowadź tłumaczenie</i>";
     meaningName.dataset.text = meaningName.textContent;
     updatePhraseDiv(meaningName);
@@ -233,7 +233,7 @@ function addSpeechSection(){
     partOfSpeech.innerHTML = '<i>Wprowadź część mowy</i>';
     updatePhraseDiv(partOfSpeech);
     let editWordOl = document.createElement("ol");
-    editWordOl.classList.add("edit-word-ol");
+    editWordOl.classList.add("foreign-word-ol");
 
     speechSection.appendChild(partOfSpeech);
     addButtonsToSpeechSection(speechSection,true);
@@ -337,7 +337,7 @@ function editPhrase(phrase){
             phraseDesc = "Podaj część mowy";
             inputDesc = "Wprowadź część mowy";
             break;
-        case 'meaning-name':
+        case 'foreign-meaning-name':
             phraseDesc = "Podaj tłumaczenie wyrażenia";
             inputDesc = "Wprowadź tłumaczenie";
             break;
@@ -410,13 +410,13 @@ for (let sp = 0; sp < speechSections.length; sp++){
     jsonStr += `"partOfSpeech": "${partOfSpeech.textContent}", "meanings":{`;
 
     //adding meanings
-    let editWordOl = speechSections[sp].querySelector(".edit-word-ol");
-    let meaningsLi = editWordOl.querySelectorAll(".meaning-li");
+    let editWordOl = speechSections[sp].querySelector(".foreign-word-ol");
+    let meaningsLi = editWordOl.querySelectorAll(".foreign-meaning-li");
     for (let m=0; m<meaningsLi.length; m++){
         jsonStr += `"${m}":{`;
-        let meaningName = meaningsLi[m].querySelector(".meaning-name");
+        let meaningName = meaningsLi[m].querySelector(".foreign-meaning-name");
         jsonStr += `"id": "${meaningsLi[m].id}",`;
-        jsonStr += `"meaningName": "${meaningName.textContent}","examples":{`;
+        jsonStr += `"meaningName": "${meaningName.textContent.trim()}","examples":{`;
 
         //adding examples with translation
         let examples = meaningsLi[m].querySelectorAll(".sentence-section");
@@ -455,7 +455,7 @@ return jsonStr;
 }
 
 function getMeaningsIdToDelete(){
-    let currentMeanings = document.querySelectorAll('.meaning-li');
+    let currentMeanings = document.querySelectorAll('.foreign-meaning-li');
     let currentMeaningsId = []
     let earlyMeaningsId = [];
 
@@ -497,7 +497,7 @@ function undoChanges(){
         parentEditWordSection.insertBefore(toUndoSection, nextSiblingEditWordSection);
 
         let speechSections = toUndoSection.querySelectorAll(".speech-section");
-        let meaningsLi = toUndoSection.querySelectorAll(".meaning-li");
+        let meaningsLi = toUndoSection.querySelectorAll(".foreign-meaning-li");
         let examples = toUndoSection.querySelectorAll(".sentence-section");
         let phraseDivs = getPhraseDivs();
 

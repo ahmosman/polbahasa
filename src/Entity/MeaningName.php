@@ -26,6 +26,7 @@ class MeaningName
 
     /**
      * @ORM\ManyToMany(targetEntity=Meaning::class, inversedBy="meaningNames")
+     * * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $meaning;
 

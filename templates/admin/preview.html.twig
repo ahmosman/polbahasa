@@ -9,10 +9,10 @@
     {% if speechSection is not empty %}
         <div class="speech-section">
             <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
-            <ol class="edit-word-ol">
+            <ol class="foreign-word-ol">
                 {% for meaning in speechSection %}
-                    <li class="meaning-li">
-                        <div class="meaning-name">
+                    <li class="foreign-meaning-li">
+                        <div class="foreign-meaning-name">
 {% for meaningName in meaning.meaningNames %}{{ meaningName.name }}{% if loop.index < meaning.meaningNames|length %}, {% endif %}{% endfor %}</div>
 
                         {% for example in meaning.examples %}

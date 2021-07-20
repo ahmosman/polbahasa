@@ -22,13 +22,13 @@ class AdminController extends AbstractController
 {
     private $em;
     private $twig;
-    private $speechSections;
+    private $dictionary;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $speechSections)
+    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $dictionary)
     {
         $this->twig = $twig;
         $this->em = $em;
-        $this->speechSections = $speechSections;
+        $this->dictionary = $dictionary;
     }
 
     #[Route('/', name: 'admin')]
@@ -40,10 +40,11 @@ class AdminController extends AbstractController
     }
 
     #[Route('/show', name: 'admin_show_words')]
-    public function show(WordRepository $wordRepository): Response{
+    public function show(WordRepository $wordRepository): Response
+    {
 
-        return new Response( $this->twig->render('admin/show.html.twig',
-            ['words' => $wordRepository->findAllOrderBy('name','asc')]
+        return new Response($this->twig->render('admin/show.html.twig',
+            ['words' => $wordRepository->findAllOrderBy('name', 'asc')]
         ));
     }
 
@@ -53,24 +54,34 @@ class AdminController extends AbstractController
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
-            $wordJson = json_decode($form['json']->getData(),true);
+            $wordJson = json_decode($form['json']->getData(), true);
             $word->setJson("");
             $speechSections = $wordJson['speechSection'];
-            foreach ($speechSections as $sp){
+            $newMeaningNames = [];
+            foreach ($speechSections as $sp) {
                 $partOfSpeech = $sp['partOfSpeech'];
                 $meanings = $sp['meanings'];
-                foreach ($meanings as $m){
+                foreach ($meanings as $m) {
                     $meaning = new Meaning();
                     $meaning->setWord($word);
-                    $meaningNames = explode(', ',$m['meaningName']);
-                    $meaning->setName($m['meaningName']);
-                    foreach($meaningNames as $mName)
-                    {
-                        $meaningName = $meaningNameRepository->findOneBy(['name'=>$mName]) ?? new MeaningName();
-                        $meaningName->setName($mName);
-                        $meaning->addMeaningName($meaningName);
+                    $meaningNames = explode(', ', $m['meaningName']);
+                    foreach ($meaningNames as $mName) {
+                        if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
+                        {
+                            $meaningName->setName($mName);
+                            $meaning->addMeaningName($meaningName);
+                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName)) {
+                            $meaning->addMeaningName($meaningName);
+                        }
+                        else
+                        {
+                            $meaningName = new MeaningName();
+                            $meaningName->setName($mName);
+                            $meaning->addMeaningName($meaningName);
+                            array_push($newMeaningNames, $meaningName);
+                        }
                         $this->em->persist($meaningName);
                     }
                     $meaning->setPartOfSpeech($partOfSpeech);
@@ -81,7 +92,7 @@ class AdminController extends AbstractController
             }
             $this->em->persist($word);
             $this->em->flush();
-            $this->addFlash('success','Pomyślnie dodano wyrażenie');
+            $this->addFlash('success', 'Pomyślnie dodano wyrażenie');
             return $this->redirectToRoute('admin_show_words');
         }
 
@@ -90,43 +101,72 @@ class AdminController extends AbstractController
         ]);
 
     }
-    #[Route('/editword/{name}', name: 'edit_word', options: ['expose'=>true])]
+
+    #[Route('/editword/{name}', name: 'edit_word', options: ['expose' => true])]
     public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository): Response
     {
 
-        $speechSections = $this->speechSections->getSpeechSections($word);
+        $speechSections = $this->dictionary->getSpeechSections($word);
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
+        if ($form->isSubmitted() && $form->isValid())
         {
-            $wordJson = json_decode($form['json']->getData(),true);
+            $wordJson = json_decode($form['json']->getData(), true);
             $word->setJson("");
             $speechSections = $wordJson['speechSection'];
-            foreach ($speechSections as $sp){
+
+            $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
+            $meaningNamesToDelete = [];
+            $newMeaningNames = [];
+
+            foreach ($meaningsToDeleteId as $mDelId)
+            {
+                $meaning = $meaningRepository->find($mDelId);
+                if($meaning)
+                {
+                    $meaningNamesToDelete = array_merge($meaningNamesToDelete, $meaning->getMeaningNames()->getValues());
+                    $this->em->remove($meaning);
+                }
+            }
+
+            foreach ($speechSections as $sp)
+            {
                 $partOfSpeech = $sp['partOfSpeech'];
                 $meanings = $sp['meanings'];
-                foreach ($meanings as $m){
+                foreach ($meanings as $m)
+                {
+                    $updatedMeaningNames = [];
                     $meaning = $meaningRepository->find($m['id']) ?? new Meaning();
                     $meaning->setWord($word);
-                    $meaningNames = explode(', ',$m['meaningName']);
-                    $meaning->setName($m['meaningName']);
-                    $updatedMeaningNames = [];
-                    foreach($meaningNames as $mName)
+                    $meaningNames = explode(', ', $m['meaningName']);
+                    $oldMeaningNames = $meaning->getMeaningNames()->getValues();
+                    foreach ($meaningNames as $mName)
                     {
-                        $meaningName = $meaningNameRepository->findOneBy(['name'=>$mName]) ?? new MeaningName();
-                        $meaningName->setName($mName);
-                        $meaning->addMeaningName($meaningName);
-                        array_push($updatedMeaningNames, $meaningName);
+                        if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
+                        {
+                            $meaningName->setName($mName);
+                            $meaning->addMeaningName($meaningName);
+                            array_push($updatedMeaningNames, $meaningName);
+                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName)) {
+                            $meaning->addMeaningName($meaningName);
+                        }
+                        else
+                        {
+                            $meaningName = new MeaningName();
+                            $meaningName->setName($mName);
+                            $meaning->addMeaningName($meaningName);
+                            array_push($newMeaningNames, $meaningName);
+                        }
                         $this->em->persist($meaningName);
                     }
-                    $oldMeaningNames = $meaning->getMeaningNames()->getValues();
+
                     foreach ($oldMeaningNames as $oldMName)
                     {
-                        if(!in_array($oldMName, $updatedMeaningNames))
+                        if (!in_array($oldMName, $updatedMeaningNames))
                         {
                             $meaning->removeMeaningName($oldMName);
-                            if(empty($oldMName->getMeaning()->getValues()))
+                            if (empty($oldMName->getMeaning()->getValues()))
                                 $this->em->remove($oldMName);
                         }
                     }
@@ -136,14 +176,16 @@ class AdminController extends AbstractController
                     $this->em->persist($meaning);
                 }
             }
-            $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
-            foreach ($meaningsToDeleteId as $mDelId){
-                $meaning = $meaningRepository->find($mDelId);
-                $this->em->remove($meaning);
-            }
             $this->em->persist($word);
             $this->em->flush();
-            $this->addFlash('success','Pomyślnie edytowano wyrażenie');
+
+            foreach ($meaningNamesToDelete as $mnDel)
+            {
+                if (empty($mnDel->getMeaning()->getValues()))
+                    $this->em->remove($mnDel);
+            }
+            $this->em->flush();
+            $this->addFlash('success', 'Pomyślnie edytowano wyrażenie');
             return $this->redirectToRoute('admin_show_words');
         }
 
@@ -162,7 +204,6 @@ class AdminController extends AbstractController
             foreach ($meaningNames as $mName)
             {
                 $meaning->removeMeaningName($mName);
-                dump($mName->getMeaning()->getValues());
                 if(empty($mName->getMeaning()->getValues()))
                     $this->em->remove($mName);
             }
@@ -179,8 +220,7 @@ class AdminController extends AbstractController
     #[Route('/preview/{name}', name: 'preview_word', options: ['expose'=>true])]
     public function preview(Word $word): Response
     {
-        $speechSections = $this->speechSections->getSpeechSections($word);
-        dump($speechSections);
+        $speechSections = $this->dictionary->getSpeechSections($word);
 
         return new Response( $this->twig->render('admin/preview.html.twig', [
             'word' => $word,

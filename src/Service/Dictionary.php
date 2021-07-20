@@ -18,7 +18,7 @@ class Dictionary
         $this->partsOfSpeech = $this->getPartsOfSpeech();
     }
 
-    public function getPartsOfSpeech(): array
+    private function getPartsOfSpeech(): array
     {
         $qb = $this->em->createQueryBuilder();
 
@@ -100,5 +100,18 @@ class Dictionary
         }
 
         return $speechSections;
+    }
+
+    public function getNotFlushedMeaningName(array $newMeaningNames, string $name)
+    {
+        if(!empty($newMeaningNames))
+        {
+            foreach ($newMeaningNames as $nMName)
+            {
+                if($nMName->getName() == $name)
+                    return $nMName;
+            }
+        }
+        return null;
     }
 }

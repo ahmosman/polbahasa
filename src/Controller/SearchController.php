@@ -27,10 +27,8 @@ class SearchController extends AbstractController
         if(isset($all))
             $suggestions = $this->suggestions->getAllSuggestions($q);
         else
-            $suggestions = $this->suggestions->getNativeSuggestions($q);
-
-        dump(isset($all));
-        dump($suggestions);die;
+            $suggestions = $this->suggestions->getForeignSuggestions($q);
+        
         return $this->json($suggestions);
     }
     //TODO: #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]

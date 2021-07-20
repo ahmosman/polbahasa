@@ -8,14 +8,14 @@ fos_elastica:
                 index:
                     analysis:
                         analyzer:
-                            suggest_analyzer:
+                            search_analyzer:
                                 type: custom
                                 tokenizer: standard
                                 filter: [ lowercase, asciifolding ]
             use_alias: true
             index_name: words_index
             properties:
-                name: {analyzer: suggest_analyzer}
+                name: {analyzer: search_analyzer}
             persistence:
                 driver: orm
                 model: App\Entity\Word
@@ -27,17 +27,17 @@ fos_elastica:
                 index:
                     analysis:
                         analyzer:
-                            suggest_analyzer:
+                            search_analyzer:
                                 type: custom
                                 tokenizer: standard
                                 filter: [ lowercase, asciifolding ]
             use_alias: true
             index_name: meanings_index
             properties:
-                name: {analyzer: suggest_analyzer }
+                name: {analyzer: search_analyzer }
             persistence:
                 driver: orm
-                model: App\Entity\Meaning
+                model: App\Entity\MeaningName
                 provider: ~
                 listener: ~
                 finder: ~
@@ -75,30 +75,10 @@ fos_elastica:
                 name: { type: completion, analyzer: suggest_analyzer }
             persistence:
                 driver: orm
-                model: App\Entity\Meaning
+                model: App\Entity\MeaningName
                 provider: ~
                 listener: ~
                 finder: ~
-#        suggest:
-#            use_alias: true
-#            settings:
-#                index:
-#                    analysis:
-#                        analyzer:
-#                            suggest_analyzer:
-#                                type: custom
-#                                tokenizer: standard
-#                                filter: [ lowercase, asciifolding ]
-#            properties:
-#                locale:
-#                    type: keyword
-#                suggest:
-#                    type: completion
-#                    analyzer: suggest_analyzer
-#                    contexts:
-#                        - name: locale
-#                          type: category
-#                          path: locale
 
 
 

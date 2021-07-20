@@ -56,8 +56,16 @@ class Suggestions
     {
         $foreign = $this->getForeignSuggestions($q);
         $native = $this->getNativeSuggestions($q);
-        return  array_merge($foreign,$native);
-
+        $merged = array_merge($foreign,$native);
+        $results = [];
+        foreach ($merged as $result)
+        {
+            $bracketPosition = strpos($result," (");
+            $result = $bracketPosition ? substr($result,0,$bracketPosition) : $result;
+            if(!in_array($result,$results,true))
+                array_push($results,$result);
+        }
+        return $results;
     }
 
     public function getForeignSuggestions(string $q)

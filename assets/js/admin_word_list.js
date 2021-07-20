@@ -4,7 +4,7 @@ let copyAdminWordTable = adminWordTable.innerHTML;
 
 
 searchInput.addEventListener('input', ()=>{
-    if(searchInput.value.length > 1){
+    if(searchInput.value.length > 0){
         searchWords();
     }else{
         adminWordTable.innerHTML = copyAdminWordTable;
@@ -27,12 +27,11 @@ function displayWords(words){
     for (const word of words) {
         let adminWordTr = document.createElement("tr");
         adminWordTr.classList.add("admin-word-tr");
-        adminWordTr.innerHTML = `<td class="word-name-td">${word.text}</td>
-                    <td class="word-id-td">${word._id}</td>
+        adminWordTr.innerHTML = `<td class="word-name-td">${word}</td>
                     <td class="word-action-td">
-                        <a href="${Routing.generate('preview_word', {name: word.text})}" class="btn btn-hotpink">Podgląd</a>
-                        <a href="${Routing.generate('edit_word', {name: word.text})}" class="btn btn-orchid">Edytuj</a>
-                        <a href="${Routing.generate('delete_word', {name: word.text})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word.text}?')">Usuń</a>
+                        <a href="${Routing.generate('preview_word', {name: word})}" class="btn btn-hotpink">Podgląd</a>
+                        <a href="${Routing.generate('edit_word', {name: word})}" class="btn btn-orchid">Edytuj</a>
+                        <a href="${Routing.generate('delete_word', {name: word})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word.text}?')">Usuń</a>
                     </td>`;
         $(".admin-word-table").append(adminWordTr);
     }

@@ -5,10 +5,6 @@ namespace App\Controller;
 use App\Elasticsearch\Search;
 use App\Elasticsearch\Suggestions;
 use App\Service\Dictionary;
-use Elastica\Query\Fuzzy;
-use Elastica\Query\MultiMatch;
-use Elastica\Util;
-use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +15,12 @@ use Twig\Environment;
 class MainController extends AbstractController
 {
     private $twig;
-    private $suggestions;
     private $search;
     private $dictionary;
 
-    public function __construct(Environment $twig, Suggestions $suggestions, Search $search, Dictionary $dictionary)
+    public function __construct(Environment $twig, Search $search, Dictionary $dictionary)
     {
         $this->twig = $twig;
-        $this->suggestions = $suggestions;
         $this->search = $search;
         $this->dictionary = $dictionary;
     }
@@ -46,9 +40,6 @@ class MainController extends AbstractController
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
-//        dump($nativeData);
-//        dump($foreignData);
-        $suggestions = $this->suggestions->getForeignSuggestions($q);
         $session->set('q', $q);
         return new Response($this->twig->render('dictionary/search_result.html.twig',[
             'foreign' => $foreignData,

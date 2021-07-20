@@ -10,14 +10,12 @@
         <table class="admin-word-table">
             <tr class="header-word-table">
                 <th>Wyrażenie</th>
-                <th>ID</th>
                 <th>Akcje</th>
             </tr>
 
             {% for word in words%}
                 <tr class="admin-word-tr">
                     <td class="word-name-td">{{ word.name }}</td>
-                    <td class="word-id-td">{{ word.id }}</td>
                     <td class="word-action-td">
                         <a href="{{ path('preview_word',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
                         <a href="{{ path('edit_word',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
@@ -29,9 +27,7 @@
             <a href="{{ path('addword') }}" class="btn btn-darkviolet add-word-btn">Dodaj wyrażenie</a>
         </div>
     </div>
-    {{ encore_entry_script_tags('admin_word_list') }}
 {% endblock %}
 {% block javascripts %}
-
-
+    {{ encore_entry_script_tags('admin_word_list') }}
 {% endblock %}

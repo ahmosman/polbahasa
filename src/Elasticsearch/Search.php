@@ -10,12 +10,12 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 class Search
 {
     private TransformedFinder $wordsFinder;
-    private TransformedFinder $meaningsFinder;
+    private TransformedFinder $meaningNamesFinder;
 
-    public function __construct(TransformedFinder $wordsFinder, TransformedFinder $meaningsFinder)
+    public function __construct(TransformedFinder $wordsFinder, TransformedFinder $meaningNamesFinder)
     {
         $this->wordsFinder = $wordsFinder;
-        $this->meaningsFinder = $meaningsFinder;
+        $this->meaningNamesFinder = $meaningNamesFinder;
 
     }
 
@@ -33,8 +33,18 @@ class Search
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
         $multiMatch->setFuzziness(0.5);
-
-        return !empty($q) ? $this->meaningsFinder->find($multiMatch) : [];
+        $meaningNames = $this->meaningNamesFinder->find($multiMatch);
+        $meaningsFinal = [];
+        foreach ($meaningNames as $mName)
+        {
+            $meanings = $mName->getMeaning();
+            foreach ($meanings as $meaning)
+            {
+                if(!in_array($meaning, $meaningsFinal))
+                    array_push($meaningsFinal, $meaning);
+            }
+        }
+        return $meaningsFinal;
     }
 
 }

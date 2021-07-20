@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
 body{
-  font-family: "Comic Sans MS";
+  font-family: "Comic Sans MS", cursive;
   font-size: 20px;
 }
 .main-container{
@@ -17,7 +17,7 @@ body{
   font-size: 30px;
 }
 
-.meaning-name{
+.foreign-meaning-name{
   font-weight: 400;
   font-size: 1.2em;
   display: inline;
@@ -48,7 +48,7 @@ body{
   display: inline-block;
 }
 
-.meaning-li{
+.foreign-meaning-li{
   margin: 20px 0;
 }
 
@@ -173,14 +173,14 @@ body{
 .search-bar-index{
   height: 60vh;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-
+  margin-top: 20%;
 }
 .search-bar-results{
   display: flex;
   margin-top: 20px;
+  height: 50px;
 }
 .search-input-div{
   display: flex;
@@ -188,8 +188,9 @@ body{
   flex-direction: column;
 }
 
-.search-input-div input,.search-input-div input:active,.search-input-div input:focus{
+.search-input-div input{
   padding: 0 30px;
+  margin: 0;
   width: 500px;
   height: 50px;
   box-sizing: border-box;
@@ -214,23 +215,45 @@ body{
 .foreign-word{
   font-weight: bold;
 }
-.native-meaning .sentence-section{
+.native-meaning-li .sentence-section{
   font-size: 0.95em;
 }
 
-.foreign-word-ol a, .edit-word-ol a{
+.foreign-word-ol a{
   text-decoration: none;
   color: black;
 }
 
-.foreign-word-ol a:hover, .edit-word-ol a:hover{
+.foreign-word-ol a:hover{
   opacity: 0.5;
 }
+.suggestions-ul{
+  background-color: white;
+}
+.suggestions-ul li{
+  list-style: none;
+  padding: 8px 12px;
+  width: 100%;
+  border-radius: 10px;
+}
 
-
-
-
-
+.suggestions-ul li:hover{
+  background-color: rgba(245, 229, 229, 0.84);
+  color: rgba(228, 89, 236, 0.88);
+  cursor: pointer;
+}
+.suggestions-div{
+  position: relative;
+  bottom: 22px;
+  right: 15px;
+  justify-self: end;
+}
+.result-header-description
+{
+  color: #999999;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
 
 //Custom buttons
 .btn-hotpink{
