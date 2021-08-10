@@ -8,7 +8,11 @@
         {% for speechSection in speechSections %}
             {% if speechSection is not empty %}
                 <div class="speech-section">
-                    <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                    <div class="part-of-speech-div">
+                        <span class="part-of-speech-span">
+                            <input class="part-of-speech" value="{{ speechSection[0].partOfSpeech }}">
+                        </span>
+                    </div>
                     <ol class="foreign-word-ol">
                         {% for meaning in speechSection %}
                             <li class="foreign-meaning-li" id="{{ meaning.id }}">

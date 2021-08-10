@@ -21,6 +21,7 @@ class Search
 
     public function findWords(string $q)
     {
+        dump($q);
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
         $multiMatch->setFuzziness(0.5);

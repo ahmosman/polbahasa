@@ -31,6 +31,5 @@ class SearchController extends AbstractController
         
         return $this->json($suggestions);
     }
-    //TODO: #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]
-    //przy wprowadzaniu nowego słowa
+
 }

@@ -13,13 +13,13 @@
         <div class="header-word">{{ word[0][0].word.name }}</div>
         {% for speechSection in word %}
             <div class="speech-section">
-                <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                <input class="part-of-speech" value="{{ speechSection[0].partOfSpeech }}">
                 <ol class="foreign-word-ol">
                     {% for meaning in speechSection %}
                         <li class="foreign-meaning-li">
                             <div class="foreign-meaning-name">
                                 {% for meaningName in meaning.meaningNames %}
-                                    <a href="{{path('dictionary')}}?q={{meaningName.name}}">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}, {% endif %}
+                                    <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
                                 {% endfor %}
                             </div>
                             {% for example in meaning.examples %}
@@ -40,7 +40,7 @@
     <div class="result-header-description">"{{ app.session.get('q') }}" po indonezyjsku</div>
     <div class="header-word">{{ app.session.get('q') }}</div>
     {% for  speechSection in native%}
-        <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
+        <input class="part-of-speech" value="{{ speechSection.partOfSpeech }}">
         <ol class="foreign-word-ol">
             {% for word in speechSection.words %}
                 <li class="foreign-word"> <a href="{{path('dictionary')}}?q={{ word.name }}">{{ word.name }}</a></li>
@@ -49,7 +49,7 @@
                         <li class="native-meaning-li">
                             <div class="native-meaning-name">
                                 {% for meaningName in meaning.meaningNames %}
-                                    <a href="{{path('dictionary')}}?q={{meaningName.name}}">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}, {% endif %}
+                                    <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
                                 {% endfor %}
                             </div>
                             {% for example in meaning.examples %}
@@ -65,5 +65,12 @@
         </ol>
     {% endfor %}
 {% endif %}
+{% if foreign is empty and native is empty%}
+    Brak wyników dla podanego zapytania.
+{% endif %}
 {% endblock %}
-{#TODO: Dodaj linki przy słowach#}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('meaning_link') }}
+{% endblock %}

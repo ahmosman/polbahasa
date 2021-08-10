@@ -43,9 +43,58 @@ body{
 }
 
 .part-of-speech{
-  width: 400px;
+  width: 100%;
   color: darkgray;
-  display: inline-block;
+}
+
+.part-of-speech-span{
+  width: 250px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input.part-of-speech::placeholder {
+  font-style: italic;
+  color: darkgray;
+}
+
+.pos-suggestion-ul{
+  position: absolute;
+  background-color: #FFFFFF;
+  z-index: 1;
+  left: 0;
+}
+.edit-error{
+  color: red;
+  font-size: 0.9em;
+  font-family: "Lucida Console", sans-serif;
+  text-decoration: underline;
+}
+
+.pos-add-message{
+  background-color: #e1b8fc;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  width: fit-content;
+}
+
+.pos-manage-div{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15%;
+}
+.pos-manage-div *{
+  margin: 10px;
+}
+
+.pos-manage-div textarea{
+  width: 70%;
+  height: 20vh;
+  border-radius: 10px;
+  outline: none;
 }
 
 .foreign-meaning-li{
@@ -83,8 +132,8 @@ body{
 }
 
 .add-sentence-btn, .del-sentence-btn, .del-meaning-btn, .move-up-btn, .move-down-btn, .del-speech-section-btn{
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   display: inline-block;
   position: relative;
   bottom: 10px;
@@ -101,7 +150,8 @@ body{
 }
 
 .move-up-btn, .move-down-btn{
-  bottom: 7px;
+  font-size: 1.2em;
+  bottom: 10px;
 }
 
 .sentence-section{
@@ -193,12 +243,16 @@ body{
   margin: 0;
   width: 500px;
   height: 50px;
-  box-sizing: border-box;
   border-radius: 25px;
+}
+
+input, textarea{
+  box-sizing: border-box;
   border: 1px solid rgba(227, 227, 227, 0.81);
   outline: none;
 }
-.search-input-div input:focus{
+
+input:focus, textarea:focus{
   border: 1px solid rgba(228, 89, 236, 0.88);
 }
 .search-submit-btn{
@@ -230,14 +284,17 @@ body{
 .suggestions-ul{
   background-color: white;
 }
-.suggestions-ul li{
+.suggestions-ul li, .pos-suggestion-ul li{
   list-style: none;
   padding: 8px 12px;
   width: 100%;
+}
+
+.suggestions-ul li{
   border-radius: 10px;
 }
 
-.suggestions-ul li:hover{
+.suggestions-ul li:hover, .pos-suggestion-ul li:hover{
   background-color: rgba(245, 229, 229, 0.84);
   color: rgba(228, 89, 236, 0.88);
   cursor: pointer;

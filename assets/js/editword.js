@@ -1,4 +1,7 @@
-let name = document.querySelector(".header-word");
+import * as pos from './part_of_speech.js';
+
+let originalWord = document.querySelector(".header-word");
+let originalWordName = originalWord.textContent;
 let addSentenceBtnTmpl = document.querySelector(".add-sentence-btn");
 let delSentenceBtnTmpl = document.querySelector(".del-sentence-btn");
 let delMeaningBtnTmpl = document.querySelector(".del-meaning-btn");
@@ -7,7 +10,8 @@ let moveUpBtnTmpl = document.querySelector(".move-up-btn");
 let moveDownBtnTmpl = document.querySelector(".move-down-btn");
 let addMeaningBtnTmpl = document.querySelector(".add-meaning-btn");
 
-let meaningsLi = document.querySelectorAll(".meaning-li");
+let partsOfSpeech = document.querySelectorAll(".part-of-speech");
+let meaningsLi = document.querySelectorAll(".foreign-meaning-li");
 let examples = document.querySelectorAll(".sentence-section");
 let speechSections = document.querySelectorAll(".speech-section");
 let editWordSection = document.querySelector(".edit-word-section");
@@ -22,9 +26,9 @@ let addSpeechSectionBtn = document.querySelector(".add-speech-section-btn");
 let undoBtn = document.querySelector(".undo-btn");
 
 let phraseClassesToIgnore = ":not(.sentence-section):not(.edit-phrase-div1):not(.edit-phrase-div1 *):not(.mb-3)";
-let phraseClasses = ['.header-word','.part-of-speech','.foreign-meaning-name','.example-sentence','.example-translation'];
-
+let phraseClasses = ['.header-word','.foreign-meaning-name','.example-sentence','.example-translation'];
 let undoNodes = [];
+
 //enter updates
 for (const e of examples) {
     addButtonsToExample(e);
@@ -35,6 +39,9 @@ for (const mli of meaningsLi) {
 }
 for (const sp of speechSections) {
     addButtonsToSpeechSection(sp);
+}
+for(const pos of partsOfSpeech){
+    updatePartOfSpeech(pos);
 }
 let phraseDivs = getPhraseDivs();
 for (const phraseDiv of phraseDivs) {
@@ -48,9 +55,9 @@ function getButton(template){
     return btn;
 }
 
-function addButtonsToSpeechSection(speechSection, newSection = false){
+function addButtonsToSpeechSection(speechSection){
 
-    let partOfSpeech = speechSection.querySelector('.part-of-speech');
+    let partOfSpeechDiv = speechSection.querySelector('.part-of-speech-div');
     let delSpeechSectionBtn = getButton(delSpeechSectionBtnTmpl);
 
     let moveUpBtn = getButton(moveUpBtnTmpl);
@@ -58,18 +65,12 @@ function addButtonsToSpeechSection(speechSection, newSection = false){
 
     let addMeaningBtn = getButton(addMeaningBtnTmpl);
     addMeaningBtn.classList.remove('opacity0');
-    if(newSection) {
-        speechSection.appendChild(delSpeechSectionBtn);
-        speechSection.appendChild(moveUpBtn);
-        speechSection.appendChild(moveDownBtn);
-        speechSection.appendChild(addMeaningBtn);
-    }
-    else {
-        speechSection.insertBefore(addMeaningBtn, partOfSpeech.nextElementSibling);
-        speechSection.insertBefore(moveDownBtn, partOfSpeech.nextElementSibling);
-        speechSection.insertBefore(moveUpBtn, partOfSpeech.nextElementSibling);
-        speechSection.insertBefore(delSpeechSectionBtn, partOfSpeech.nextElementSibling);
-    }
+
+    partOfSpeechDiv.appendChild(delSpeechSectionBtn);
+    partOfSpeechDiv.appendChild(moveUpBtn);
+    partOfSpeechDiv.appendChild(moveDownBtn);
+    partOfSpeechDiv.appendChild(addMeaningBtn);
+
     addSpeechSectionEventListeners(speechSection);
 }
 
@@ -106,9 +107,9 @@ function addSpeechSectionEventListeners(speechSection){
     let moveDownBtn = speechSection.querySelector(".move-down-btn");
     let addMeaningBtn = speechSection.querySelector(".add-meaning-btn");
 
-    delSpeechSectionBtn.addEventListener('click',deleteParentElement);
-    moveUpBtn.addEventListener('click',moveParentElementUp);
-    moveDownBtn.addEventListener('click',moveParentElementDown);
+    delSpeechSectionBtn.addEventListener('click',deleteParentOfParentElement);
+    moveUpBtn.addEventListener('click',moveParentOfParentElementUp);
+    moveDownBtn.addEventListener('click',moveParentOfParentElementDown);
     addMeaningBtn.addEventListener('click',addMeaning);
 
     speechSection.addEventListener('mouseover',()=>{
@@ -186,7 +187,7 @@ function addExampleEventListeners(example){
 }
 
 function addMeaning(){
-    let wordList = this.nextElementSibling;
+    let wordList = this.parentNode.parentNode.querySelector(".foreign-word-ol");
     let meaningLi = document.createElement("li");
     meaningLi.classList.add("foreign-meaning-li");
     let meaningName = document.createElement("div");
@@ -228,58 +229,77 @@ function addSpeechSection(){
 
     let speechSection = document.createElement("div");
     speechSection.classList.add("speech-section");
-    let partOfSpeech = document.createElement("div");
-    partOfSpeech.classList.add("part-of-speech");
-    partOfSpeech.innerHTML = '<i>Wprowadź część mowy</i>';
-    updatePhraseDiv(partOfSpeech);
-    let editWordOl = document.createElement("ol");
-    editWordOl.classList.add("foreign-word-ol");
+    speechSection.innerHTML = `<div class="part-of-speech-div">
+                    <span class="part-of-speech-span">
+                    <input class="part-of-speech" placeholder="Wprowadź część mowy">
+                    </span>
+                    </div>
+                    <ol class="foreign-word-ol"></ol>`;
 
-    speechSection.appendChild(partOfSpeech);
-    addButtonsToSpeechSection(speechSection,true);
-    speechSection.appendChild(editWordOl);
+    addButtonsToSpeechSection(speechSection);
 
-    let previousElement = document.querySelector(".speech-section:last-of-type") ?? name;
+    let previousElement = document.querySelector(".speech-section:last-of-type") ?? originalWord;
 
     previousElement.parentNode.insertBefore(speechSection, previousElement.nextElementSibling);
 
-    editPhrase(partOfSpeech);
+    let partOfSpeech = speechSection.querySelector('.part-of-speech');
+    updatePartOfSpeech(partOfSpeech);
+    partOfSpeech.focus();
 
 }
 
-function deleteParentElement() {
+function deleteElement(toDelete){
     addUndoNode();
-    let parentToDelete = this.parentNode;
-    let parentOfParent = parentToDelete.parentNode;
-    parentOfParent.removeChild(parentToDelete);
+    let parentOfToDelete = toDelete.parentNode;
+    parentOfToDelete.removeChild(toDelete);
     phraseDescDiv.textContent = '';
     editPhraseDiv.classList.add("hidden");
 }
 
-function moveParentElementUp(){
-    let toMove = this.parentNode;
+function deleteParentElement(){
+    deleteElement(this.parentNode);
+}
+
+function deleteParentOfParentElement(){
+    deleteElement(this.parentNode.parentNode);
+}
+
+function moveElementUp(toMove){
     if(toMove.previousElementSibling !== null && toMove.previousElementSibling.classList.contains(toMove.classList[0]))
         toMove.parentNode.insertBefore(toMove,toMove.previousElementSibling);
     else{
         let lastChild = toMove.parentNode.querySelector(`.${toMove.classList[0]}:last-of-type`);
-        console.log(lastChild);
         if(toMove !== lastChild)
             swapElements(toMove,lastChild);
     }
-
 }
 
-function moveParentElementDown(){
-    let toMove = this.parentNode;
+function moveElementDown(toMove){
     if(toMove.nextElementSibling !== null && toMove.nextElementSibling.classList.contains(toMove.classList[0]))
         toMove.parentNode.insertBefore(toMove.nextElementSibling, toMove);
     else {
         let firstChild = toMove.parentNode.querySelector(`.${toMove.classList[0]}`);
-        console.log(firstChild);
         if(toMove !== firstChild)
             swapElements(toMove,firstChild);
     }
 }
+
+function moveParentElementUp() {
+    moveElementUp(this.parentNode);
+}
+
+function moveParentElementDown() {
+    moveElementDown(this.parentNode);
+}
+
+function moveParentOfParentElementUp() {
+    moveElementUp(this.parentNode.parentNode);
+}
+
+function moveParentOfParentElementDown() {
+    moveElementDown(this.parentNode.parentNode);
+}
+
 
 function swapElements(a,b) {
     let aParent = a.parentNode;
@@ -302,6 +322,17 @@ function getPhraseDivs(){
             phraseDivs.push(s);
     }
     return phraseDivs;
+}
+
+function updatePartOfSpeech(partOfSpeech){
+    pos.partOfSpeechSuggestions(partOfSpeech);
+    partOfSpeech.addEventListener('focus',()=>{
+        phraseDescDiv.textContent = '';
+        editPhraseDiv.classList.add("hidden");
+        phraseDivs = getPhraseDivs();
+        for (const p of phraseDivs)
+            p.classList.remove('phrase-click');
+    });
 }
 
 function updatePhraseDiv(phraseDiv){
@@ -332,10 +363,6 @@ function editPhrase(phrase){
         case 'header-word':
             phraseDesc = "Podaj wyrażenie, które jest tłumaczone";
             inputDesc = "Wprowadź wyrażenie";
-            break;
-        case 'part-of-speech':
-            phraseDesc = "Podaj część mowy";
-            inputDesc = "Wprowadź część mowy";
             break;
         case 'foreign-meaning-name':
             phraseDesc = "Podaj tłumaczenie wyrażenia";
@@ -390,6 +417,9 @@ function editPhrase(phrase){
         phrase.classList.remove('phrase-click');
         phraseDescDiv.textContent = '';
         editPhraseDiv.classList.add("hidden");
+        if(classname === 'header-word'){
+            checkWordExists();
+        }
     }
 }
 
@@ -407,7 +437,7 @@ for (let sp = 0; sp < speechSections.length; sp++){
     let partOfSpeech = speechSections[sp].querySelector(".part-of-speech");
 
     //adding part of speech
-    jsonStr += `"partOfSpeech": "${partOfSpeech.textContent}", "meanings":{`;
+    jsonStr += `"partOfSpeech": "${partOfSpeech.value}", "meanings":{`;
 
     //adding meanings
     let editWordOl = speechSections[sp].querySelector(".foreign-word-ol");
@@ -442,7 +472,9 @@ for (let sp = 0; sp < speechSections.length; sp++){
 //closing all speech sections
     jsonStr += '},';
 //adding meanings id to delete
-    jsonStr += `"toDeleteMeaningsId": ${getMeaningsIdToDelete()}`;
+    jsonStr += `"toDeleteMeaningsId": ${getMeaningsIdToDelete()},`;
+//adding parts of speech csv string
+    jsonStr += `"partsOfSpeechCsv": "${pos.getPartsOfSpeechCsv()}"`;
 //closing word json
     jsonStr += '}';
 
@@ -474,12 +506,17 @@ function getMeaningsIdToDelete(){
 }
 
 function saveWord(){
+    if(Object.values(isError).includes(true)){
+        alert('Wypełnij wymagane pola');
+        return false;
+    }
     let wordNameIn = document.querySelector("#word_name");
     let wordName = document.querySelector(".header-word");
     wordNameIn.value = wordName.textContent;
 
     let wordJsonIn = document.querySelector("#word_json");
     wordJsonIn.value = getWordJson();
+    $("form[name='word']").submit();
 }
 
 function addUndoNode(){
@@ -499,6 +536,7 @@ function undoChanges(){
         let speechSections = toUndoSection.querySelectorAll(".speech-section");
         let meaningsLi = toUndoSection.querySelectorAll(".foreign-meaning-li");
         let examples = toUndoSection.querySelectorAll(".sentence-section");
+        let partsOfSpeech = toUndoSection.querySelectorAll(".part-of-speech");
         let phraseDivs = getPhraseDivs();
 
         for (const sp of speechSections)
@@ -509,6 +547,9 @@ function undoChanges(){
 
         for (const e of examples)
             addExampleEventListeners(e);
+
+        for (const pos of partsOfSpeech)
+            updatePartOfSpeech(pos);
 
         for (const phraseDiv of phraseDivs)
             updatePhraseDiv(phraseDiv);
@@ -522,7 +563,25 @@ saveBtn.addEventListener('click',saveWord);
 addSpeechSectionBtn.addEventListener('click',addSpeechSection);
 undoBtn.addEventListener('click',undoChanges);
 
-
+async function checkWordExists(){
+    let word = document.querySelector('.header-word');
+    let response = await fetch(`${Routing.generate('checkexist')}?wordName=${word.textContent}`);
+    let exists = await response.json();
+    let wordError = document.querySelector('.word-exists');
+    if(exists && (word.textContent !== originalWordName)){
+        isError.wordError = true;
+        if(!wordError){
+            wordError = document.createElement('div');
+            wordError.classList.add('edit-error', 'word-exists');
+            wordError.textContent = 'Podane wyrażenie już istnieje';
+            word.parentNode.insertBefore(wordError, word.nextElementSibling);
+        }
+    }else{
+        isError.wordError = false;
+        if(wordError)
+            wordError.parentNode.removeChild(wordError);
+    }
+}
 
 
 

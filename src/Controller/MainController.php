@@ -40,6 +40,11 @@ class MainController extends AbstractController
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
+        dump($meanings);
+        dump($words);
+        dump($nativeData);
+        dump($foreignData);
+
         $session->set('q', $q);
         return new Response($this->twig->render('dictionary/search_result.html.twig',[
             'foreign' => $foreignData,

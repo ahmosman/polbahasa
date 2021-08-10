@@ -6,6 +6,7 @@
 parameters:
     elasticsearch_host: 127.0.0.1
     elasticsearch_port: 9200
+    data_dir: '%env(resolve:DATA_DIR)%'
 services:
     # default configuration for services in *this* file
     _defaults:

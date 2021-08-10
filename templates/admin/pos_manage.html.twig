@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="pos-manage-div">
+        <div class="pos-manage-message">Wprowadź części mowy odzielając je przecinkiem bez spacji</div>
+        <textarea>{{ partsOfSpeechCsv }}</textarea>
+        <div class="pos-manage-btn-div">
+            <a href="{{ path('admin_pos') }}" class="pos-manage-confirm-btn btn btn-hotpink">Zatwierdź</a>
+            <a href="{{ path('admin') }}"class="pos-manage-deny-btn btn btn-darkviolet">Anuluj</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin_pos') }}
+{% endblock %}

@@ -54,20 +54,27 @@ class AdminController extends AbstractController
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
+        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
+
         if ($form->isSubmitted() && $form->isValid())
         {
             $wordJson = json_decode($form['json']->getData(), true);
             $word->setJson("");
             $speechSections = $wordJson['speechSection'];
             $newMeaningNames = [];
+            $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
+            if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
+                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$jsonPartsOfSpeechCsv);
+
             foreach ($speechSections as $sp) {
                 $partOfSpeech = $sp['partOfSpeech'];
                 $meanings = $sp['meanings'];
                 foreach ($meanings as $m) {
                     $meaning = new Meaning();
                     $meaning->setWord($word);
-                    $meaningNames = explode(', ', $m['meaningName']);
+                    $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
                     foreach ($meaningNames as $mName) {
+                        $mName = trim($mName);
                         if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
                         {
                             $meaningName->setName($mName);
@@ -98,6 +105,7 @@ class AdminController extends AbstractController
 
         return $this->render('admin/addword.html.twig', [
             'form' => $form->createView(),
+            'partsOfSpeechCsv' => $partsOfSpeechCsv
         ]);
 
     }
@@ -106,7 +114,7 @@ class AdminController extends AbstractController
     public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository): Response
     {
 
-        $speechSections = $this->dictionary->getSpeechSections($word);
+        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
@@ -119,6 +127,9 @@ class AdminController extends AbstractController
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
             $meaningNamesToDelete = [];
             $newMeaningNames = [];
+            $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
+            if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
+                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$jsonPartsOfSpeechCsv);
 
             foreach ($meaningsToDeleteId as $mDelId)
             {
@@ -139,10 +150,11 @@ class AdminController extends AbstractController
                     $updatedMeaningNames = [];
                     $meaning = $meaningRepository->find($m['id']) ?? new Meaning();
                     $meaning->setWord($word);
-                    $meaningNames = explode(', ', $m['meaningName']);
+                    $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
                     $oldMeaningNames = $meaning->getMeaningNames()->getValues();
                     foreach ($meaningNames as $mName)
                     {
+                        $mName = trim($mName);
                         if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
                         {
                             $meaningName->setName($mName);
@@ -192,7 +204,8 @@ class AdminController extends AbstractController
         return $this->render('admin/editword.html.twig', [
             'form' => $form->createView(),
             'word' => $word,
-            'speechSections' => $speechSections
+            'speechSections' => $this->dictionary->getSpeechSections($word),
+            'partsOfSpeechCsv' => $partsOfSpeechCsv
         ]);
     }
     #[Route('/delete/{name}', name: 'delete_word', options: ['expose'=>true])]
@@ -220,11 +233,34 @@ class AdminController extends AbstractController
     #[Route('/preview/{name}', name: 'preview_word', options: ['expose'=>true])]
     public function preview(Word $word): Response
     {
-        $speechSections = $this->dictionary->getSpeechSections($word);
-
         return new Response( $this->twig->render('admin/preview.html.twig', [
             'word' => $word,
-            'speechSections' => $speechSections
+            'speechSections' => $this->dictionary->getSpeechSections($word)
         ]));
+    }
+
+    #[Route('/pos', name: 'admin_pos')]
+    public function managePartsOfSpeech()
+    {
+        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
+        $newPartsOfSpeechCsv = $_GET['posCsv'] ?? null;
+        if($newPartsOfSpeechCsv)
+        {
+            if($newPartsOfSpeechCsv !== $partsOfSpeechCsv)
+                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$newPartsOfSpeechCsv);
+            return $this->redirectToRoute('admin');
+        }
+        return new Response($this->twig->render('admin/pos_manage.html.twig',[
+            'partsOfSpeechCsv' => $partsOfSpeechCsv
+        ]));
+    }
+
+    #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]
+    public function checkexist(WordRepository $wordRepository)
+    {
+        $wordName = $_GET['wordName'];
+        $word = $wordRepository->findOneBy(['name' => $wordName]) ?? null;
+        $wordExists = $word ? true : false;
+        return $this->json($wordExists);
     }
 }

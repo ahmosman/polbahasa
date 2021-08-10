@@ -10,7 +10,7 @@
     </div>
     <footer class="edit-word-footer">
         <div class="edit-word-btn-div">
-            {{ form_row(form.save ) }}
+            <button type="button" class="save-meaning-btn btn btn-mediumpurple">Zapisz</button>
             <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
             <button type="button" class="undo-btn btn btn-mediumpurple">Cofnij</button>
         </div>
@@ -38,6 +38,14 @@
                 });
             });
         });
+
+        let partsOfSpeechCsv = '{{ partsOfSpeechCsv }}';
+        let partsOfSpeechArr = partsOfSpeechCsv.split(',');
+        let isError = {
+            posError: false,
+            wordError: false
+        };
     </script>
+    {{ encore_entry_script_tags('part_of_speech') }}
     {{ encore_entry_script_tags('editword') }}
 {% endblock %}
