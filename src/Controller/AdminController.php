@@ -9,6 +9,7 @@ use App\Form\WordType;
 use App\Repository\MeaningNameRepository;
 use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
+use App\Service\DataFileReader;
 use App\Service\Dictionary;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +24,14 @@ class AdminController extends AbstractController
     private $em;
     private $twig;
     private $dictionary;
+    private $data;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $dictionary)
+    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $dictionary, DataFileReader $data)
     {
         $this->twig = $twig;
         $this->em = $em;
         $this->dictionary = $dictionary;
+        $this->data = $data;
     }
 
     #[Route('/', name: 'admin')]
@@ -54,7 +57,7 @@ class AdminController extends AbstractController
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
+        $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
 
         if ($form->isSubmitted() && $form->isValid())
         {
@@ -64,8 +67,7 @@ class AdminController extends AbstractController
             $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
             if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
-                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$jsonPartsOfSpeechCsv);
-
+                $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
             foreach ($speechSections as $sp) {
                 $partOfSpeech = $sp['partOfSpeech'];
                 $meanings = $sp['meanings'];
@@ -114,7 +116,7 @@ class AdminController extends AbstractController
     public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository): Response
     {
 
-        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
+        $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
@@ -129,8 +131,7 @@ class AdminController extends AbstractController
             $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
             if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
-                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$jsonPartsOfSpeechCsv);
-
+                $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
             foreach ($meaningsToDeleteId as $mDelId)
             {
                 $meaning = $meaningRepository->find($mDelId);
@@ -242,16 +243,32 @@ class AdminController extends AbstractController
     #[Route('/pos', name: 'admin_pos')]
     public function managePartsOfSpeech()
     {
-        $partsOfSpeechCsv = $this->dictionary->getPartsOfSpeechCsv();
-        $newPartsOfSpeechCsv = $_GET['posCsv'] ?? null;
+        $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
+        $newPartsOfSpeechCsv = $_GET['data'] ?? null;
         if($newPartsOfSpeechCsv)
         {
             if($newPartsOfSpeechCsv !== $partsOfSpeechCsv)
-                file_put_contents($this->getParameter('data_dir').'parts_of_speech.csv',$newPartsOfSpeechCsv);
+                $this->data->saveData('parts_of_speech.csv', $newPartsOfSpeechCsv);
             return $this->redirectToRoute('admin');
         }
         return new Response($this->twig->render('admin/pos_manage.html.twig',[
             'partsOfSpeechCsv' => $partsOfSpeechCsv
+        ]));
+    }
+
+    #[Route('/filters', name: 'admin_filters')]
+    public function managePronPrepFilter()
+    {
+        $pronPrepToFilterCsv = $this->data->readData('pron_prep_to_filter.csv');
+        $newPronPrepToFilterCsv = $_GET['data'] ?? null;
+        if($newPronPrepToFilterCsv)
+        {
+            if($newPronPrepToFilterCsv !== $pronPrepToFilterCsv)
+                $this->data->saveData('pron_prep_to_filter.csv', $newPronPrepToFilterCsv);
+            return $this->redirectToRoute('admin');
+        }
+        return new Response($this->twig->render('admin/filter_manage.html.twig',[
+            'pronPrepToFilterCsv' => $pronPrepToFilterCsv
         ]));
     }
 

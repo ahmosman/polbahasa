@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <div class="data-manage-div">
-        <div class="data-manage-message">Wprowadź części mowy odzielając je przecinkiem bez spacji</div>
-        <textarea>{{ partsOfSpeechCsv }}</textarea>
+        <div class="data-manage-message">Wprowadź przyimki i zaimki do oldfiltrowania podczas wyszukiwania odzielając je przecinkiem bez spacji</div>
+        <textarea>{{ pronPrepToFilterCsv }}</textarea>
         <div class="data-manage-btn-div">
-            <a href="{{ path('admin_pos') }}" class="data-manage-confirm-btn btn btn-hotpink">Zatwierdź</a>
+            <a href="{{ path('admin_filters') }}" class="data-manage-confirm-btn btn btn-hotpink">Zatwierdź</a>
             <a href="{{ path('admin') }}" class="data-manage-deny-btn btn btn-darkviolet">Anuluj</a>
         </div>
     </div>

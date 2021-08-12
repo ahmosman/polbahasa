@@ -80,17 +80,17 @@ input.part-of-speech::placeholder {
   width: fit-content;
 }
 
-.pos-manage-div{
+.data-manage-div{
   display: flex;
   align-items: center;
   flex-direction: column;
   margin-top: 15%;
 }
-.pos-manage-div *{
+.data-manage-div *{
   margin: 10px;
 }
 
-.pos-manage-div textarea{
+.data-manage-div textarea{
   width: 70%;
   height: 20vh;
   border-radius: 10px;
@@ -268,6 +268,7 @@ input:focus, textarea:focus{
 }
 .foreign-word{
   font-weight: bold;
+  margin-top: 10px;
 }
 .native-meaning-li .sentence-section{
   font-size: 0.95em;

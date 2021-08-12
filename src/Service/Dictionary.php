@@ -6,19 +6,15 @@ use App\Entity\Meaning;
 use App\Entity\Word;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 
 class Dictionary
 {
     private $em;
-    private $params;
     private $partsOfSpeech;
 
-    public function __construct(EntityManagerInterface $em, ContainerBagInterface $params)
+    public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
-        $this->params = $params;
         $this->partsOfSpeech = $this->getPartsOfSpeech();
     }
 
@@ -117,10 +113,5 @@ class Dictionary
             }
         }
         return null;
-    }
-
-    public function getPartsOfSpeechCsv()
-    {
-        return file_get_contents($this->params->get('data_dir').'parts_of_speech.csv');
     }
 }
