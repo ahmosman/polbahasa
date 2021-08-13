@@ -36,6 +36,11 @@ class Word
      */
     private $json;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $partsOfSpeechOrder;
+
     public function __construct()
     {
         $this->meanings = new ArrayCollection();
@@ -96,6 +101,18 @@ class Word
     public function setJson(?string $json): self
     {
         $this->json = $json;
+
+        return $this;
+    }
+
+    public function getPartsOfSpeechOrder(): ?string
+    {
+        return $this->partsOfSpeechOrder;
+    }
+
+    public function setPartsOfSpeechOrder(?string $partsOfSpeechOrder): self
+    {
+        $this->partsOfSpeechOrder = $partsOfSpeechOrder;
 
         return $this;
     }

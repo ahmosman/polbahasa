@@ -52,9 +52,27 @@ class Dictionary
                 array_push($speechSections, $meanings);
         }
 
-        arsort($speechSections);
-
-        return $speechSections;
+        //sorting speechSections by partOfSpeech order
+        $posOrder = explode(',', $word->getPartsOfSpeechOrder());
+        $sortedSpeechSections = [];
+        while(!empty($posOrder))
+        {
+            for($i = 0; $i < count($speechSections); $i++)
+            {
+                if($speechSections[$i][0]->getPartOfSpeech() == $posOrder[0])
+                {
+                    array_push($sortedSpeechSections, $speechSections[$i]);
+                    //delete first value from posOrder array
+                    array_shift($posOrder);
+                    //delete value from speechSections array
+                    unset($speechSections[$i]);
+                    //re-index speechSections array
+                    $speechSections = array_values($speechSections);
+                    break;
+                }
+            }
+        }
+        return $sortedSpeechSections;
     }
 
     public function getForeignData(array $words): array
@@ -98,7 +116,6 @@ class Dictionary
                 array_push($speechSections[$speech_index]['words'][$word_index]['meanings'],$meaning);
             }
         }
-
         return $speechSections;
     }
 

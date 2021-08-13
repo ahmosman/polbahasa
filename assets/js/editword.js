@@ -423,8 +423,20 @@ function editPhrase(phrase){
     }
 }
 
-function getWordJson() {
+function getPartsOfSpeechOrder(){
+    let partsOfSpeech = document.querySelectorAll('.part-of-speech');
+    let partsOfSpeechOrder = '';
+    for (let i=0; i<partsOfSpeech.length; i++){
+        if(i < partsOfSpeech.length-1)
+            partsOfSpeechOrder += `${partsOfSpeech[i].value},`;
+        else
+            partsOfSpeechOrder += `${partsOfSpeech[i].value}`;
+    }
+    return partsOfSpeechOrder;
+}
 
+function getWordJson() {
+console.log(getPartsOfSpeechOrder());
 let word = document.querySelector(".header-word");
 let speechSections = document.querySelectorAll(".speech-section");
 
@@ -471,6 +483,8 @@ for (let sp = 0; sp < speechSections.length; sp++){
 }
 //closing all speech sections
     jsonStr += '},';
+//adding parts of speech order
+    jsonStr += `"partsOfSpeechOrder": "${getPartsOfSpeechOrder()}",`;
 //adding meanings id to delete
     jsonStr += `"toDeleteMeaningsId": ${getMeaningsIdToDelete()},`;
 //adding parts of speech csv string

@@ -62,10 +62,11 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $wordJson = json_decode($form['json']->getData(), true);
-            $word->setJson("");
             $speechSections = $wordJson['speechSection'];
-            $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
+            $word->setJson(null);
+            $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
+            $newMeaningNames = [];
             if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
                 $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
             foreach ($speechSections as $sp) {
@@ -81,9 +82,8 @@ class AdminController extends AbstractController
                         {
                             $meaningName->setName($mName);
                             $meaning->addMeaningName($meaningName);
-                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName)) {
+                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName))
                             $meaning->addMeaningName($meaningName);
-                        }
                         else
                         {
                             $meaningName = new MeaningName();
@@ -123,10 +123,10 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid())
         {
             $wordJson = json_decode($form['json']->getData(), true);
-            $word->setJson("");
             $speechSections = $wordJson['speechSection'];
-
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
+            $word->setJson(null);
+            $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
             $meaningNamesToDelete = [];
             $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];

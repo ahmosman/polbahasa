@@ -12,7 +12,7 @@ class Search
 {
     private TransformedFinder $wordsFinder;
     private TransformedFinder $meaningNamesFinder;
-    private DataFileReader $pronPrepToFilter;
+    private array $pronPrepToFilter;
 
     public function __construct(TransformedFinder $wordsFinder, TransformedFinder $meaningNamesFinder, DataFileReader $data)
     {
@@ -26,7 +26,7 @@ class Search
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
-        $multiMatch->setFuzziness(1);
+        //$multiMatch->setFuzziness(1);
 
         return !empty($q) ? $this->wordsFinder->find($multiMatch) : [];
     }
@@ -35,7 +35,7 @@ class Search
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
-        $multiMatch->setFuzziness(1);
+        //$multiMatch->setFuzziness(1);
         $allMeaningNames = $this->meaningNamesFinder->find($multiMatch);
         $filteredMeaningNames = [];
         $meaningsFinal = [];
