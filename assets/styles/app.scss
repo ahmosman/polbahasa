@@ -29,6 +29,7 @@ body{
   margin: 0 20%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .admin-menu-tile{
   text-decoration: none;
@@ -40,6 +41,9 @@ body{
   padding: 20px;
   text-align: center;
   border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .part-of-speech{
@@ -122,7 +126,11 @@ input.part-of-speech::placeholder {
   justify-content: flex-start;
   flex-shrink: 0;
 }
-
+.edit-word-footer{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
 .edit-word-footer button{
   margin: 0 10px;
   height: 40px;
@@ -285,7 +293,7 @@ input:focus, textarea:focus{
 .suggestions-ul{
   background-color: white;
 }
-.suggestions-ul li, .pos-suggestion-ul li{
+.suggestions-ul li, .pos-suggestion-ul li, .root-word-suggestion-ul li{
   list-style: none;
   padding: 8px 12px;
   width: 100%;
@@ -295,7 +303,7 @@ input:focus, textarea:focus{
   border-radius: 10px;
 }
 
-.suggestions-ul li:hover, .pos-suggestion-ul li:hover{
+.suggestions-ul li:hover, .pos-suggestion-ul li:hover, .root-word-suggestion-ul li:hover{
   background-color: rgba(245, 229, 229, 0.84);
   color: rgba(228, 89, 236, 0.88);
   cursor: pointer;
@@ -311,6 +319,48 @@ input:focus, textarea:focus{
   color: #999999;
   margin-top: 10px;
   margin-bottom: 20px;
+}
+.root-word-input{
+  padding: 3px 10px;
+  width: 250px;
+}
+.root-word-edit-div+span{
+  border-radius: 35px;
+  padding: 20px;
+  margin-left: 30px;
+}
+.root-word-found-span{
+  color: #07a407;
+  background-color: #bffabf;
+}
+.root-word-not-found-span{
+  color: red;
+  background-color: #ff8989;
+}
+.root-word-suggestion-div{
+  position: relative;
+  right: 32px;
+  top: 42px;
+}
+.root-word-suggestion-ul{
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  width: 282px;
+}
+.admin-root-word-edit-div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  font-size: 1.2em;
+}
+.admin-root-word-input{
+  display: block;
+  margin: 20px 0;
+}
+.admin-root-word-submit-btn{
+  margin: 10px 36%;
 }
 
 //Custom buttons

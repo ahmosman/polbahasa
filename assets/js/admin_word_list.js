@@ -5,17 +5,17 @@ let copyAdminWordTable = adminWordTable.innerHTML;
 
 searchInput.addEventListener('input', ()=>{
     if(searchInput.value.length > 0){
-        searchWords();
+        autocompleteWords();
     }else{
         adminWordTable.innerHTML = copyAdminWordTable;
     }
 });
 
-async function searchWords(){
+async function autocompleteWords(){
     let response = await fetch(`${Routing.generate('autocomplete')}?q=${searchInput.value}`);
     let words = await response.json();
 
-    if(words.length > 0)
+    if(words.length > 0 && searchInput.value.length > 0)
         displayWords(words);
     else
         adminWordTable.innerHTML = copyAdminWordTable;

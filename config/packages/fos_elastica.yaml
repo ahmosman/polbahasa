@@ -79,6 +79,25 @@ fos_elastica:
                 provider: ~
                 listener: ~
                 finder: ~
+        rootwords_suggest:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            suggest_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [ lowercase, asciifolding ]
+            use_alias: true
+            index_name: rootwords_suggest_index
+            properties:
+                name: { type: completion, analyzer: suggest_analyzer }
+            persistence:
+                driver: orm
+                model: App\Entity\RootWord
+                provider: ~
+                listener: ~
+                finder: ~
 
 
 

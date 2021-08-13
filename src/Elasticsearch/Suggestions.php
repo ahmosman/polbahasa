@@ -12,9 +12,6 @@ use FOS\ElasticaBundle\Elastica\Client;
 
 class Suggestions
 {
-    public const WORD_INDEX = 'words_index';
-    public const WORD_SUGGEST_NAME = 'completion';
-    public const WORD_SUGGEST_FIELD = 'name';
 
     public const WORD = [
         'INDEX' =>  'words_suggest_index',
@@ -28,6 +25,12 @@ class Suggestions
         'SUGGEST_FIELD' => 'name'
     ];
 
+    public const ROOTWORD = [
+        'INDEX' =>  'rootwords_suggest_index',
+        'SUGGEST_NAME' => 'completion',
+        'SUGGEST_FIELD' => 'name'
+    ];
+
     private Client $client;
 
     public function __construct(Client $client)
@@ -35,17 +38,16 @@ class Suggestions
         $this->client = $client;
     }
 
-    private function getSuggestions(string $q, $forNative = false)
+    private function getSuggestions(string $q, $indexData)
     {
-        $data = !$forNative ? self::WORD : self::MEANING;
-        $suggestIndex = $this->client->getIndex($data['INDEX']);
-        $completionSuggest = (new Completion($data['SUGGEST_NAME'], $data['SUGGEST_FIELD']))
+        $suggestIndex = $this->client->getIndex($indexData['INDEX']);
+        $completionSuggest = (new Completion($indexData['SUGGEST_NAME'], $indexData['SUGGEST_FIELD']))
             ->setPrefix(Util::escapeTerm($q));
         $suggest = new Suggest($completionSuggest);
         $query = (new Query())->setSuggest($suggest);
         $suggests = $suggestIndex->search($query)->getSuggests();
         $results = [];
-        foreach ($suggests[$data['SUGGEST_NAME']][0]['options'] as $result)
+        foreach ($suggests[$indexData['SUGGEST_NAME']][0]['options'] as $result)
         {
             array_push($results, $result['text']);
         }
@@ -70,12 +72,17 @@ class Suggestions
 
     public function getForeignSuggestions(string $q)
     {
-        return $this->getSuggestions($q);
+        return $this->getSuggestions($q, self::WORD);
     }
 
     public function getNativeSuggestions(string $q)
     {
-        return $this->getSuggestions($q,true);
+        return $this->getSuggestions($q,self::MEANING);
+    }
+
+    public function getRootWordsSuggestions(string $q)
+    {
+        return $this->getSuggestions($q,self::ROOTWORD);
     }
 
 

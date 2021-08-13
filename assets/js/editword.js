@@ -1,4 +1,5 @@
 import * as pos from './part_of_speech.js';
+import * as rootword from './root_word.js';
 
 let originalWord = document.querySelector(".header-word");
 let originalWordName = originalWord.textContent;
@@ -25,9 +26,9 @@ let phraseCancelBtn = document.querySelector("#edit-phrase-cancel");
 let addSpeechSectionBtn = document.querySelector(".add-speech-section-btn");
 let undoBtn = document.querySelector(".undo-btn");
 
-let phraseClassesToIgnore = ":not(.sentence-section):not(.edit-phrase-div1):not(.edit-phrase-div1 *):not(.mb-3)";
 let phraseClasses = ['.header-word','.foreign-meaning-name','.example-sentence','.example-translation'];
 let undoNodes = [];
+let rootWord = null;
 
 //enter updates
 for (const e of examples) {
@@ -485,6 +486,8 @@ for (let sp = 0; sp < speechSections.length; sp++){
     jsonStr += '},';
 //adding parts of speech order
     jsonStr += `"partsOfSpeechOrder": "${getPartsOfSpeechOrder()}",`;
+//adding root word
+    jsonStr += `"rootWord": ${rootWord ? '"'+rootWord+'"':rootWord},`;
 //adding meanings id to delete
     jsonStr += `"toDeleteMeaningsId": ${getMeaningsIdToDelete()},`;
 //adding parts of speech csv string
@@ -519,10 +522,22 @@ function getMeaningsIdToDelete(){
     return JSON.stringify(toDelete);
 }
 
-function saveWord(){
+async function saveWord(){
     if(Object.values(isError).includes(true)){
         alert('Wypełnij wymagane pola');
         return false;
+    }
+    let rootWordExists = await rootword.checkRootWordExists(rootWord);
+    let rootWordInput = document.querySelector(".root-word-input");
+    if(!rootWordExists && rootWordInput.value.length > 0)
+    {
+        if(!confirm("Podana podstawa słowotwórcza zostanie stworzona. Czy chcesz kontynuować?"))
+            return false;
+        let addingRootWordSucceed = await rootword.addRootWord(rootWord);
+        if(!addingRootWordSucceed) {
+            alert('Dodawanie podstawy słowotwórzczej NIE powiodło się');
+            return false;
+        }
     }
     let wordNameIn = document.querySelector("#word_name");
     let wordName = document.querySelector(".header-word");
@@ -598,6 +613,56 @@ async function checkWordExists(){
 }
 
 
+async function rootWordsHandle(){
+    let rootWordSuggestionDiv = document.querySelector(".root-word-suggestion-div");
+    let rootWordInput = document.querySelector(".root-word-input");
+    let rootWordSuggestionUl = document.querySelector(".root-word-suggestion-ul");
+    rootWordInput.addEventListener('input',async () => {
+        if (rootWordInput.value.length > 0) {
+            rootWordSuggestionDiv.classList.remove('hidden');
+            let rootWords = await rootword.getRootWordsForAutocomplete(rootWordInput.value, rootWordSuggestionUl);
+
+            for (const rootWord of rootWords) {
+                rootWordSuggestionUl.innerHTML += `<li>${rootWord}</li>`;
+            }
+            let rootWordSuggestionLi = rootWordSuggestionUl.querySelectorAll("li");
+            for (const li of rootWordSuggestionLi) {
+                li.addEventListener('mousedown', ()=>{
+                    rootWordInput.value = li.textContent;
+                    rootWordSuggestionDiv.classList.add('hidden');
+                });
+            }
+        }else{
+            rootWordSuggestionDiv.classList.add('hidden');
+            $(".root-word-edit-div+span").remove();
+        }
+    });
+
+    rootWordInput.addEventListener('blur', async ()=>{
+        $(".root-word-edit-div+span").remove();
+        rootWordSuggestionDiv.classList.add('hidden');
+        if (rootWordInput.value.length > 0) {
+            rootWord = rootWordInput.value;
+            let rootWordExists = await rootword.checkRootWordExists(rootWord);
+            let rootWordInfoSpan = document.createElement("span");
+            let rootWordInfoSpanMessage;
+            let rootWordInfoSpanClass;
+            if (rootWordExists) {
+                rootWordInfoSpanMessage = 'Znaleziono podstawę';
+                rootWordInfoSpanClass = 'root-word-found-span';
+            } else {
+                rootWordInfoSpanMessage = 'Nie znaleziono podstawy';
+                rootWordInfoSpanClass = 'root-word-not-found-span';
+            }
+            rootWordInfoSpan.textContent = rootWordInfoSpanMessage;
+            rootWordInfoSpan.classList.add(rootWordInfoSpanClass);
+            rootWordInput.parentNode.parentNode.appendChild(rootWordInfoSpan);
+        }else {
+            rootWord = null;
+        }
+    });
+}
+rootWordsHandle();
 
 
 $(window).ready(function() {

@@ -24,6 +24,7 @@ Encore
     .addEntry('part_of_speech', `./assets/js/part_of_speech.js`)
     .addEntry('editword', './assets/js/editword.js')
     .addEntry('admin_word_list', './assets/js/admin_word_list.js')
+    .addEntry('admin_root_word', './assets/js/admin_root_word.js')
     .addEntry('search_suggestions', './assets/js/search_suggestions.js')
     .addEntry('admin_data', './assets/js/admin_data.js')
     .addEntry('meaning_link', './assets/js/meaning_link.js')

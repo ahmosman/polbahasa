@@ -8,6 +8,7 @@ use App\Entity\Word;
 use App\Form\WordType;
 use App\Repository\MeaningNameRepository;
 use App\Repository\MeaningRepository;
+use App\Repository\RootWordRepository;
 use App\Repository\WordRepository;
 use App\Service\DataFileReader;
 use App\Service\Dictionary;
@@ -52,7 +53,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/addword', name: 'addword')]
-    public function addWord(Request $request, MeaningNameRepository $meaningNameRepository): Response
+    public function addWord(Request $request, MeaningNameRepository $meaningNameRepository, RootWordRepository $rootWordRepository): Response
     {
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
@@ -64,6 +65,9 @@ class AdminController extends AbstractController
             $wordJson = json_decode($form['json']->getData(), true);
             $speechSections = $wordJson['speechSection'];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
+            $rootWordJson = $wordJson['rootWord'];
+            $rootWord = $rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
+            $word->setRootWord($rootWord);
             $word->setJson(null);
             $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
             $newMeaningNames = [];
@@ -113,7 +117,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/editword/{name}', name: 'edit_word', options: ['expose' => true])]
-    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository): Response
+    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository, RootWordRepository $rootWordRepository): Response
     {
 
         $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
@@ -125,6 +129,9 @@ class AdminController extends AbstractController
             $wordJson = json_decode($form['json']->getData(), true);
             $speechSections = $wordJson['speechSection'];
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
+            $rootWordJson = $wordJson['rootWord'];
+            $rootWord = $rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
+            $word->setRootWord($rootWord);
             $word->setJson(null);
             $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
             $meaningNamesToDelete = [];
@@ -273,7 +280,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]
-    public function checkexist(WordRepository $wordRepository)
+    public function wordCheckexist(WordRepository $wordRepository)
     {
         $wordName = $_GET['wordName'];
         $word = $wordRepository->findOneBy(['name' => $wordName]) ?? null;

@@ -32,4 +32,11 @@ class SearchController extends AbstractController
         return $this->json($suggestions);
     }
 
+    #[Route('/autocomplete_rootwords', name: 'autocomplete_rootwords', options: ['expose'=>true])]
+    public function autocompleteRootWords(Request $request): Response
+    {
+        $q = $request->query->get('q','');
+        $suggestions = $this->suggestions->getRootWordsSuggestions($q);
+        return $this->json($suggestions);
+    }
 }

@@ -41,6 +41,11 @@ class Word
      */
     private $partsOfSpeechOrder;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=RootWord::class, inversedBy="words")
+     */
+    private $rootWord;
+
     public function __construct()
     {
         $this->meanings = new ArrayCollection();
@@ -113,6 +118,18 @@ class Word
     public function setPartsOfSpeechOrder(?string $partsOfSpeechOrder): self
     {
         $this->partsOfSpeechOrder = $partsOfSpeechOrder;
+
+        return $this;
+    }
+
+    public function getRootWord(): ?RootWord
+    {
+        return $this->rootWord;
+    }
+
+    public function setRootWord(?RootWord $rootWord): self
+    {
+        $this->rootWord = $rootWord;
 
         return $this;
     }

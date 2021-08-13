@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="edit-main-div">
-    {{form_start(form)}}
+    {{form(form)}}
         {% block edit_word_section %}
         {% endblock %}
 
@@ -14,8 +14,14 @@
             <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
             <button type="button" class="undo-btn btn btn-mediumpurple">Cofnij</button>
         </div>
+        <div class="root-word-edit-div">
+                <div class="root-word-suggestion-div hidden">
+                    <ul class="root-word-suggestion-ul">
+                    </ul>
+                </div>
+            <input class="root-word-input" type="text" placeholder="Podstawa słowotwórcza">
+        </div>
     </footer>
-    {{form_end(form)}}
 
 {# templates for editword.js#}
     <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
