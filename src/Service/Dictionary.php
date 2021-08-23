@@ -77,13 +77,26 @@ class Dictionary
 
     public function getForeignData(array $words): array
     {
-        $wordsSections = [];
+        $foreignData = [
+          'wordsSections' => [],
+          'rootWord' => null
+        ];
         if(!empty($words))
         {
             foreach ($words as $word)
-                array_push($wordsSections, $this->getSpeechSections($word));
+            {
+                if($word->getRootWord() !== null)
+                {
+                    $rootWord = $word->getRootWord();
+                    $words = $rootWord->getWords();
+                    $foreignData['rootWord'] = $rootWord->getName();
+                    break;
+                }
+            }
+            foreach ($words as $word)
+                array_push($foreignData['wordsSections'], $this->getSpeechSections($word));
         }
-        return $wordsSections;
+        return $foreignData;
     }
 
     public function getNativeData(array $meanings) :array

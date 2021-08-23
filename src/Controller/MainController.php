@@ -35,7 +35,6 @@ class MainController extends AbstractController
     public function dictionary(Request $request, SessionInterface $session): Response
     {
         $q =  $request->query->get('q','');
-
         $meanings = $this->search->findMeanings($q);
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
@@ -43,8 +42,9 @@ class MainController extends AbstractController
 
         $session->set('q', $q);
         return new Response($this->twig->render('dictionary/search_result.html.twig',[
-            'foreign' => $foreignData,
-            'native' => $nativeData
+            'foreign' => $foreignData['wordsSections'],
+            'native' => $nativeData,
+            'rootWord' => $foreignData['rootWord']
         ]));
     }
 }

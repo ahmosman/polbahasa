@@ -45,7 +45,18 @@ body{
   justify-content: center;
   align-items: center;
 }
-
+.root-word-name{
+  font-weight: 600;
+  font-size: 35px;
+}
+.root-word-description{
+  width: 100%;
+  color: darkgray;
+  font-size: 1.1em;
+}
+.root-word-div{
+  margin-bottom: 20px;
+}
 .part-of-speech{
   width: 100%;
   color: darkgray;

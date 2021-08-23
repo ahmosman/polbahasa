@@ -9,6 +9,12 @@
 {% if foreign is not empty %}
 <section class="words-section">
     <div class="result-header-description">"{{ app.session.get('q') }}" po polsku</div>
+    {% if rootWord%}
+        <div class="root-word-div">
+            <div class="root-word-name">{{ rootWord }}</div>
+            <div class="root-word-description">Podstawa słowotwórcza</div>
+        </div>
+    {% endif %}
     {% for  word in foreign%}
         <div class="header-word">{{ word[0][0].word.name }}</div>
         {% for speechSection in word %}
