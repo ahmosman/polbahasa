@@ -13,6 +13,7 @@ use App\Repository\WordRepository;
 use App\Service\DataFileReader;
 use App\Service\Dictionary;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
 #[Route('/admin')]
+#[IsGranted('ROLE_ADMIN')]
 class AdminController extends AbstractController
 {
     private $em;
@@ -131,9 +133,11 @@ class AdminController extends AbstractController
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
             $rootWordJson = $wordJson['rootWord'];
             $rootWord = $rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
+
             $word->setRootWord($rootWord);
             $word->setJson(null);
             $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
+
             $meaningNamesToDelete = [];
             $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];

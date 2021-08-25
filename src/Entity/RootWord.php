@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=RootWordRepository::class)
+ * @ORM\HasLifecycleCallbacks()
  */
 class RootWord
 {
@@ -28,6 +29,16 @@ class RootWord
      * @ORM\OneToMany(targetEntity=Word::class, mappedBy="rootWord")
      */
     private $words;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $modifiedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $modifiedBy;
 
     public function __construct()
     {
@@ -77,6 +88,35 @@ class RootWord
                 $word->setRootWord(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getModifiedAt(): ?\DateTimeImmutable
+    {
+        return $this->modifiedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     * @return $this
+     */
+    public function setModifiedAt(): self
+    {
+        $this->modifiedAt = new \DateTimeImmutable();
+
+        return $this;
+    }
+
+    public function getModifiedBy(): ?string
+    {
+        return $this->modifiedBy;
+    }
+
+    public function setModifiedBy(?string $modifiedBy): self
+    {
+        $this->modifiedBy = $modifiedBy;
 
         return $this;
     }

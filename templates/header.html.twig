@@ -3,9 +3,27 @@
         <a class="navbar-brand" href="{{ path('main') }}">Home</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+            {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('admin') }}">Admin</a>
                 </li>
+            {% endif %}
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                {% if is_granted('ROLE_USER') %}
+                <li class="nav-item active nav-item-right"
+                    {% if app.user.username == 'akna.adogal' %}
+                    data-toggle="tooltip" data-placement="bottom" title="Jesteś najlepszą dziewczyną na świecie"
+                    {% endif %}
+                >
+                    Witaj, {{ app.user.username }}
+                </li>
+
+                <li class="nav-item active nav-item-right">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Wyloguj</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

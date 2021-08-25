@@ -12,11 +12,13 @@ body{
 .navbar a{
   padding: 0 30px;
 }
+.nav-item-right{
+  margin-right: 30px;
+}
 .header-word{
   font-weight: 600;
   font-size: 30px;
 }
-
 .foreign-meaning-name{
   font-weight: 400;
   font-size: 1.2em;
@@ -373,6 +375,36 @@ input:focus, textarea:focus{
 .admin-root-word-submit-btn{
   margin: 10px 36%;
 }
+.login-inputs-div input:not([type='checkbox']){
+  width: 100%;
+  display: block;
+  margin: 10px 0;
+}
+
+.login-form-div{
+  margin-left: 40%;
+  margin-top: 6%;
+}
+.login-inputs-div{
+  margin-left: 5vh;
+  margin-top: 5vh;
+  position: relative;
+  width: 300px;
+}
+.login-inputs-div button{
+  position: absolute;
+  right: 0;
+}
+.login-title{
+  font-size: 1.5em;
+}
+
+
+
+
+
+
+
 
 //Custom buttons
 .btn-hotpink{
