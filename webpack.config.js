@@ -28,6 +28,7 @@ Encore
     .addEntry('search_suggestions', './assets/js/search_suggestions.js')
     .addEntry('admin_data', './assets/js/admin_data.js')
     .addEntry('meaning_link', './assets/js/meaning_link.js')
+    .addEntry('suggestions_events', './assets/js/suggestions_events.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

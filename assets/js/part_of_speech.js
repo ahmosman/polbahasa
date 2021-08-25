@@ -1,11 +1,12 @@
+import * as suggestionsEvents from "./suggestions_events.js";
+
 function partOfSpeechSuggestions(partOfSpeech){
     let partOfSpeechDiv = partOfSpeech.parentNode.parentNode;
+    let posSuggestionDiv = partOfSpeech.parentNode.querySelector(".pos-suggestion-div");
+    let posSuggestionUl = posSuggestionDiv.querySelector(".pos-suggestion-ul");
+    suggestionsEvents.suggestionsScroller(partOfSpeech, posSuggestionUl);
     partOfSpeech.addEventListener('input',()=>{
-        let oldSuggestionDiv = partOfSpeech.parentNode.querySelector(".pos-suggestion-div");
         let oldPosError = partOfSpeechDiv.parentNode.querySelector(".edit-error");
-        if(oldSuggestionDiv){
-            oldSuggestionDiv.parentNode.removeChild(oldSuggestionDiv);
-        }
         if(oldPosError){
             oldPosError.parentNode.removeChild(oldPosError);
         }
@@ -21,32 +22,24 @@ function partOfSpeechSuggestions(partOfSpeech){
                     posToDisplayArr.push(posElem);
             }
             if(posToDisplayArr.length > 0){
-                let posSuggestionDiv = document.createElement("div");
-                let posSuggestionUl = document.createElement('ul');
-
-                posSuggestionDiv.classList.add('pos-suggestion-div');
-                posSuggestionUl.classList.add('pos-suggestion-ul');
-
-                posSuggestionDiv.appendChild(posSuggestionUl);
-                partOfSpeech.parentNode.appendChild(posSuggestionDiv);
-
+                posSuggestionUl.innerHTML = "";
+                posSuggestionDiv.classList.remove('hidden');
                 for (const posElem of posToDisplayArr) {
                     let posSuggestionLi = document.createElement("li");
                     posSuggestionLi.textContent = posElem;
                     posSuggestionLi.addEventListener('mousedown',()=>{
                        partOfSpeech.value = posSuggestionLi.textContent;
                     });
-
                     posSuggestionUl.appendChild(posSuggestionLi);
                 }
+                suggestionsEvents.suggestionsMouseEvents(posSuggestionUl);
             }
-        }
+        }else
+            posSuggestionDiv.classList.add('hidden');
     });
 
     partOfSpeech.addEventListener('blur',()=>{
-        let posSuggestionDiv = partOfSpeech.nextElementSibling;
-        if(posSuggestionDiv)
-            partOfSpeech.parentNode.removeChild(posSuggestionDiv);
+        posSuggestionDiv.classList.add('hidden');
         if(partOfSpeech.value.length <= 0){
             isError.posError = true;
             let posError = partOfSpeechDiv.parentNode.querySelector('.edit-error');

@@ -64,7 +64,7 @@ body{
   color: darkgray;
 }
 
-.part-of-speech-span{
+.part-of-speech-input-div{
   width: 250px;
   display: inline-flex;
   flex-direction: column;
@@ -303,20 +303,20 @@ input:focus, textarea:focus{
 .foreign-word-ol a:hover{
   opacity: 0.5;
 }
-.suggestions-ul{
+.search-suggestions-ul{
   background-color: white;
 }
-.suggestions-ul li, .pos-suggestion-ul li, .root-word-suggestion-ul li{
+.suggestions-ul li{
   list-style: none;
   padding: 8px 12px;
   width: 100%;
 }
 
-.suggestions-ul li{
+.search-suggestions-ul li{
   border-radius: 10px;
 }
 
-.suggestions-ul li:hover, .pos-suggestion-ul li:hover, .root-word-suggestion-ul li:hover{
+.suggestion-selected{
   background-color: rgba(245, 229, 229, 0.84);
   color: rgba(228, 89, 236, 0.88);
   cursor: pointer;

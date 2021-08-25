@@ -9,9 +9,13 @@
             {% if speechSection is not empty %}
                 <div class="speech-section">
                     <div class="part-of-speech-div">
-                        <span class="part-of-speech-span">
-                            <input class="part-of-speech" value="{{ speechSection[0].partOfSpeech }}">
-                        </span>
+                        <div class="part-of-speech-input-div">
+                            <input class="part-of-speech" value="{{ speechSection[0].partOfSpeech }}" placeholder="Wprowadź część mowy">
+                            <div class="pos-suggestion-div hidden">
+                                <ul class="pos-suggestion-ul suggestions-ul">
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <ol class="foreign-word-ol">
                         {% for meaning in speechSection %}

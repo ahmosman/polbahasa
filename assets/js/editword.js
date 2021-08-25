@@ -1,5 +1,6 @@
 import * as pos from './part_of_speech.js';
 import * as rootword from './root_word.js';
+import * as suggestionsEvents from './suggestions_events.js';
 
 let originalWord = document.querySelector(".header-word");
 let originalWordName = originalWord.textContent;
@@ -231,10 +232,11 @@ function addSpeechSection(){
     let speechSection = document.createElement("div");
     speechSection.classList.add("speech-section");
     speechSection.innerHTML = `<div class="part-of-speech-div">
-                    <span class="part-of-speech-span">
-                    <input class="part-of-speech" placeholder="Wprowadź część mowy">
-                    </span>
-                    </div>
+                            <div class="part-of-speech-input-div">
+                                <input class="part-of-speech" placeholder="Wprowadź część mowy">                    <div class="pos-suggestion-div hidden">
+                                    <ul class="pos-suggestion-ul suggestions-ul">
+                                    </ul>
+                            </div></div></div>
                     <ol class="foreign-word-ol"></ol>`;
 
     addButtonsToSpeechSection(speechSection);
@@ -617,6 +619,9 @@ async function rootWordsHandle(){
     let rootWordSuggestionDiv = document.querySelector(".root-word-suggestion-div");
     let rootWordInput = document.querySelector(".root-word-input");
     let rootWordSuggestionUl = document.querySelector(".root-word-suggestion-ul");
+
+    suggestionsEvents.suggestionsScroller(rootWordInput, rootWordSuggestionUl);
+
     rootWordInput.addEventListener('input',async () => {
         if (rootWordInput.value.length > 0) {
             rootWordSuggestionDiv.classList.remove('hidden');
@@ -632,6 +637,7 @@ async function rootWordsHandle(){
                     rootWordSuggestionDiv.classList.add('hidden');
                 });
             }
+            suggestionsEvents.suggestionsMouseEvents(rootWordSuggestionUl);
         }else{
             rootWordSuggestionDiv.classList.add('hidden');
             $(".root-word-edit-div+span").remove();

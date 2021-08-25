@@ -1,10 +1,10 @@
-<form action="{{ path('dictionary') }}" method="get" autocomplete="off">
+<form action="{{ path('dictionary') }}" method="get" autocomplete="off" id="searching-form">
     <div class="search-input-div">
         <input type="text" name="q" placeholder="Wpisz indonezyjskie lub polskie słowo">
         <button type="submit" class="search-submit-btn fas fa-search" title="Szukaj"></button>
     </div>
     <div class="suggestions-div hidden">
-        <ul class="suggestions-ul">
+        <ul class="search-suggestions-ul suggestions-ul">
         </ul>
     </div>
 </form>

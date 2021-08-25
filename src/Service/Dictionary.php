@@ -71,6 +71,9 @@ class Dictionary
                     break;
                 }
             }
+            if(empty($speechSections))
+                break;
+
         }
         return $sortedSpeechSections;
     }
