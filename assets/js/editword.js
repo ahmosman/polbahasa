@@ -14,7 +14,7 @@ let addMeaningBtnTmpl = document.querySelector(".add-meaning-btn");
 
 let partsOfSpeech = document.querySelectorAll(".part-of-speech");
 let meaningsLi = document.querySelectorAll(".foreign-meaning-li");
-let examples = document.querySelectorAll(".sentence-section");
+let examples = document.querySelectorAll(".sentence-tr");
 let speechSections = document.querySelectorAll(".speech-section");
 let editWordSection = document.querySelector(".edit-word-section");
 let parentEditWordSection = editWordSection.parentNode;
@@ -29,7 +29,7 @@ let undoBtn = document.querySelector(".undo-btn");
 
 let phraseClasses = ['.header-word','.foreign-meaning-name','.example-sentence','.example-translation'];
 let undoNodes = [];
-let rootWord = null;
+let rootWord = document.querySelector('.root-word-input').value;
 
 //enter updates
 for (const e of examples) {
@@ -57,6 +57,69 @@ function getButton(template){
     return btn;
 }
 
+//CREATING ELEMENTS
+function createSentenceTable(){
+    let sentenceTable = document.createElement("table");
+    sentenceTable.classList.add('sentence-table');
+    return sentenceTable;
+}
+function createSentenceTr(){
+    let sentenceTr = document.createElement("tr");
+    sentenceTr.classList.add("sentence-tr");
+    return sentenceTr;
+}
+function createExampleSentence(){
+    let sentence = document.createElement("td");
+    sentence.classList.add("example-sentence");
+    sentence.innerHTML = "<i>Wprowadź zdanie</i>";
+    updatePhraseDiv(sentence);
+    return sentence;
+}
+
+function createExampleTranslation(){
+    let translation = document.createElement("td");
+    translation.classList.add("example-translation");
+    translation.innerHTML = "<i>Wprowadź tłumaczenie</i>";
+    updatePhraseDiv(translation);
+    return translation;
+}
+
+function createMeaning(){
+    let meaningLi = document.createElement("li");
+    meaningLi.classList.add("foreign-meaning-li");
+    let meaningName = document.createElement("div");
+    meaningName.classList.add("foreign-meaning-name");
+    meaningName.innerHTML = "<i>Wprowadź tłumaczenie</i>";
+    meaningLi.appendChild(meaningName);
+    updatePhraseDiv(meaningName);
+    addButtonsToMeaning(meaningLi);
+
+    return meaningLi;
+}
+
+function createSpeechSection(){
+
+    let speechSection = document.createElement("div");
+    speechSection.classList.add("speech-section");
+    speechSection.innerHTML = `<div class="part-of-speech-div">
+                            <div class="part-of-speech-input-div">
+                                <input class="part-of-speech" placeholder="Wprowadź część mowy">                    <div class="pos-suggestion-div hidden">
+                                    <ul class="pos-suggestion-ul suggestions-ul">
+                                    </ul>
+                            </div></div></div>
+                    <ol class="foreign-word-ol"></ol>`;
+
+    addButtonsToSpeechSection(speechSection);
+
+    let wordList = speechSection.querySelector('.foreign-word-ol');
+
+    addMeaning(wordList,false);
+    let partOfSpeech = speechSection.querySelector('.part-of-speech');
+    updatePartOfSpeech(partOfSpeech);
+    return speechSection;
+}
+
+//ADDING BUTTONS TO ELEMENTS
 function addButtonsToSpeechSection(speechSection){
 
     let partOfSpeechDiv = speechSection.querySelector('.part-of-speech-div');
@@ -101,6 +164,8 @@ function addButtonsToExample(example){
     example.appendChild(moveDownBtn);
     addExampleEventListeners(example);
 }
+
+//ADDING EVENT LISTENERS TO ELEMENTS
 
 function addSpeechSectionEventListeners(speechSection){
 
@@ -188,66 +253,48 @@ function addExampleEventListeners(example){
 
 }
 
-function addMeaning(){
-    let wordList = this.parentNode.parentNode.querySelector(".foreign-word-ol");
-    let meaningLi = document.createElement("li");
-    meaningLi.classList.add("foreign-meaning-li");
-    let meaningName = document.createElement("div");
-    meaningName.classList.add("foreign-meaning-name");
-    meaningName.innerHTML = "<i>Wprowadź tłumaczenie</i>";
-    meaningName.dataset.text = meaningName.textContent;
-    updatePhraseDiv(meaningName);
-    meaningLi.appendChild(meaningName);
-    wordList.appendChild(meaningLi);
-    addButtonsToMeaning(meaningLi);
-    editPhrase(meaningName);
+//ADDING NEW ELEMENTS
+function addMeaning(wordList,editMeaningName = true){
+    //check if wordList is pointerEvent from clicked add meaning btn
+    if(wordList.pointerId){
+        wordList = this.parentNode.parentNode.querySelector(".foreign-word-ol");
+    }
+    let meaning = createMeaning();
+    let sentenceTable = createSentenceTable();
+    addSentence(sentenceTable, false);
+    meaning.appendChild(sentenceTable);
+    wordList.appendChild(meaning);
+    if(editMeaningName) {
+        let meaningName = meaning.querySelector('.foreign-meaning-name');
+        editPhrase(meaningName);
+    }
 }
 
-function addSentence(){
-    let meaningLi = this.parentNode;
-    let example = document.createElement("div");
-    example.classList.add("sentence-section")
+function addSentence(sentenceTable,editSentence = true){
+    //check if sentenceTable is pointerEvent from clicked add sentence btn
+    if(sentenceTable.pointerId){
+        sentenceTable = this.parentNode.querySelector('.sentence-table');
+    }
 
-    let sentence = document.createElement("div");
-    sentence.classList.add("example-sentence");
-    sentence.innerHTML = "<i>Wprowadź zdanie</i>";
-    sentence.dataset.text = sentence.textContent;
-    updatePhraseDiv(sentence);
-    let translation = document.createElement("div");
-    translation.classList.add("example-translation");
-    translation.innerHTML = "<i>Wprowadź tłumaczenie</i>";
-    translation.dataset.text = translation.textContent;
-    updatePhraseDiv(translation);
+    let sentenceTr = createSentenceTr();
 
-    example.appendChild(sentence);
-    example.appendChild(translation);
-    meaningLi.appendChild(example);
+    let sentence = createExampleSentence();
+    let translation = createExampleTranslation();
 
-    addButtonsToExample(example);
-    editPhrase(sentence);
+    sentenceTr.appendChild(sentence);
+    sentenceTr.appendChild(translation);
+    sentenceTable.appendChild(sentenceTr);
+
+    addButtonsToExample(sentenceTr);
+    if(editSentence)
+        editPhrase(sentence);
 }
 
 function addSpeechSection(){
 
-    let speechSection = document.createElement("div");
-    speechSection.classList.add("speech-section");
-    speechSection.innerHTML = `<div class="part-of-speech-div">
-                            <div class="part-of-speech-input-div">
-                                <input class="part-of-speech" placeholder="Wprowadź część mowy">                    <div class="pos-suggestion-div hidden">
-                                    <ul class="pos-suggestion-ul suggestions-ul">
-                                    </ul>
-                            </div></div></div>
-                    <ol class="foreign-word-ol"></ol>`;
-
-    addButtonsToSpeechSection(speechSection);
-
+    let speechSection = createSpeechSection();
     let previousElement = document.querySelector(".speech-section:last-of-type") ?? originalWord;
-
     previousElement.parentNode.insertBefore(speechSection, previousElement.nextElementSibling);
-
-    let partOfSpeech = speechSection.querySelector('.part-of-speech');
-    updatePartOfSpeech(partOfSpeech);
-    partOfSpeech.focus();
 
 }
 
@@ -464,7 +511,7 @@ for (let sp = 0; sp < speechSections.length; sp++){
         jsonStr += `"meaningName": "${meaningName.textContent.trim()}","examples":{`;
 
         //adding examples with translation
-        let examples = meaningsLi[m].querySelectorAll(".sentence-section");
+        let examples = meaningsLi[m].querySelectorAll(".sentence-tr");
         for(let e=0; e<examples.length; e++){
             let sentence = examples[e].querySelector(".example-sentence");
             let translation = examples[e].querySelector(".example-translation");
@@ -505,6 +552,40 @@ for (let sp = 0; sp < speechSections.length; sp++){
 return jsonStr;
 }
 
+function checkForEmptyElements(){
+
+    let partsOfSpeech = document.querySelectorAll(".part-of-speech");
+    for (const pos of partsOfSpeech) {
+        isError.emptyPosError = pos.value.trim() === "";
+    }
+    let phraseDivs = getPhraseDivs();
+    for (const phraseDiv of phraseDivs) {
+        let classname = phraseDiv.classList.item(0);
+        let orgDesc;
+        switch (classname) {
+            case 'header-word':
+                orgDesc = "Wprowadź wyrażenie";
+                break;
+            case 'foreign-meaning-name':
+                orgDesc = "Wprowadź tłumaczenie";
+                break;
+            case 'example-sentence':
+                orgDesc = "Wprowadź zdanie";
+                break;
+            case 'example-translation':
+                orgDesc = "Wprowadź tłumaczenie";
+                break;
+            default:
+                orgDesc = "Wprowadź frazę";
+        }
+        if(phraseDiv.textContent === orgDesc){
+            isError.emptyError = true;
+            return;
+        }
+    }
+    isError.emptyError = false;
+
+}
 function getMeaningsIdToDelete(){
     let currentMeanings = document.querySelectorAll('.foreign-meaning-li');
     let currentMeaningsId = []
@@ -524,9 +605,11 @@ function getMeaningsIdToDelete(){
     return JSON.stringify(toDelete);
 }
 
+
 async function saveWord(){
+    checkForEmptyElements();
     if(Object.values(isError).includes(true)){
-        alert('Wypełnij wymagane pola');
+        alert('Wypełnij wszystkie pola');
         return false;
     }
     let rootWordExists = await rootword.checkRootWordExists(rootWord);
@@ -566,7 +649,7 @@ function undoChanges(){
 
         let speechSections = toUndoSection.querySelectorAll(".speech-section");
         let meaningsLi = toUndoSection.querySelectorAll(".foreign-meaning-li");
-        let examples = toUndoSection.querySelectorAll(".sentence-section");
+        let examples = toUndoSection.querySelectorAll(".sentence-tr");
         let partsOfSpeech = toUndoSection.querySelectorAll(".part-of-speech");
         let phraseDivs = getPhraseDivs();
 
@@ -585,6 +668,9 @@ function undoChanges(){
         for (const phraseDiv of phraseDivs)
             updatePhraseDiv(phraseDiv);
     }
+    phraseDivs = getPhraseDivs();
+    for (const p of phraseDivs)
+        p.classList.remove('phrase-click');
 }
 
 let saveBtn = document.querySelector(".save-meaning-btn");

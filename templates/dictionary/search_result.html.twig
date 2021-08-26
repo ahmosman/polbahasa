@@ -28,12 +28,14 @@
                                     <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
                                 {% endfor %}
                             </div>
-                            {% for example in meaning.examples %}
-                                <div class="sentence-section">
-                                    <div class="example-sentence">{{ example.sentence }}</div>
-                                    <div class="example-translation">{{ example.translation }}</div>
-                                </div>
-                            {% endfor %}
+                            <table class="sentence-table">
+                                {% for example in meaning.examples %}
+                                    <tr class="sentence-tr">
+                                        <td class="example-sentence">{{ example.sentence }}</td>
+                                        <td class="example-translation">{{ example.translation }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
                         </li>
                     {% endfor %}
                 </ol>
@@ -58,12 +60,14 @@
                                     <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
                                 {% endfor %}
                             </div>
-                            {% for example in meaning.examples %}
-                                <div class="sentence-section">
-                                    <div class="example-sentence">{{ example.sentence }}</div>
-                                    <div class="example-translation">{{ example.translation }}</div>
-                                </div>
-                            {% endfor %}
+                            <table class="sentence-table">
+                                {% for example in meaning.examples %}
+                                    <tr class="sentence-tr">
+                                        <td class="example-sentence">{{ example.sentence }}</td>
+                                        <td class="example-translation">{{ example.translation }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
                         </li>
                     {% endfor %}
                 </ul>

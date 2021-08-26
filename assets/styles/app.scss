@@ -26,6 +26,7 @@ body{
 }
 .example-translation{
   color: darkgray;
+  padding-left: 20px;
 }
 .admin-menu{
   margin: 0 20%;
@@ -175,14 +176,16 @@ input.part-of-speech::placeholder {
   bottom: 10px;
 }
 
-.sentence-section{
+.sentence-tr{
   margin: 10px 0;
 }
 
-.sentence-section div{
-  display: inline;
-  margin: 0 10px;
+.sentence-tr td{
+  width: 40vh;
+  padding-top: 12px;
+  vertical-align: top;
 }
+
 .hidden, .hidden:before{
   display: none;
 }
@@ -291,7 +294,10 @@ input:focus, textarea:focus{
   font-weight: bold;
   margin-top: 10px;
 }
-.native-meaning-li .sentence-section{
+.foreign-word, .native-meaning-name{
+  font-size: 1.15em;
+}
+.native-meaning-li .sentence-tr{
   font-size: 0.95em;
 }
 

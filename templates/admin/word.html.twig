@@ -49,7 +49,9 @@
         let partsOfSpeechArr = partsOfSpeechCsv.split(',');
         let isError = {
             posError: false,
-            wordError: false
+            wordError: false,
+            emptyError: false,
+            emptyPosError: false
         };
     </script>
     {{ encore_entry_script_tags('part_of_speech') }}

@@ -172,9 +172,8 @@ class AdminController extends AbstractController
                             $meaningName->setName($mName);
                             $meaning->addMeaningName($meaningName);
                             array_push($updatedMeaningNames, $meaningName);
-                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName)) {
+                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName))
                             $meaning->addMeaningName($meaningName);
-                        }
                         else
                         {
                             $meaningName = new MeaningName();
