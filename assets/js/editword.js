@@ -29,7 +29,8 @@ let undoBtn = document.querySelector(".undo-btn");
 
 let phraseClasses = ['.header-word','.foreign-meaning-name','.example-sentence','.example-translation'];
 let undoNodes = [];
-let rootWord = document.querySelector('.root-word-input').value;
+let rootWordInputValue = document.querySelector('.root-word-input').value;
+let rootWord = rootWordInputValue.length > 0 ? rootWordInputValue : null;
 
 //enter updates
 for (const e of examples) {
