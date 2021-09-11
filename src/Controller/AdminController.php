@@ -24,17 +24,28 @@ use Twig\Environment;
 #[IsGranted('ROLE_ADMIN')]
 class AdminController extends AbstractController
 {
-    private $em;
-    private $twig;
-    private $dictionary;
-    private $data;
+    private Environment $twig;
+    private EntityManagerInterface $em;
+    private Dictionary $dictionary;
+    private DataFileReader $data;
+    private WordRepository $wordRepository;
+    private MeaningNameRepository $meaningNameRepository;
+    private RootWordRepository $rootWordRepository;
+    private MeaningRepository $meaningRepository;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em, Dictionary $dictionary, DataFileReader $data)
+    public function __construct(Environment $twig, EntityManagerInterface $em,
+                                Dictionary $dictionary, DataFileReader $data,
+                                WordRepository $wordRepository, MeaningNameRepository $meaningNameRepository,
+                                RootWordRepository $rootWordRepository, MeaningRepository $meaningRepository)
     {
         $this->twig = $twig;
         $this->em = $em;
         $this->dictionary = $dictionary;
         $this->data = $data;
+        $this->wordRepository = $wordRepository;
+        $this->meaningNameRepository = $meaningNameRepository;
+        $this->rootWordRepository = $rootWordRepository;
+        $this->meaningRepository = $meaningRepository;
     }
 
     #[Route('/', name: 'admin')]
@@ -55,7 +66,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/addword', name: 'addword')]
-    public function addWord(Request $request, MeaningNameRepository $meaningNameRepository, RootWordRepository $rootWordRepository): Response
+    public function addWord(Request $request): Response
     {
         $word = new Word();
         $form = $this->createForm(WordType::class, $word);
@@ -64,50 +75,51 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $wordJson = json_decode($form['json']->getData(), true);
-            $speechSections = $wordJson['speechSection'];
-            $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
-            $rootWordJson = $wordJson['rootWord'];
-            $rootWord = $rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
-            $word->setRootWord($rootWord);
-            $word->setJson(null);
-            $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
-            $newMeaningNames = [];
-            if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
-                $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
-            foreach ($speechSections as $sp) {
-                $partOfSpeech = $sp['partOfSpeech'];
-                $meanings = $sp['meanings'];
-                foreach ($meanings as $m) {
-                    $meaning = new Meaning();
-                    $meaning->setWord($word);
-                    $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
-                    foreach ($meaningNames as $mName) {
-                        $mName = trim($mName);
-                        if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
-                        {
-                            $meaningName->setName($mName);
-                            $meaning->addMeaningName($meaningName);
-                        } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName))
-                            $meaning->addMeaningName($meaningName);
-                        else
-                        {
-                            $meaningName = new MeaningName();
-                            $meaningName->setName($mName);
-                            $meaning->addMeaningName($meaningName);
-                            array_push($newMeaningNames, $meaningName);
+            if(!$this->wordRepository->findOneBy(['name' => $word->getName()]))
+            {
+                $wordJson = json_decode($form['json']->getData(), true);
+                $speechSections = $wordJson['speechSection'];
+                $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
+                $rootWordJson = $wordJson['rootWord'];
+                $rootWord = $this->rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
+                $word->setRootWord($rootWord);
+                $word->setJson(null);
+                $word->setPartsOfSpeechOrder($wordJson['partsOfSpeechOrder']);
+                $newMeaningNames = [];
+                if ($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
+                    $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
+                foreach ($speechSections as $sp) {
+                    $partOfSpeech = $sp['partOfSpeech'];
+                    $meanings = $sp['meanings'];
+                    foreach ($meanings as $m) {
+                        $meaning = new Meaning();
+                        $meaning->setWord($word);
+                        $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
+                        foreach ($meaningNames as $mName) {
+                            $mName = trim($mName);
+                            if ($meaningName = $this->meaningNameRepository->findOneBy(['name' => $mName])) {
+                                $meaningName->setName($mName);
+                                $meaning->addMeaningName($meaningName);
+                            } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName))
+                                $meaning->addMeaningName($meaningName);
+                            else {
+                                $meaningName = new MeaningName();
+                                $meaningName->setName($mName);
+                                $meaning->addMeaningName($meaningName);
+                                array_push($newMeaningNames, $meaningName);
+                            }
+                            $this->em->persist($meaningName);
                         }
-                        $this->em->persist($meaningName);
+                        $meaning->setPartOfSpeech($partOfSpeech);
+                        $meaning->setExamples($m['examples']);
+                        $meaning->setOrderValue(intval($m['order']));
+                        $this->em->persist($meaning);
                     }
-                    $meaning->setPartOfSpeech($partOfSpeech);
-                    $meaning->setExamples($m['examples']);
-                    $meaning->setOrderValue(intval($m['order']));
-                    $this->em->persist($meaning);
                 }
+                $this->em->persist($word);
+                $this->em->flush();
+                $this->addFlash('success', 'Pomyślnie dodano wyrażenie');
             }
-            $this->em->persist($word);
-            $this->em->flush();
-            $this->addFlash('success', 'Pomyślnie dodano wyrażenie');
             return $this->redirectToRoute('admin_show_words');
         }
 
@@ -119,7 +131,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/editword/{name}', name: 'edit_word', options: ['expose' => true])]
-    public function editword(Request $request, Word $word, MeaningRepository $meaningRepository, MeaningNameRepository $meaningNameRepository, RootWordRepository $rootWordRepository): Response
+    public function editword(Request $request, Word $word): Response
     {
 
         $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
@@ -132,7 +144,7 @@ class AdminController extends AbstractController
             $speechSections = $wordJson['speechSection'];
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
             $rootWordJson = $wordJson['rootWord'];
-            $rootWord = $rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
+            $rootWord = $this->rootWordRepository->findOneBy(['name' => $rootWordJson]) ?? null;
 
             $word->setRootWord($rootWord);
             $word->setJson(null);
@@ -145,7 +157,7 @@ class AdminController extends AbstractController
                 $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
             foreach ($meaningsToDeleteId as $mDelId)
             {
-                $meaning = $meaningRepository->find($mDelId);
+                $meaning = $this->meaningRepository->find($mDelId);
                 if($meaning)
                 {
                     $meaningNamesToDelete = array_merge($meaningNamesToDelete, $meaning->getMeaningNames()->getValues());
@@ -160,14 +172,14 @@ class AdminController extends AbstractController
                 foreach ($meanings as $m)
                 {
                     $updatedMeaningNames = [];
-                    $meaning = $meaningRepository->find($m['id']) ?? new Meaning();
+                    $meaning = $this->meaningRepository->find($m['id']) ?? new Meaning();
                     $meaning->setWord($word);
                     $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
                     $oldMeaningNames = $meaning->getMeaningNames()->getValues();
                     foreach ($meaningNames as $mName)
                     {
                         $mName = trim($mName);
-                        if ($meaningName = $meaningNameRepository->findOneBy(['name' => $mName]))
+                        if ($meaningName = $this->meaningNameRepository->findOneBy(['name' => $mName]))
                         {
                             $meaningName->setName($mName);
                             $meaning->addMeaningName($meaningName);
