@@ -608,7 +608,6 @@ let isSubmitted = false;
 
 async function saveWord(){
     let wordJson;
-
     try{
         wordJson = getWordJson();
     }catch (e){
