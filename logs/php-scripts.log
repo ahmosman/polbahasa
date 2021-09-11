@@ -1,0 +1,726 @@
+[31-Aug-2021 23:09:36 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:10:41 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:15:19 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:17:15 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:18:02 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:18:02 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:18:03 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:18:49 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:18:52 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:18:56 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:23:16 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:23:17 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:23:44 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:30:05 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "App\Entity\Word object not found by the @ParamConverter annotation." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/sensio/framework-extra-bundle/src/Request/ParamConverter/DoctrineParamConverter.php line 107
+
+[31-Aug-2021 23:30:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:30:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:30:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:30:55 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:31:12 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:31:14 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:31:14 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:31:38 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:31:39 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:32:10 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:32:10 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:32:11 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:32:29 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [info] Matched route "dictionary".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Checking for authenticator support.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Checking support on authenticator.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Authenticator does not support the request.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Checking support on authenticator.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Remember-me cookie detected.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SELECT DISTINCT m0_.part_of_speech AS part_of_speech_0 FROM meaning m0_
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [error] Elastica Request Failure
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't resolve host" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Read existing security token from the session.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.username AS username_2, t0.roles AS roles_3, t0.password AS password_4 FROM user t0 WHERE t0.id = ?
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] User was reloaded from a user provider.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Skipping the "Symfony\Component\Security\Http\Authenticator\RememberMeAuthenticator" authenticator as it did not support the request.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\Component\Security\Http\Firewall\ExceptionListener::onKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\WebpackEncoreBundle\EventListener\ExceptionListener::onKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::logKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.exception" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onKernelException" stopped propagation of the event "kernel.exception".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Stored the security token in the session.
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] [debug] Notified event "kernel.terminate" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelTerminate".
+
+[31-Aug-2021 23:37:11 Europe/Warsaw] 2021-08-31T23:37:11+02:00 [info] User Deprecated: Since symfony/property-access 5.3: Passing a boolean as the second argument to "Symfony\Component\PropertyAccess\PropertyAccessor::__construct()" is deprecated. Pass a combination of bitwise flags instead (i.e an integer).
+[31-Aug-2021 23:37:12 Europe/Warsaw] [info] Matched route "_wdt".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:37:12 Europe/Warsaw] [debug] Notified event "kernel.terminate" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelTerminate".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [info] Matched route "dictionary".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Checking for authenticator support.
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Checking support on authenticator.
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Authenticator does not support the request.
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Checking support on authenticator.
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Remember-me cookie detected.
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] SELECT DISTINCT m0_.part_of_speech AS part_of_speech_0 FROM meaning m0_
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [debug] Elastica Request
+
+[31-Aug-2021 23:38:21 Europe/Warsaw] [info] meanings_index/_search (POST) 200.59 ms
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Elastica Request
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [info] words_index/_search (POST) 104.76 ms
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT w0_.id AS id_0, w0_.name AS name_1, w0_.json AS json_2, w0_.parts_of_speech_order AS parts_of_speech_order_3, w0_.modified_at AS modified_at_4, w0_.modified_by AS modified_by_5, w0_.root_word_id AS root_word_id_6 FROM word w0_ WHERE w0_.id IN (?)
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.examples AS examples_2, t0.part_of_speech AS part_of_speech_3, t0.order_value AS order_value_4, t0.modified_at AS modified_at_5, t0.modified_by AS modified_by_6, t0.word_id AS word_id_7 FROM meaning t0 WHERE (t0.part_of_speech = ? AND t0.word_id = ?) ORDER BY t0.order_value ASC
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Read existing security token from the session.
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.username AS username_2, t0.roles AS roles_3, t0.password AS password_4 FROM user t0 WHERE t0.id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] User was reloaded from a user provider.
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Skipping the "Symfony\Component\Security\Http\Authenticator\RememberMeAuthenticator" authenticator as it did not support the request.
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "debug.security.authorization.vote" to listener "Symfony\Bundle\SecurityBundle\EventListener\VoteListener::onVoterVote".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SELECT t0.id AS id_1, t0.name AS name_2, t0.modified_at AS modified_at_3, t0.modified_by AS modified_by_4 FROM meaning_name t0 INNER JOIN meaning_name_meaning ON t0.id = meaning_name_meaning.meaning_name_id WHERE meaning_name_meaning.meaning_id = ?
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Stored the security token in the session.
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] [debug] Notified event "kernel.terminate" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelTerminate".
+
+[31-Aug-2021 23:38:22 Europe/Warsaw] 2021-08-31T23:38:22+02:00 [info] User Deprecated: Since symfony/property-access 5.3: Passing a boolean as the second argument to "Symfony\Component\PropertyAccess\PropertyAccessor::__construct()" is deprecated. Pass a combination of bitwise flags instead (i.e an integer).
+[31-Aug-2021 23:38:23 Europe/Warsaw] [info] Matched route "fos_js_routing_js".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] SHOW FULL TABLES WHERE Table_type = 'BASE TABLE'
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.terminate" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelTerminate".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [info] Matched route "_wdt".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\DebugHandlersListener::configure".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\ValidateRequestListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::setDefaultLocale".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::configureLogoutUrlGenerator".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ControllerListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\ParamConverterListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::onControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\SecurityListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.controller_arguments" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\IsGrantedListener::onKernelControllerArguments".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\Firewall\ContextListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\DataCollector\RequestDataCollector::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\HttpCacheListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\Security\Http\RememberMe\ResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\ErrorListener::removeCspHeader".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener::onResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.response" to listener "Symfony\Component\HttpKernel\EventListener\StreamedResponseListener::onKernelResponse".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\SessionListener::onFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\RouterListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.finish_request" to listener "Symfony\Component\HttpKernel\EventListener\LocaleAwareListener::onKernelFinishRequest".
+
+[31-Aug-2021 23:38:23 Europe/Warsaw] [debug] Notified event "kernel.terminate" to listener "Symfony\Component\HttpKernel\EventListener\ProfilerListener::onKernelTerminate".
+
+[31-Aug-2021 23:39:15 Europe/Warsaw] [critical] Uncaught PHP Exception Symfony\Component\DependencyInjection\Exception\EnvNotFoundException: "Environment variable not found: "DATABASE_URL"." at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/dependency-injection/EnvVarProcessor.php line 172
+
+[31-Aug-2021 23:39:38 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[31-Aug-2021 23:53:35 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 15:30:58 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 15:31:02 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 15:31:02 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 15:31:07 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 15:31:07 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 15:31:07 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Couldn't connect to host, Elasticsearch down?" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 16:25:25 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 17:34:35 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 17:37:10 Europe/Warsaw] [critical] Uncaught PHP Exception RuntimeException: "Cannot find corresponding Doctrine objects (0) for all Elastica results (2). Missing IDs: 91, 100. IDs: 91, 100" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/friendsofsymfony/elastica-bundle/src/Doctrine/AbstractElasticaToModelTransformer.php line 99
+
+[01-Sep-2021 17:37:30 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 19:12:37 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 21:22:09 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/login")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 23:41:47 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[01-Sep-2021 23:46:50 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:46:50 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:46:52 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:51:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:51:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:51:56 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:56:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:56:54 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[01-Sep-2021 23:58:17 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[02-Sep-2021 00:05:34 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:05:34 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:05:34 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:06:50 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:06:50 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:06:50 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:08:05 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:08:05 Europe/Warsaw] [critical] Uncaught PHP Exception Elastica\Exception\Connection\HttpException: "Operation timed out" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/ruflin/elastica/src/Transport/Http.php line 186
+
+[02-Sep-2021 00:33:12 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[02-Sep-2021 08:11:13 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[02-Sep-2021 09:13:15 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=biru")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[02-Sep-2021 14:48:21 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=biru")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[02-Sep-2021 16:24:14 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=naucza%C4%87")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[03-Sep-2021 12:29:19 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=naucza%C4%87")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[03-Sep-2021 17:57:49 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[04-Sep-2021 10:20:50 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[04-Sep-2021 10:42:47 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/login")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[05-Sep-2021 22:00:12 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/login")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[06-Sep-2021 10:05:49 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[06-Sep-2021 12:38:01 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=belajar")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[06-Sep-2021 18:31:03 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[08-Sep-2021 11:12:34 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=biru")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[08-Sep-2021 23:27:17 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[09-Sep-2021 13:38:52 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/?fbclid=IwAR2rY0Gu1Os_1DP_m6k5yowytpZD94gVBnEeMDCpPY8KCfqcTpmgmG7_Yz4")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[09-Sep-2021 14:48:25 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=niebieski")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[09-Sep-2021 15:41:32 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET http://ahmedo126.ct8.pl/favicon.ico" (from "http://ahmedo126.ct8.pl/dictionary?q=Di")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
+[09-Sep-2021 17:55:26 Europe/Warsaw] [error] Uncaught PHP Exception Symfony\Component\HttpKernel\Exception\NotFoundHttpException: "No route found for "GET https://ahmedo126.ct8.pl/favicon.ico" (from "https://ahmedo126.ct8.pl/")" at /usr/home/ahmedo126/domains/ahmedo126.ct8.pl/vendor/symfony/http-kernel/EventListener/RouterListener.php line 136
+
