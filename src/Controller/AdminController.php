@@ -75,7 +75,7 @@ class AdminController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            if(!$this->wordRepository->findOneBy(['name' => $word->getName()]))
+            if(!$this->wordRepository->findOneBy(['name' => $word->getName()])) //prevent from adding duplicates by double submitted form
             {
                 $wordJson = json_decode($form['json']->getData(), true);
                 $speechSections = $wordJson['speechSection'];
