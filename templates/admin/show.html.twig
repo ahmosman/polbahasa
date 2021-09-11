@@ -20,7 +20,7 @@
                     <td class="word-action-td">
                         <a href="{{ path('preview_word',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
                         <a href="{{ path('edit_word',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
-                        <a href="{{ path('delete_word',{name: word.name}) }}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć {{ word.name }}')">Usuń</a>
+                        <a href="{{ path('delete_word',{name: word.name}) }}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć {{ word.name }}?')">Usuń</a>
                     </td>
                 </tr>
             {% endfor %}
