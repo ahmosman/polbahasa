@@ -487,7 +487,6 @@ function getPartsOfSpeechOrder(){
 }
 
 function getWordJson() {
-console.log(getPartsOfSpeechOrder());
 let word = document.querySelector(".header-word");
 let speechSections = document.querySelectorAll(".speech-section");
 
@@ -602,17 +601,27 @@ function getMeaningsIdToDelete(){
     let toDelete = earlyMeaningsId.filter((el)=>{
          return !currentMeaningsId.includes(el);
      });
-    console.log(JSON.stringify(toDelete));
     return JSON.stringify(toDelete);
 }
 
+let isSubmitted = false;
 
 async function saveWord(){
+    let wordJson;
+    try{
+        wordJson = getWordJson();
+    }catch (e){
+        console.log(e);
+        alert('Popraw błędy semantyczne');
+        return false;
+    }
+
     checkForEmptyElements();
     if(Object.values(isError).includes(true)){
         alert('Wypełnij wszystkie pola');
         return false;
     }
+
     let rootWordExists = await rootword.checkRootWordExists(rootWord);
     let rootWordInput = document.querySelector(".root-word-input");
     if(!rootWordExists && rootWordInput.value.length > 0)
@@ -630,8 +639,12 @@ async function saveWord(){
     wordNameIn.value = wordName.textContent;
 
     let wordJsonIn = document.querySelector("#word_json");
-    wordJsonIn.value = getWordJson();
-    $("form[name='word']").submit();
+    wordJsonIn.value = wordJson;
+
+    if(!isSubmitted) {
+        $("form[name='word']").submit();
+        isSubmitted = true;
+    }
 }
 
 function addUndoNode(){
