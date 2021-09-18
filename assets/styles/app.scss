@@ -213,7 +213,6 @@ input.part-of-speech::placeholder {
   margin: 2% 0;
 }
 .admin-word-list-container-2{
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   width: 70%;
@@ -233,6 +232,9 @@ input.part-of-speech::placeholder {
 }
 .admin-word-table .btn{
   margin: 5px 0;
+}
+.admin-word-counter{
+  margin: 10px 0;
 }
 .add-word-btn{
   width: 200px;
