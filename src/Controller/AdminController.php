@@ -59,10 +59,12 @@ class AdminController extends AbstractController
     #[Route('/show', name: 'admin_show_words')]
     public function show(WordRepository $wordRepository): Response
     {
-
-        return new Response($this->twig->render('admin/show.html.twig',
-            ['words' => $wordRepository->findAllOrderBy('name', 'asc')]
-        ));
+        $words = $wordRepository->findAllOrderBy('name', 'asc');
+        $wordsCount = ['all' => count($words)];
+        return new Response($this->twig->render('admin/show.html.twig', [
+            'words' => $words,
+            'wordsCount' => $wordsCount
+            ]));
     }
 
     #[Route('/addword', name: 'addword')]
