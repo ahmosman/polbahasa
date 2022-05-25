@@ -1,0 +1,16 @@
+title:
+  main: Polbahasa
+  sub: Słownik indonezyjsko-polski
+search:
+  placeholder: Wpisz indonezyjskie lub polskie słowo
+  search-btn: Szukaj
+results:
+  in:
+    polish: po polsku
+    indo: po indonezyjsku
+  rootword: Podstawa słowotwórcza
+  didYouMean: Czy chodziło Ci o
+  empty: Nie znaleziono tłumaczenia dla podanej frazy.
+header:
+  hello: Witaj
+  logout: Wyloguj

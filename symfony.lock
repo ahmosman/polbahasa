@@ -284,6 +284,9 @@
     "symfony/http-kernel": {
         "version": "5.4.x-dev"
     },
+    "symfony/intl": {
+        "version": "v5.4.8"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -381,6 +384,19 @@
     "symfony/string": {
         "version": "5.4.x-dev"
     },
+    "symfony/translation": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "da64f5a2b6d96f5dc24914517c0350a5f91dee43"
+        },
+        "files": [
+            "./config/packages/translation.yaml",
+            "./translations/.gitignore"
+        ]
+    },
     "symfony/translation-contracts": {
         "version": "v2.4.0"
     },
@@ -460,6 +476,9 @@
     },
     "twig/extra-bundle": {
         "version": "v3.3.1"
+    },
+    "twig/intl-extra": {
+        "version": "v3.4.0"
     },
     "twig/twig": {
         "version": "v3.3.2"

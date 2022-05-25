@@ -27,13 +27,19 @@ class MainController extends AbstractController
         $this->suggestions = $suggestions;
     }
 
-    #[Route('/', name: 'main')]
+    #[Route('/')]
+    public function indexNoLocale(): Response
+    {
+        return $this->redirectToRoute('main', ['_locale' => 'pl']);
+    }
+
+    #[Route('/{_locale<%app.supported_locales%>}/', name: 'main')]
     public function index(): Response
     {
         return $this->render('index.html.twig');
     }
 
-    #[Route('/dictionary', name: 'dictionary')]
+    #[Route('/{_locale<%app.supported_locales%>}/dictionary', name: 'dictionary')]
     public function dictionary(Request $request, SessionInterface $session): Response
     {
         $q = $request->query->get('q', '');
@@ -42,8 +48,8 @@ class MainController extends AbstractController
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
         $phraseSuggestions = [];
-        if(count($nativeData) <= 0 && count($foreignData['wordsSections']) <= 0)
-            $phraseSuggestions = $this->suggestions->getAllSuggestions($q,'phrase');
+        if (count($nativeData) <= 0 && count($foreignData['wordsSections']) <= 0)
+            $phraseSuggestions = $this->suggestions->getAllSuggestions($q, 'phrase');
 
         $session->set('q', $q);
         return new Response($this->twig->render('dictionary/search_result.html.twig', [

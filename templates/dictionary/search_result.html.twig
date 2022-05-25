@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.session.get('q') }} - Słownik indonezyjsko-polski{% endblock %}
+{% block title %}{{ app.session.get('q') }} - {{ 'title.sub'|trans }}{% endblock %}
 
 {% block body %}
     <div class="search-bar-results">
@@ -8,11 +8,11 @@
     </div>
     {% if foreign is not empty %}
         <section class="words-section">
-            <div class="result-header-description">"{{ app.session.get('q') }}" po polsku</div>
+            <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.polish'|trans }}</div>
             {% if rootWord %}
                 <div class="root-word-div">
                     <div class="root-word-name">{{ rootWord }}</div>
-                    <div class="root-word-description">Podstawa słowotwórcza</div>
+                    <div class="root-word-description">{{'results.rootword'|trans}}</div>
                 </div>
             {% endif %}
             {% for  word in foreign %}
@@ -45,7 +45,7 @@
         </section>
     {% endif %}
     {% if native is not empty %}
-        <div class="result-header-description">"{{ app.session.get('q') }}" po indonezyjsku</div>
+        <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.indo'|trans }}</div>
         <div class="header-word">{{ app.session.get('q') }}</div>
         {% for  speechSection in native %}
             <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
@@ -79,14 +79,14 @@
     {% if foreign is empty and native is empty %}
         {% if suggestions is not empty %}
             <div class="empty-result-suggestion-div">
-                Czy chodziło Ci o:
+                {{ 'results.didYouMean'|trans }}:
                 {% for suggestion in suggestions %}
                     <a href="{{ path('dictionary') }}?q={{ suggestion }}">{{ suggestion }}</a>{% if loop.index < suggestions|length %}<span>,</span>{% endif %}
                 {% endfor %}
             </div>
 
         {% endif %}
-        Nie znaleziono tłumaczenia dla podanej frazy.
+        {{ 'results.empty'|trans }}
     {% endif %}
 {% endblock %}
 

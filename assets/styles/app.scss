@@ -10,7 +10,9 @@ body {
   font-family: "Comic Sans MS", cursive;
   font-size: 20px;
 }
-
+a{
+  text-decoration: none;
+}
 .main-container {
   min-height: 90vh;
   display: flex;
@@ -24,6 +26,19 @@ body {
 
 .nav-item-right {
   margin-right: 30px;
+}
+
+.nav-language-container{
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.nav-language-container *{
+  padding: 0 5px;
+}
+.nav-language-selected{
+  color: black !important;
 }
 
 .header-word {

@@ -11,17 +11,33 @@
             </ul>
 
             <ul class="navbar-nav ms-auto">
+                <div class="nav-language-container">
+                    {% if app.request.locale == 'pl' %}
+                        <span class="nav-link nav-language-selected"> POL </span>
+                        |
+                        <a class="nav-link"
+                            href="{{ path(app.request.attributes.get('_route'),{'_locale': 'id'}) }}{% if app.session.get('q') is defined %}?q={{ app.session.get('q') }}{% endif %}">
+                        IND</a>
+                    {% elseif app.request.locale == 'id' %}
+                        <a class="nav-link"
+                            href="{{ path(app.request.attributes.get('_route'),{'_locale': 'pl'}) }}{% if app.session.get('q') is defined %}?q={{ app.session.get('q') }}{% endif %}">
+                        POL</a>
+                        |
+                        <span class="nav-link nav-language-selected"> IND </span>
+
+                    {% endif %}
+                </div>
                 {% if is_granted('ROLE_USER') %}
                     <li class="nav-item active nav-item-right"
                             {% if app.user.username == 'akna.adogal' %}
                                 data-toggle="tooltip" data-placement="bottom" title="Jesteś najlepszą dziewczyną na świecie"
                             {% endif %}
                     >
-                        Witaj, {{ app.user.username }}
+                        {{ 'header.hello'|trans }}, {{ app.user.username }}
                     </li>
 
                     <li class="nav-item active nav-item-right">
-                        <a class="nav-link" href="{{ path('app_logout') }}">Wyloguj</a>
+                        <a class="nav-link" href="{{ path('app_logout') }}">{{ 'header.logout'|trans }}</a>
                     </li>
                 {% endif %}
             </ul>
