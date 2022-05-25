@@ -527,6 +527,21 @@ input:focus, textarea:focus {
   display: none;
 }
 
+.empty-result-suggestion-div {
+  border: 2px solid #c006c0;
+  border-radius: 30px;
+  padding: 20px;
+  margin-top: 20px;
+  width: 600px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.empty-result-suggestion-div a {
+  text-decoration: none;
+  color: #c006c0;
+  margin-left: 5px;
+}
 
 //Custom buttons
 .btn-hotpink {

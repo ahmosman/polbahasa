@@ -77,7 +77,16 @@
         {% endfor %}
     {% endif %}
     {% if foreign is empty and native is empty %}
-        Brak wyników dla podanego zapytania.
+        {% if suggestions is not empty %}
+            <div class="empty-result-suggestion-div">
+                Czy chodziło Ci o:
+                {% for suggestion in suggestions %}
+                    <a href="{{ path('dictionary') }}?q={{ suggestion }}">{{ suggestion }}</a>{% if loop.index < suggestions|length %}<span>,</span>{% endif %}
+                {% endfor %}
+            </div>
+
+        {% endif %}
+        Nie znaleziono tłumaczenia dla podanej frazy.
     {% endif %}
 {% endblock %}
 

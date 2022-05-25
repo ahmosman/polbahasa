@@ -14,15 +14,17 @@ use Twig\Environment;
 
 class MainController extends AbstractController
 {
-    private $twig;
-    private $search;
-    private $dictionary;
+    private Environment $twig;
+    private Search $search;
+    private Dictionary $dictionary;
+    private Suggestions $suggestions;
 
-    public function __construct(Environment $twig, Search $search, Dictionary $dictionary)
+    public function __construct(Environment $twig, Search $search, Suggestions $suggestions, Dictionary $dictionary)
     {
         $this->twig = $twig;
         $this->search = $search;
         $this->dictionary = $dictionary;
+        $this->suggestions = $suggestions;
     }
 
     #[Route('/', name: 'main')]
@@ -39,17 +41,17 @@ class MainController extends AbstractController
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
-        $fuzzyResults = [];
-        if (count($nativeData) <= 0 && count($foreignData) <= 0) {
-            $fuzzyResults = $this->search->findFuzzy($q, 0);
-        }
-
+        $phraseSuggestions = [];
+        if(count($nativeData) <= 0 && count($foreignData['wordsSections']) <= 0)
+            $phraseSuggestions = $this->suggestions->getAllSuggestions($q,'phrase');
 
         $session->set('q', $q);
         return new Response($this->twig->render('dictionary/search_result.html.twig', [
             'foreign' => $foreignData['wordsSections'],
             'native' => $nativeData,
-            'rootWord' => $foreignData['rootWord']
+            'rootWord' => $foreignData['rootWord'],
+            'suggestions' => $phraseSuggestions
         ]));
     }
+    //TODO: Przy wywoływaniu słowa z podstawą słowotwórczą wykonuje 57 kwerend (wywołujących części mowy)
 }

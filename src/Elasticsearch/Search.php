@@ -21,12 +21,6 @@ class Search
         $this->pronPrepToFilter = explode(',', $data->readData('pron_prep_to_filter.csv'));
     }
 
-    public function findFuzzy(string $q, int $fuzziness = 0)
-    {
-        $words = $this->findWords($q, $fuzziness);
-        $meanings = $this->findMeanings($q, $fuzziness);
-    }
-
     public function findWords(string $q, int $fuzziness = 0)
     {
         $multiMatch = new MultiMatch();

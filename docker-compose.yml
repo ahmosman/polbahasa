@@ -1,14 +1,26 @@
 version: '3'
 services:
   elasticsearch:
+    container_name: es01
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
       - 9200:9200
       - 9300:9300
+  kibana:
+    container_name: kibana
+    image: docker.elastic.co/kibana/kibana:7.13.3
+    environment:
+      - ELASTICSEARCH_HOSTS=http://es01:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
   baza:
     image: mariadb
     volumes:

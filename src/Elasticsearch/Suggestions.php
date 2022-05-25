@@ -7,27 +7,40 @@ namespace App\Elasticsearch;
 use Elastica\Query;
 use Elastica\Suggest;
 use Elastica\Suggest\Completion;
+use Elastica\Suggest\Phrase;
 use Elastica\Util;
 use FOS\ElasticaBundle\Elastica\Client;
 
 class Suggestions
 {
 
-    public const WORD = [
-        'INDEX' => 'words_suggest_index',
+    public const COMPLETION_WORD = [
+        'INDEX' => 'completion_words_suggest_index',
         'SUGGEST_NAME' => 'completion',
         'SUGGEST_FIELD' => 'name'
     ];
 
-    public const MEANING = [
-        'INDEX' => 'meanings_suggest_index',
+    public const COMPLETION_MEANING = [
+        'INDEX' => 'completion_meanings_suggest_index',
         'SUGGEST_NAME' => 'completion',
         'SUGGEST_FIELD' => 'name'
     ];
 
-    public const ROOTWORD = [
-        'INDEX' => 'rootwords_suggest_index',
+    public const COMPLETION_ROOTWORD = [
+        'INDEX' => 'completion_rootwords_suggest_index',
         'SUGGEST_NAME' => 'completion',
+        'SUGGEST_FIELD' => 'name'
+    ];
+
+    public const PHRASE_WORD = [
+        'INDEX' => 'phrase_words_suggest_index',
+        'SUGGEST_NAME' => 'text',
+        'SUGGEST_FIELD' => 'name'
+    ];
+
+    public const PHRASE_MEANING = [
+        'INDEX' => 'phrase_meanings_suggest_index',
+        'SUGGEST_NAME' => 'text',
         'SUGGEST_FIELD' => 'name'
     ];
 
@@ -38,10 +51,18 @@ class Suggestions
         $this->client = $client;
     }
 
-    public function getAllSuggestions(string $q)
+    public function getAllSuggestions(string $q, string $type)
     {
-        $foreign = $this->getForeignSuggestions($q);
-        $native = $this->getNativeSuggestions($q);
+        $foreign = [];
+        $native = [];
+        if ($type == 'completion') {
+            $foreign = $this->getForeignCompletionSuggestions($q);
+            $native = $this->getNativeCompletionSuggestions($q);
+        } elseif ($type == 'phrase') {
+            $foreign = $this->getForeignPhraseSuggestions($q);
+            $native = $this->getNativePhraseSuggestions($q);
+        }
+
         $merged = array_merge($foreign, $native);
         $results = [];
         foreach ($merged as $result) {
@@ -53,17 +74,24 @@ class Suggestions
         return $results;
     }
 
-    public function getForeignSuggestions(string $q)
+    public function getForeignCompletionSuggestions(string $q)
     {
-        return $this->getSuggestions($q, self::WORD);
+        return $this->getSuggestions($q, 'completion', self::COMPLETION_WORD);
     }
 
-    private function getSuggestions(string $q, $indexData)
+    private function getSuggestions(string $q, string $type, array $indexData)
     {
         $suggestIndex = $this->client->getIndex($indexData['INDEX']);
-        $completionSuggest = (new Completion($indexData['SUGGEST_NAME'], $indexData['SUGGEST_FIELD']))
-            ->setPrefix(Util::escapeTerm($q));
-        $suggest = new Suggest($completionSuggest);
+        $suggestion = match ($type) {
+            'phrase' => (new Phrase($indexData['SUGGEST_NAME'], $indexData['SUGGEST_FIELD']))
+                ->setText(Util::escapeTerm($q))
+                ->setRealWordErrorLikelihood(0.5)
+                ->setStupidBackoffSmoothing(0.4)
+        ,
+            'completion' => (new Completion($indexData['SUGGEST_NAME'], $indexData['SUGGEST_FIELD']))
+                ->setPrefix(Util::escapeTerm($q))
+        };
+        $suggest = new Suggest($suggestion);
         $query = (new Query())->setSuggest($suggest);
         $suggests = $suggestIndex->search($query)->getSuggests();
         $results = [];
@@ -73,14 +101,24 @@ class Suggestions
         return $results;
     }
 
-    public function getNativeSuggestions(string $q)
+    public function getNativeCompletionSuggestions(string $q)
     {
-        return $this->getSuggestions($q, self::MEANING);
+        return $this->getSuggestions($q, 'completion', self::COMPLETION_MEANING);
     }
 
-    public function getRootWordsSuggestions(string $q)
+    public function getForeignPhraseSuggestions(string $q)
     {
-        return $this->getSuggestions($q, self::ROOTWORD);
+        return $this->getSuggestions($q, 'phrase', self::PHRASE_WORD);
+    }
+
+    public function getNativePhraseSuggestions(string $q)
+    {
+        return $this->getSuggestions($q, 'phrase', self::PHRASE_MEANING);
+    }
+
+    public function getRootWordsCompletionSuggestions(string $q)
+    {
+        return $this->getSuggestions($q, 'completion', self::COMPLETION_ROOTWORD);
     }
 
 

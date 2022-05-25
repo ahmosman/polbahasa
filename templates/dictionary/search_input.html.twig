@@ -1,6 +1,6 @@
 <form action="{{ path('dictionary') }}" method="get" autocomplete="off" id="searching-form">
     <div class="search-input-div">
-        <input type="text" name="q" placeholder="Wpisz indonezyjskie lub polskie słowo">
+        <input type="text" name="q" placeholder="Wpisz indonezyjskie lub polskie słowo" value="{{ app.session.get('q') }}">
         <button type="submit" class="search-submit-btn fas fa-search" title="Szukaj"></button>
     </div>
     <div class="suggestions-div suggestions-hidden {% if app.request.attributes.get('_route') == "main" %} suggestions-div-main {% endif %}">

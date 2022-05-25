@@ -41,7 +41,7 @@ fos_elastica:
         provider: ~
         listener: ~
         finder: ~
-    words_suggest:
+    completion_words_suggest:
       settings:
         index:
           analysis:
@@ -51,7 +51,7 @@ fos_elastica:
                 tokenizer: standard
                 filter: [ lowercase, asciifolding ]
       use_alias: true
-      index_name: words_suggest_index
+      index_name: completion_words_suggest_index
       properties:
         name: { type: completion, analyzer: suggest_analyzer }
       persistence:
@@ -60,7 +60,7 @@ fos_elastica:
         provider: ~
         listener: ~
         finder: ~
-    meanings_suggest:
+    completion_meanings_suggest:
       settings:
         index:
           analysis:
@@ -70,7 +70,7 @@ fos_elastica:
                 tokenizer: standard
                 filter: [ lowercase, asciifolding ]
       use_alias: true
-      index_name: meanings_suggest_index
+      index_name: completion_meanings_suggest_index
       properties:
         name: { type: completion, analyzer: suggest_analyzer }
       persistence:
@@ -79,7 +79,7 @@ fos_elastica:
         provider: ~
         listener: ~
         finder: ~
-    rootwords_suggest:
+    completion_rootwords_suggest:
       settings:
         index:
           analysis:
@@ -89,7 +89,7 @@ fos_elastica:
                 tokenizer: standard
                 filter: [ lowercase, asciifolding ]
       use_alias: true
-      index_name: rootwords_suggest_index
+      index_name: completion_rootwords_suggest_index
       properties:
         name: { type: completion, analyzer: suggest_analyzer }
       persistence:
@@ -98,8 +98,60 @@ fos_elastica:
         provider: ~
         listener: ~
         finder: ~
-
-
+    phrase_words_suggest:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              trigram:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, shingle ]
+            filter:
+              shingle:
+                type: shingle
+      properties:
+        name:
+          type: text
+          fields:
+            trigram:
+              type: text
+              analyzer: trigram
+      persistence:
+        driver: orm
+        model: App\Entity\Word
+        provider: ~
+        listener: ~
+        finder: ~
+      use_alias: true
+      index_name: phrase_words_suggest_index
+    phrase_meanings_suggest:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              trigram:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, shingle ]
+            filter:
+              shingle:
+                type: shingle
+      properties:
+        name:
+          type: text
+          fields:
+            trigram:
+              type: text
+              analyzer: trigram
+      persistence:
+        driver: orm
+        model: App\Entity\MeaningName
+        provider: ~
+        listener: ~
+        finder: ~
+      use_alias: true
+      index_name: phrase_meanings_suggest_index
 
 
 
