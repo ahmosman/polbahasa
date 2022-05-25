@@ -34,14 +34,19 @@ class MainController extends AbstractController
     #[Route('/dictionary', name: 'dictionary')]
     public function dictionary(Request $request, SessionInterface $session): Response
     {
-        $q =  $request->query->get('q','');
+        $q = $request->query->get('q', '');
         $meanings = $this->search->findMeanings($q);
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
+        $fuzzyResults = [];
+        if (count($nativeData) <= 0 && count($foreignData) <= 0) {
+            $fuzzyResults = $this->search->findFuzzy($q, 0);
+        }
+
 
         $session->set('q', $q);
-        return new Response($this->twig->render('dictionary/search_result.html.twig',[
+        return new Response($this->twig->render('dictionary/search_result.html.twig', [
             'foreign' => $foreignData['wordsSections'],
             'native' => $nativeData,
             'rootWord' => $foreignData['rootWord']

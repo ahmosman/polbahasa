@@ -6,78 +6,79 @@
     <div class="search-bar-results">
         {% include 'dictionary/search_input.html.twig' %}
     </div>
-{% if foreign is not empty %}
-<section class="words-section">
-    <div class="result-header-description">"{{ app.session.get('q') }}" po polsku</div>
-    {% if rootWord%}
-        <div class="root-word-div">
-            <div class="root-word-name">{{ rootWord }}</div>
-            <div class="root-word-description">Podstawa słowotwórcza</div>
-        </div>
-    {% endif %}
-    {% for  word in foreign%}
-        <div class="header-word">{{ word[0][0].word.name }}</div>
-        {% for speechSection in word %}
-            <div class="speech-section">
-                <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
-                <ol class="foreign-word-ol">
-                    {% for meaning in speechSection %}
-                        <li class="foreign-meaning-li">
-                            <div class="foreign-meaning-name">
-                                {% for meaningName in meaning.meaningNames %}
-                                    <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
-                                {% endfor %}
-                            </div>
-                            <table class="sentence-table">
-                                {% for example in meaning.examples %}
-                                    <tr class="sentence-tr">
-                                        <td class="example-sentence">{{ example.sentence }}</td>
-                                        <td class="example-translation">{{ example.translation }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </li>
-                    {% endfor %}
-                </ol>
-            </div>
-        {% endfor %}
-    {% endfor %}
-</section>
-{% endif %}
-{% if native is not empty%}
-    <div class="result-header-description">"{{ app.session.get('q') }}" po indonezyjsku</div>
-    <div class="header-word">{{ app.session.get('q') }}</div>
-    {% for  speechSection in native%}
-        <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
-        <ol class="foreign-word-ol">
-            {% for word in speechSection.words %}
-                <li class="foreign-word"> <a href="{{path('dictionary')}}?q={{ word.name }}">{{ word.name }}</a></li>
-                <ul class="native-meaning-ul">
-                    {% for meaning in word.meanings %}
-                        <li class="native-meaning-li">
-                            <div class="native-meaning-name">
-                                {% for meaningName in meaning.meaningNames %}
-                                    <a href="{{path('dictionary')}}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
-                                {% endfor %}
-                            </div>
-                            <table class="sentence-table">
-                                {% for example in meaning.examples %}
-                                    <tr class="sentence-tr">
-                                        <td class="example-sentence">{{ example.sentence }}</td>
-                                        <td class="example-translation">{{ example.translation }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </table>
-                        </li>
-                    {% endfor %}
-                </ul>
+    {% if foreign is not empty %}
+        <section class="words-section">
+            <div class="result-header-description">"{{ app.session.get('q') }}" po polsku</div>
+            {% if rootWord %}
+                <div class="root-word-div">
+                    <div class="root-word-name">{{ rootWord }}</div>
+                    <div class="root-word-description">Podstawa słowotwórcza</div>
+                </div>
+            {% endif %}
+            {% for  word in foreign %}
+                <div class="header-word">{{ word[0][0].word.name }}</div>
+                {% for speechSection in word %}
+                    <div class="speech-section">
+                        <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                        <ol class="foreign-word-ol">
+                            {% for meaning in speechSection %}
+                                <li class="foreign-meaning-li">
+                                    <div class="foreign-meaning-name">
+                                        {% for meaningName in meaning.meaningNames %}
+                                            <a href="{{ path('dictionary') }}" class="meaning-anchor">{{ meaningName.name }}</a>{% if loop.index < meaning.meaningNames|length %}<span>, </span>{% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <table class="sentence-table">
+                                        {% for example in meaning.examples %}
+                                            <tr class="sentence-tr">
+                                                <td class="example-sentence">{{ example.sentence }}</td>
+                                                <td class="example-translation">{{ example.translation }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endfor %}
             {% endfor %}
-        </ol>
-    {% endfor %}
-{% endif %}
-{% if foreign is empty and native is empty%}
-    Brak wyników dla podanego zapytania.
-{% endif %}
+        </section>
+    {% endif %}
+    {% if native is not empty %}
+        <div class="result-header-description">"{{ app.session.get('q') }}" po indonezyjsku</div>
+        <div class="header-word">{{ app.session.get('q') }}</div>
+        {% for  speechSection in native %}
+            <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
+            <ol class="foreign-word-ol">
+                {% for word in speechSection.words %}
+                    <li class="foreign-word"><a href="{{ path('dictionary') }}?q={{ word.name }}">{{ word.name }}</a>
+                    </li>
+                    <ul class="native-meaning-ul">
+                        {% for meaning in word.meanings %}
+                            <li class="native-meaning-li">
+                                <div class="native-meaning-name">
+                                    {% for meaningName in meaning.meaningNames %}
+                                        {% if meaningName.name ==  app.session.get('q') %}<span>{{ meaningName.name }}</span>{% else %}<a href="{{ path('dictionary') }}"class="meaning-anchor">{{ meaningName.name }}</a>{% endif %}{% if loop.index < meaning.meaningNames|length %}<span>,</span>{% endif %}
+                                    {% endfor %}
+                                </div>
+                                <table class="sentence-table">
+                                    {% for example in meaning.examples %}
+                                        <tr class="sentence-tr">
+                                            <td class="example-sentence">{{ example.sentence }}</td>
+                                            <td class="example-translation">{{ example.translation }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
+            </ol>
+        {% endfor %}
+    {% endif %}
+    {% if foreign is empty and native is empty %}
+        Brak wyników dla podanego zapytania.
+    {% endif %}
 {% endblock %}
 
 

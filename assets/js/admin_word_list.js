@@ -1,27 +1,31 @@
 let searchInput = document.querySelector(".search-input-div>input");
 let adminWordTable = document.querySelector(".admin-word-table");
 let copyAdminWordTable = adminWordTable.innerHTML;
+let previousLabel = document.querySelector(".pagination__item.pagination__item--previous-page");
+let nextLabel = document.querySelector(".pagination__item.pagination__item--next-page");
 
+previousLabel.innerHTML = '<i class="fa-solid fa-arrow-left-long"></i>';
+nextLabel.innerHTML = '<i class="fa-solid fa-arrow-right-long"></i>';
 
-searchInput.addEventListener('input', ()=>{
-    if(searchInput.value.length > 0){
+searchInput.addEventListener('input', () => {
+    if (searchInput.value.length > 0) {
         autocompleteWords();
-    }else{
+    } else {
         adminWordTable.innerHTML = copyAdminWordTable;
     }
 });
 
-async function autocompleteWords(){
+async function autocompleteWords() {
     let response = await fetch(`${Routing.generate('autocomplete')}?q=${searchInput.value}`);
     let words = await response.json();
 
-    if(words.length > 0 && searchInput.value.length > 0)
+    if (words.length > 0 && searchInput.value.length > 0)
         displayWords(words);
     else
         adminWordTable.innerHTML = copyAdminWordTable;
 }
 
-function displayWords(words){
+function displayWords(words) {
     $(".admin-word-tr").remove();
 
     for (const word of words) {

@@ -1,4 +1,7 @@
 {
+    "babdev/pagerfanta-bundle": {
+        "version": "v3.6.1"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -135,9 +138,6 @@
     },
     "paragonie/sodium_compat": {
         "version": "v1.17.0"
-    },
-    "php": {
-        "version": "8.0"
     },
     "psr/cache": {
         "version": "2.0.0"
@@ -278,9 +278,6 @@
             "./src/Kernel.php"
         ]
     },
-    "symfony/http-client-contracts": {
-        "version": "v2.4.0"
-    },
     "symfony/http-foundation": {
         "version": "5.4.x-dev"
     },
@@ -298,9 +295,6 @@
     },
     "symfony/options-resolver": {
         "version": "5.4.x-dev"
-    },
-    "symfony/orm-pack": {
-        "version": "v2.1.0"
     },
     "symfony/password-hasher": {
         "version": "5.4.x-dev"
@@ -325,9 +319,6 @@
     },
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
-    },
-    "symfony/profiler-pack": {
-        "version": "v1.0.5"
     },
     "symfony/property-access": {
         "version": "5.4.x-dev"
@@ -408,9 +399,6 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
-    },
-    "symfony/twig-pack": {
-        "version": "v1.0.1"
     },
     "symfony/validator": {
         "version": "4.3",

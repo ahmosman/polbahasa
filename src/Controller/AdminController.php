@@ -13,6 +13,8 @@ use App\Repository\WordRepository;
 use App\Service\DataFileReader;
 use App\Service\Dictionary;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,9 +35,9 @@ class AdminController extends AbstractController
     private RootWordRepository $rootWordRepository;
     private MeaningRepository $meaningRepository;
 
-    public function __construct(Environment $twig, EntityManagerInterface $em,
-                                Dictionary $dictionary, DataFileReader $data,
-                                WordRepository $wordRepository, MeaningNameRepository $meaningNameRepository,
+    public function __construct(Environment        $twig, EntityManagerInterface $em,
+                                Dictionary         $dictionary, DataFileReader $data,
+                                WordRepository     $wordRepository, MeaningNameRepository $meaningNameRepository,
                                 RootWordRepository $rootWordRepository, MeaningRepository $meaningRepository)
     {
         $this->twig = $twig;
@@ -56,15 +58,18 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/show', name: 'admin_show_words')]
-    public function show(WordRepository $wordRepository): Response
+    #[Route('/show/{page<\d+>}', name: 'admin_show_words')]
+    public function show(int $page = 1): Response
     {
-        $words = $wordRepository->findAllOrderBy('name', 'asc');
-        $wordsCount = ['all' => count($words)];
+        $queryBuilder = $this->wordRepository->createWordListQueryBuilder();
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(15);
+        $pager->setCurrentPage($page);
+        $wordsCount = $pager->count();
         return new Response($this->twig->render('admin/show.html.twig', [
-            'words' => $words,
+            'pager' => $pager,
             'wordsCount' => $wordsCount
-            ]));
+        ]));
     }
 
     #[Route('/addword', name: 'addword')]
@@ -75,9 +80,8 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
 
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            if(!$this->wordRepository->findOneBy(['name' => $word->getName()])) //prevent from adding duplicates by double submitted form
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$this->wordRepository->findOneBy(['name' => $word->getName()])) //prevent from adding duplicates by double submitted form
             {
                 $wordJson = json_decode($form['json']->getData(), true);
                 $speechSections = $wordJson['speechSection'];
@@ -129,19 +133,16 @@ class AdminController extends AbstractController
             'form' => $form->createView(),
             'partsOfSpeechCsv' => $partsOfSpeechCsv
         ]);
-
     }
 
     #[Route('/editword/{name}', name: 'edit_word', options: ['expose' => true])]
     public function editword(Request $request, Word $word): Response
     {
-
         $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
 
         $form = $this->createForm(WordType::class, $word);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $wordJson = json_decode($form['json']->getData(), true);
             $speechSections = $wordJson['speechSection'];
             $meaningsToDeleteId = $wordJson['toDeleteMeaningsId'];
@@ -155,41 +156,34 @@ class AdminController extends AbstractController
             $meaningNamesToDelete = [];
             $newMeaningNames = [];
             $jsonPartsOfSpeechCsv = $wordJson['partsOfSpeechCsv'];
-            if($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
+            if ($jsonPartsOfSpeechCsv !== $partsOfSpeechCsv)
                 $this->data->saveData('parts_of_speech.csv', $jsonPartsOfSpeechCsv);
-            foreach ($meaningsToDeleteId as $mDelId)
-            {
+            foreach ($meaningsToDeleteId as $mDelId) {
                 $meaning = $this->meaningRepository->find($mDelId);
-                if($meaning)
-                {
+                if ($meaning) {
                     $meaningNamesToDelete = array_merge($meaningNamesToDelete, $meaning->getMeaningNames()->getValues());
                     $this->em->remove($meaning);
                 }
             }
 
-            foreach ($speechSections as $sp)
-            {
+            foreach ($speechSections as $sp) {
                 $partOfSpeech = $sp['partOfSpeech'];
                 $meanings = $sp['meanings'];
-                foreach ($meanings as $m)
-                {
+                foreach ($meanings as $m) {
                     $updatedMeaningNames = [];
                     $meaning = $this->meaningRepository->find($m['id']) ?? new Meaning();
                     $meaning->setWord($word);
                     $meaningNames = preg_split("/,(?![^(]+\))/", $m['meaningName']);
                     $oldMeaningNames = $meaning->getMeaningNames()->getValues();
-                    foreach ($meaningNames as $mName)
-                    {
+                    foreach ($meaningNames as $mName) {
                         $mName = trim($mName);
-                        if ($meaningName = $this->meaningNameRepository->findOneBy(['name' => $mName]))
-                        {
+                        if ($meaningName = $this->meaningNameRepository->findOneBy(['name' => $mName])) {
                             $meaningName->setName($mName);
                             $meaning->addMeaningName($meaningName);
                             array_push($updatedMeaningNames, $meaningName);
                         } elseif ($meaningName = $this->dictionary->getNotFlushedMeaningName($newMeaningNames, $mName))
                             $meaning->addMeaningName($meaningName);
-                        else
-                        {
+                        else {
                             $meaningName = new MeaningName();
                             $meaningName->setName($mName);
                             $meaning->addMeaningName($meaningName);
@@ -198,10 +192,8 @@ class AdminController extends AbstractController
                         $this->em->persist($meaningName);
                     }
 
-                    foreach ($oldMeaningNames as $oldMName)
-                    {
-                        if (!in_array($oldMName, $updatedMeaningNames))
-                        {
+                    foreach ($oldMeaningNames as $oldMName) {
+                        if (!in_array($oldMName, $updatedMeaningNames)) {
                             $meaning->removeMeaningName($oldMName);
                             if (empty($oldMName->getMeaning()->getValues()))
                                 $this->em->remove($oldMName);
@@ -216,8 +208,7 @@ class AdminController extends AbstractController
             $this->em->persist($word);
             $this->em->flush();
 
-            foreach ($meaningNamesToDelete as $mnDel)
-            {
+            foreach ($meaningNamesToDelete as $mnDel) {
                 if (empty($mnDel->getMeaning()->getValues()))
                     $this->em->remove($mnDel);
             }
@@ -233,16 +224,16 @@ class AdminController extends AbstractController
             'partsOfSpeechCsv' => $partsOfSpeechCsv
         ]);
     }
-    #[Route('/delete/{name}', name: 'delete_word', options: ['expose'=>true])]
-    public function delete(Word $word): Response{
+
+    #[Route('/delete/{name}', name: 'delete_word', options: ['expose' => true])]
+    public function delete(Word $word): Response
+    {
         $meanings = $word->getMeanings();
-        foreach($meanings as $meaning)
-        {
-            $meaningNames =  $meaning->getMeaningNames();
-            foreach ($meaningNames as $mName)
-            {
+        foreach ($meanings as $meaning) {
+            $meaningNames = $meaning->getMeaningNames();
+            foreach ($meaningNames as $mName) {
                 $meaning->removeMeaningName($mName);
-                if(empty($mName->getMeaning()->getValues()))
+                if (empty($mName->getMeaning()->getValues()))
                     $this->em->remove($mName);
             }
         }
@@ -250,15 +241,15 @@ class AdminController extends AbstractController
 
         $this->em->remove($word);
         $this->em->flush();
-        $this->addFlash('success','Pomyślnie usunięto wyrażenie');
+        $this->addFlash('success', 'Pomyślnie usunięto wyrażenie');
 
         return $this->redirectToRoute('admin_show_words');
-
     }
-    #[Route('/preview/{name}', name: 'preview_word', options: ['expose'=>true])]
+
+    #[Route('/preview/{name}', name: 'preview_word', options: ['expose' => true])]
     public function preview(Word $word): Response
     {
-        return new Response( $this->twig->render('admin/preview.html.twig', [
+        return new Response($this->twig->render('admin/preview.html.twig', [
             'word' => $word,
             'speechSections' => $this->dictionary->getSpeechSections($word)
         ]));
@@ -269,13 +260,12 @@ class AdminController extends AbstractController
     {
         $partsOfSpeechCsv = $this->data->readData('parts_of_speech.csv');
         $newPartsOfSpeechCsv = $_GET['data'] ?? null;
-        if($newPartsOfSpeechCsv)
-        {
-            if($newPartsOfSpeechCsv !== $partsOfSpeechCsv)
+        if ($newPartsOfSpeechCsv) {
+            if ($newPartsOfSpeechCsv !== $partsOfSpeechCsv)
                 $this->data->saveData('parts_of_speech.csv', $newPartsOfSpeechCsv);
             return $this->redirectToRoute('admin');
         }
-        return new Response($this->twig->render('admin/pos_manage.html.twig',[
+        return new Response($this->twig->render('admin/pos_manage.html.twig', [
             'partsOfSpeechCsv' => $partsOfSpeechCsv
         ]));
     }
@@ -285,18 +275,17 @@ class AdminController extends AbstractController
     {
         $pronPrepToFilterCsv = $this->data->readData('pron_prep_to_filter.csv');
         $newPronPrepToFilterCsv = $_GET['data'] ?? null;
-        if($newPronPrepToFilterCsv)
-        {
-            if($newPronPrepToFilterCsv !== $pronPrepToFilterCsv)
+        if ($newPronPrepToFilterCsv) {
+            if ($newPronPrepToFilterCsv !== $pronPrepToFilterCsv)
                 $this->data->saveData('pron_prep_to_filter.csv', $newPronPrepToFilterCsv);
             return $this->redirectToRoute('admin');
         }
-        return new Response($this->twig->render('admin/filter_manage.html.twig',[
+        return new Response($this->twig->render('admin/filter_manage.html.twig', [
             'pronPrepToFilterCsv' => $pronPrepToFilterCsv
         ]));
     }
 
-    #[Route('/checkexist', name: 'checkexist', options: ['expose'=>true])]
+    #[Route('/checkexist', name: 'checkexist', options: ['expose' => true])]
     public function wordCheckexist(WordRepository $wordRepository)
     {
         $wordName = $_GET['wordName'];

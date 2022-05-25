@@ -1,103 +1,103 @@
 # Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
 fos_elastica:
-    clients:
-        default: { host: "%elasticsearch_host%", port: "%elasticsearch_port%" }
-    indexes:
-        words:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            search_analyzer:
-                                type: custom
-                                tokenizer: standard
-                                filter: [ lowercase, asciifolding ]
-            use_alias: true
-            index_name: words_index
-            properties:
-                name: {analyzer: search_analyzer}
-            persistence:
-                driver: orm
-                model: App\Entity\Word
-                provider: ~
-                listener: ~
-                finder: ~
-        meanings:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            search_analyzer:
-                                type: custom
-                                tokenizer: standard
-                                filter: [ lowercase, asciifolding ]
-            use_alias: true
-            index_name: meanings_index
-            properties:
-                name: {analyzer: search_analyzer }
-            persistence:
-                driver: orm
-                model: App\Entity\MeaningName
-                provider: ~
-                listener: ~
-                finder: ~
-        words_suggest:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            suggest_analyzer:
-                                type: custom
-                                tokenizer: standard
-                                filter: [ lowercase, asciifolding ]
-            use_alias: true
-            index_name: words_suggest_index
-            properties:
-                name: {type: completion, analyzer: suggest_analyzer}
-            persistence:
-                driver: orm
-                model: App\Entity\Word
-                provider: ~
-                listener: ~
-                finder: ~
-        meanings_suggest:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            suggest_analyzer:
-                                type: custom
-                                tokenizer: standard
-                                filter: [ lowercase, asciifolding ]
-            use_alias: true
-            index_name: meanings_suggest_index
-            properties:
-                name: { type: completion, analyzer: suggest_analyzer }
-            persistence:
-                driver: orm
-                model: App\Entity\MeaningName
-                provider: ~
-                listener: ~
-                finder: ~
-        rootwords_suggest:
-            settings:
-                index:
-                    analysis:
-                        analyzer:
-                            suggest_analyzer:
-                                type: custom
-                                tokenizer: standard
-                                filter: [ lowercase, asciifolding ]
-            use_alias: true
-            index_name: rootwords_suggest_index
-            properties:
-                name: { type: completion, analyzer: suggest_analyzer }
-            persistence:
-                driver: orm
-                model: App\Entity\RootWord
-                provider: ~
-                listener: ~
-                finder: ~
+  clients:
+    default: { host: "%elasticsearch_host%", port: "%elasticsearch_port%" }
+  indexes:
+    words:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              search_analyzer:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, asciifolding ]
+      use_alias: true
+      index_name: words_index
+      properties:
+        name: { analyzer: search_analyzer }
+      persistence:
+        driver: orm
+        model: App\Entity\Word
+        provider: ~
+        listener: ~
+        finder: ~
+    meanings:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              search_analyzer:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, asciifolding ]
+      use_alias: true
+      index_name: meanings_index
+      properties:
+        name: { analyzer: search_analyzer }
+      persistence:
+        driver: orm
+        model: App\Entity\MeaningName
+        provider: ~
+        listener: ~
+        finder: ~
+    words_suggest:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              suggest_analyzer:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, asciifolding ]
+      use_alias: true
+      index_name: words_suggest_index
+      properties:
+        name: { type: completion, analyzer: suggest_analyzer }
+      persistence:
+        driver: orm
+        model: App\Entity\Word
+        provider: ~
+        listener: ~
+        finder: ~
+    meanings_suggest:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              suggest_analyzer:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, asciifolding ]
+      use_alias: true
+      index_name: meanings_suggest_index
+      properties:
+        name: { type: completion, analyzer: suggest_analyzer }
+      persistence:
+        driver: orm
+        model: App\Entity\MeaningName
+        provider: ~
+        listener: ~
+        finder: ~
+    rootwords_suggest:
+      settings:
+        index:
+          analysis:
+            analyzer:
+              suggest_analyzer:
+                type: custom
+                tokenizer: standard
+                filter: [ lowercase, asciifolding ]
+      use_alias: true
+      index_name: rootwords_suggest_index
+      properties:
+        name: { type: completion, analyzer: suggest_analyzer }
+      persistence:
+        driver: orm
+        model: App\Entity\RootWord
+        provider: ~
+        listener: ~
+        finder: ~
 
 
 

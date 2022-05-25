@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Word;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,8 +20,14 @@ class WordRepository extends ServiceEntityRepository
         parent::__construct($registry, Word::class);
     }
 
-    public function findAllOrderBy( string $orderByWhat, string $ascOrDesc){
-        return $this->findBy([],[$orderByWhat => $ascOrDesc]);
+    public function findAllOrderBy(string $orderByWhat, string $ascOrDesc)
+    {
+        return $this->findBy([], [$orderByWhat => $ascOrDesc]);
     }
 
+    public function createWordListQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('w')
+            ->orderBy('w.name', 'ASC');
+    }
 }
