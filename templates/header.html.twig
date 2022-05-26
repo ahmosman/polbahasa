@@ -16,11 +16,11 @@
                         <span class="nav-link nav-language-selected"> POL </span>
                         |
                         <a class="nav-link"
-                            href="{{ path(app.request.attributes.get('_route'),{'_locale': 'id'}) }}{% if app.session.get('q') is defined %}?q={{ app.session.get('q') }}{% endif %}">
+                            href="{{ path('main',{'_locale': 'id'}) }}">
                         IND</a>
                     {% elseif app.request.locale == 'id' %}
                         <a class="nav-link"
-                            href="{{ path(app.request.attributes.get('_route'),{'_locale': 'pl'}) }}{% if app.session.get('q') is defined %}?q={{ app.session.get('q') }}{% endif %}">
+                            href="{{ path('main',{'_locale': 'pl'}) }}">
                         POL</a>
                         |
                         <span class="nav-link nav-language-selected"> IND </span>
