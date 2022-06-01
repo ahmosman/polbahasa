@@ -59,5 +59,10 @@ class MainController extends AbstractController
             'suggestions' => $phraseSuggestions
         ]));
     }
-    //TODO: Przy wywoływaniu słowa z podstawą słowotwórczą wykonuje 57 kwerend (wywołujących części mowy)
+
+    #[Route('/mobile', name: 'mobile', options: ['expose'=>true])]
+    public function mobile(): Response
+    {
+        return $this->render('mobile/unavailable.html.twig');
+    }
 }

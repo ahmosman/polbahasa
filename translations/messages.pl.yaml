@@ -14,3 +14,16 @@ results:
 header:
   hello: Witaj
   logout: Wyloguj
+pos:
+  rzeczownik: rzeczownik
+  czasownik: czasownik
+  przymiotnik: przymiotnik
+  przyimek: przyimek
+  wykrzyknik: wykrzyknik
+  przysłówek: przysłówek
+  partykuła: partykuła
+  spójnik: spójnik
+  zaimek: zaimek
+  zaimek rzeczowny: zaimek rzeczowny
+  zaimek przymiotny: zaimek przymiotny
+  zaimek dzierżawczy: zaimek dzierżawczy

@@ -19,7 +19,7 @@
                 <div class="header-word">{{ word[0][0].word.name }}</div>
                 {% for speechSection in word %}
                     <div class="speech-section">
-                        <div class="part-of-speech">{{ speechSection[0].partOfSpeech }}</div>
+                        <div class="part-of-speech">{{ ('pos.'~speechSection[0].partOfSpeech)|trans}}</div>
                         <ol class="foreign-word-ol">
                             {% for meaning in speechSection %}
                                 <li class="foreign-meaning-li">
@@ -48,8 +48,7 @@
         <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.indo'|trans }}</div>
         <div class="header-word">{{ app.session.get('q') }}</div>
         {% for  speechSection in native %}
-            <div class="part-of-speech">{{ speechSection.partOfSpeech }}</div>
-            <ol class="foreign-word-ol">
+            <div class="part-of-speech">{{ ('pos.'~speechSection.partOfSpeech)|trans}}</div>
                 {% for word in speechSection.words %}
                     <li class="foreign-word"><a href="{{ path('dictionary') }}?q={{ word.name }}">{{ word.name }}</a>
                     </li>

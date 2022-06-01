@@ -1,28 +1,35 @@
+# !!!! THIS FILE IS FOR DEV PURPOSE ONLY !!!!
 version: '3'
 services:
   elasticsearch:
     container_name: es01
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3
+    restart: on-failure
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - 9200:9200
-      - 9300:9300
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.13.3
-    environment:
-      - ELASTICSEARCH_HOSTS=http://es01:9200
     depends_on:
-      - elasticsearch
+      - mariadb
     ports:
-      - "5601:5601"
-  baza:
+      - "9200:9200"
+      - "9300:9300"
+  #  kibana:
+  #    container_name: kibana
+  #    image: docker.elastic.co/kibana/kibana:7.13.3
+  #    restart: on-failure
+  #    environment:
+  #      - ELASTICSEARCH_HOSTS=http://es01:9200
+  #    depends_on:
+  #      - elasticsearch
+  #    ports:
+  #      - "5601:5601"
+  mariadb:
     image: mariadb
+    restart: on-failure
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     volumes:
       - db_polbahasa:/var/lib/mysql
     environment:
@@ -31,7 +38,42 @@ services:
       MARIADB_PASSWORD: 1@qwerty
       MARIADB_DATABASE: polbahasa
     ports:
-      - 3306:3306
+      - "3306:3306"
+  php:
+    build:
+      context: .
+      target: app_php
+    image: polbahasa/php:dev
+    restart: on-failure
+    environment:
+      APP_ENV: dev
+      APP_DEBUG: 1
+      PHP_DATE_TIMEZONE: ${PHP_DATE_TIMEZONE:-UTC}
+      XDEBUG_CONFIG: remote_host=docker.remote.localhost
+      PHP_IDE_CONFIG: serverName=localhost
+    volumes:
+      - .:/var/www/polbahasa:rw,cached
+      - var:/var/www/polbahasa/var
+      - vendor:/var/www/polbahasa/vendor
+    depends_on:
+      - mariadb
+      - elasticsearch
+  nginx:
+    build:
+      context: .
+      target: app_nginx
+    image: polbahasa/nginx:dev
+    restart: on-failure
+    volumes:
+      - ./public:/var/www/polbahasa/public
+      - var:/var/www/polbahasa/var
+      - vendor:/var/www/polbahasa/vendor
+    depends_on:
+      - php
+    ports:
+      - "8080:80"
 volumes:
   db_polbahasa:
   elasticsearch_data:
+  var:
+  vendor:

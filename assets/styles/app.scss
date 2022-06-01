@@ -6,13 +6,29 @@
   url("./fonts/comic-webfont.woff") format("woff");
 }
 
+@media screen and (max-width: 900px) {
+  .search-bar-index {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
 body {
   font-family: "Comic Sans MS", cursive;
   font-size: 20px;
 }
-a{
+
+a {
   text-decoration: none;
+  color: black;
+
 }
+
+a:hover {
+  opacity: 0.5;
+  color: black;
+}
+
 .main-container {
   min-height: 90vh;
   display: flex;
@@ -28,16 +44,17 @@ a{
   margin-right: 30px;
 }
 
-.nav-language-container{
+.nav-language-container {
   display: flex;
   justify-content: center;
   margin-right: 5px;
 }
 
-.nav-language-container *{
+.nav-language-container * {
   padding: 0 5px;
 }
-.nav-language-selected{
+
+.nav-language-selected {
   color: black !important;
 }
 
@@ -375,15 +392,6 @@ input:focus, textarea:focus {
 
 .native-meaning-li .sentence-tr {
   font-size: 0.95em;
-}
-
-.foreign-word-ol a {
-  text-decoration: none;
-  color: black;
-}
-
-.foreign-word-ol a:hover {
-  opacity: 0.5;
 }
 
 .search-suggestions-ul {
