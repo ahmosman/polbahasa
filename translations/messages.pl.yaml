@@ -1,6 +1,9 @@
 title:
   main: Polbahasa
-  sub: Słownik indonezyjsko-polski
+  subtitle: Słownik indonezyjsko-polski
+  sub:
+    first: Słownik
+    sec: indonezyjsko-polski
 search:
   placeholder: Wpisz indonezyjskie lub polskie słowo
   search-btn: Szukaj

@@ -10,9 +10,11 @@ suggestionsEvents.suggestionsScroller(searchInput, suggestionsUl);
 searchInput.addEventListener('input', () => {
     if (searchInput.value.length > 0) {
         suggestionsDiv.classList.remove("opacity0");
+        suggestionsUl.classList.remove("hidden");
         searchSuggestions();
     } else {
         suggestionsDiv.classList.add("opacity0");
+        suggestionsUl.classList.add("hidden");
     }
 });
 
@@ -35,7 +37,7 @@ async function searchSuggestions() {
     }
     suggestionsEvents.suggestionsMouseEvents(suggestionsUl);
     suggestionsUl = document.querySelector(".search-suggestions-ul");
-    if (suggestionsUl.offsetHeight >= 200) {
+    if (suggestionsUl.offsetHeight >= 185) {
         suggestionsUl.classList.add("search-suggestions-scroll");
     } else {
         suggestionsUl.classList.remove("search-suggestions-scroll");

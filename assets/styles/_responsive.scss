@@ -1,0 +1,104 @@
+@mixin media-base($base)
+{
+  .main {
+    padding: 0 20px;
+  }
+  .home-page {
+    .main-title {
+      font-size: $base + 1.5rem;
+    }
+
+    .sub-title {
+      font-size: $base + 0.5rem;
+    }
+  }
+  .search {
+    &-bar {
+      margin-top: 5px;
+    }
+
+    &-input {
+      input {
+        width: 100%;
+        padding: 0 25px;
+
+        &::placeholder {
+          font-size: $base - 0.05rem;
+        }
+      }
+    }
+  }
+  .sentence-tr {
+    display: flex;
+    flex-direction: column;
+    font-size: $base + 0.05rem;
+    margin: 5px 0;
+    td {
+      padding-top: 0;
+      width: auto;
+    }
+  }
+  .example-translation {
+    padding: 0;
+  }
+  .example-sentence {
+    padding-top: $base - 0.7rem;
+  }
+  .root-word {
+    &-name {
+      font-size: $base + 0.7rem;
+    }
+
+    &-description {
+      font-size: $base + 0.15rem;
+    }
+    &-div{
+      margin-bottom: $base - 0.5rem;
+    }
+  }
+  .header-word {
+    font-size: $base + 0.45rem;
+  }
+  .part-of-speech{
+    font-size: $base + 0.1rem;
+  }
+  .foreign {
+    &-meaning {
+      &-li {
+        margin: 5px 0;
+      }
+      &-name{
+        font-size: $base + 0.3rem;
+      }
+    }
+    &-word-ol{
+      font-size: $base + 0.2rem;
+      margin: 0;
+    }
+  }
+  .native-meaning-li {
+    .sentence-tr {
+      font-size: $base + 0.05rem;
+    }
+  }
+  .foreign-word, .native-meaning-name {
+    font-size: $base + 0.3rem;
+  }
+  .result-header-description {
+    margin-bottom: 10px;
+    font-size: $base + 0.2rem;
+  }
+  .empty-result-suggestion-div{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  $base: 1rem;
+  @include media-base($base);
+}
+
+@media screen and (min-width: 471px) and (max-width: 768px) {
+  $base: 1.2rem;
+  @include media-base($base);
+}
