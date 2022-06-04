@@ -59,10 +59,4 @@ class MainController extends AbstractController
             'suggestions' => $phraseSuggestions
         ]));
     }
-
-    #[Route('/mobile', name: 'mobile', options: ['expose'=>true])]
-    public function mobile(): Response
-    {
-        return $this->render('mobile/unavailable.html.twig');
-    }
 }
