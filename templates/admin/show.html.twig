@@ -2,23 +2,23 @@
 
 {% block title %}Lista słów{% endblock %}
 {% block body %}
-    <div class="admin-word-list-container-1">
-        <div class="search-input-div">
+    <div class="admin-word">
+        <div class="search-input">
             <input type="text" name="q" placeholder="Znajdź wyrażenie" autocomplete="off">
             <a href="{{ path('addword') }}" class="btn btn-darkviolet add-word-btn">Dodaj wyrażenie</a>
         </div>
-        <div class="admin-word-list-container-2">
+        <div class="admin-word-list">
             <div class="admin-word-counter">Ilość słów: {{ wordsCount }}</div>
             <table class="admin-word-table">
-                <tr class="header-word-table">
+                <tr>
                     <th>Wyrażenie</th>
                     <th>Akcje</th>
                 </tr>
 
                 {% for word in pager %}
-                    <tr class="admin-word-tr">
-                        <td class="word-name-td">{{ word.name }}</td>
-                        <td class="word-action-td">
+                    <tr class="word-tr">
+                        <td class="word-name">{{ word.name }}</td>
+                        <td class="word-action">
                             <a href="{{ path('preview_word',{name: word.name}) }}" class="btn btn-hotpink">Podgląd</a>
                             <a href="{{ path('edit_word',{name: word.name}) }}" class="btn btn-orchid">Edytuj</a>
                             <a href="{{ path('delete_word',{name: word.name}) }}" class="btn btn-danger"

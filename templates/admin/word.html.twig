@@ -9,7 +9,7 @@
         {% include 'admin/editinput.html' %}
     </div>
     <footer class="edit-word-footer">
-        <div class="edit-word-btn-div">
+        <div class="edit-word-footer-btn">
             <button type="button" class="save-meaning-btn btn btn-mediumpurple">Zapisz</button>
             <button type="button" class="add-speech-section-btn btn btn-darkviolet">Dodaj część mowy</button>
             <button type="button" class="undo-btn btn btn-mediumpurple">Cofnij</button>
@@ -24,12 +24,12 @@
     </footer>
 
 {# templates for editword.js#}
-    <span class="add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
-    <span class="del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
-    <span class="del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
-    <span class="del-speech-section-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń część mowy"></span>
-    <span class="move-up-btn fas fa-angle-up hidden"></span>
-    <span class="move-down-btn fas fa-angle-down hidden"></span>
+    <span class="edit-btn add-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Dodaj zdanie"></span>
+    <span class="edit-btn del-sentence-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń zdanie"></span>
+    <span class="edit-btn del-meaning-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń tłumaczenie"></span>
+    <span class="edit-btn del-speech-section-btn hidden" data-toggle="tooltip" data-placement="top" title="Usuń część mowy"></span>
+    <span class="edit-btn move-up-btn fas fa-angle-up hidden"></span>
+    <span class="edit-btn move-down-btn fas fa-angle-down hidden"></span>
     <button type="button" class="add-meaning-btn btn btn-orchid hidden">Dodaj tłumaczenie</button>
 {% endblock %}
 

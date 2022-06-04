@@ -1,0 +1,270 @@
+.admin {
+  &-menu {
+    margin: 0 20%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    &-tile {
+      color: white;
+      width: 200px;
+      height: 200px;
+      background-color: plum;
+      margin: 40px;
+      padding: 20px;
+      text-align: center;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-word {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2% 0;
+
+    &-list {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+    }
+
+    &-counter {
+      margin: 10px 0;
+    }
+
+    &-table {
+      border-collapse: collapse;
+      width: 100%;
+
+      td, th {
+        border: 2px solid #d08cf3;
+        padding: 8px;
+      }
+
+      .btn {
+        margin: 5px 0;
+      }
+
+      .word-action {
+        width: 20%;
+      }
+    }
+  }
+
+  &-root-word {
+    &-edit-div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10%;
+      font-size: 1.2em;
+    }
+
+    &-input {
+      display: block;
+      margin: 20px 0;
+    }
+
+    &-submit-btn {
+      margin: 10px 36%;
+    }
+  }
+}
+
+.phrase {
+  &-mouseover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  &-click {
+    opacity: 0.5;
+    text-decoration: underline;
+  }
+}
+
+.edit {
+  &-main-div {
+    display: flex;
+    justify-content: flex-start;
+    flex: 1;
+  }
+
+  &-phrase {
+    text-align: center;
+
+    &-section {
+      position: fixed;
+      top: 35vh;
+      right: 40vh;
+    }
+  }
+
+  &-btn {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    bottom: 10px;
+    margin: 0 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+
+  &-word-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    &-btn {
+      display: flex;
+      justify-content: flex-start;
+      flex-shrink: 0;
+    }
+
+    button {
+      margin: 0 10px;
+      height: 40px;
+    }
+  }
+
+  &-error {
+    color: red;
+    font-size: 0.9em;
+    font-family: "Lucida Console", sans-serif;
+    text-decoration: underline;
+  }
+}
+
+.pos {
+  &-suggestion-ul {
+    position: absolute;
+    background-color: #FFFFFF;
+    z-index: 1;
+    left: 0;
+  }
+
+  &-add-message {
+    background-color: #e1b8fc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    width: fit-content;
+  }
+}
+
+.root-word {
+  &-input {
+    padding: 3px 10px;
+    width: 250px;
+  }
+
+  &-edit-div + span {
+    border-radius: 35px;
+    padding: 20px;
+    margin-left: 30px;
+  }
+
+  &-found-span {
+    color: #07a407;
+    background-color: #bffabf;
+  }
+
+  &-not-found-span {
+    color: red;
+    background-color: #ff8989;
+  }
+
+  &-suggestion-div {
+    position: relative;
+    right: 32px;
+    top: 42px;
+  }
+
+  &-suggestion-ul {
+    position: absolute;
+    bottom: 25px;
+    left: 0;
+    width: 282px;
+  }
+}
+
+.add {
+  &-word-btn {
+    width: 200px;
+    margin: 20px;
+    align-self: flex-end;
+  }
+}
+
+.add-sentence-btn {
+  background-color: hotpink;
+}
+
+.del-sentence-btn {
+  background-color: red;
+}
+
+.del-meaning-btn, .del-speech-section-btn {
+  background-color: rebeccapurple;
+}
+
+.move-up-btn, .move-down-btn {
+  font-size: 1.2em;
+  bottom: 10px;
+}
+
+.data-manage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 15%;
+
+  * {
+    margin: 10px;
+  }
+
+  textarea {
+    width: 70%;
+    height: 20vh;
+    border-radius: 10px;
+    outline: none;
+  }
+}
+
+.login {
+  &-title {
+    font-size: 1.5em;
+  }
+
+  &-inputs {
+    margin-left: 5vh;
+    margin-top: 5vh;
+    position: relative;
+    width: 300px;
+
+    input:not([type='checkbox']) {
+      width: 100%;
+      display: block;
+      margin: 10px 0;
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  &-form-div {
+    margin-left: 40%;
+    margin-top: 6%;
+  }
+}

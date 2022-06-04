@@ -1,9 +1,9 @@
 <form action="{{ path('dictionary') }}" method="get" autocomplete="off" id="searching-form">
-    <div class="search-input-div">
+    <div class="search-input">
         <input type="text" name="q" placeholder="{{ 'search.placeholder'|trans }}" value="{{ app.session.get('q') }}">
         <button type="submit" class="search-submit-btn fas fa-search" title="{{ 'search.search-btn'|trans }}"></button>
     </div>
-    <div class="suggestions-div suggestions-hidden {% if app.request.attributes.get('_route') == "main" %} suggestions-div-main {% endif %}">
+    <div class="suggestions-div opacity0 {% if app.request.attributes.get('_route') == "main" %} suggestions-div-main {% endif %}">
         <ul class="search-suggestions-ul suggestions-ul">
             <li></li>
         </ul>

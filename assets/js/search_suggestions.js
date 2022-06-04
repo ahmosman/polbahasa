@@ -1,18 +1,18 @@
 import * as suggestionsEvents from './suggestions_events.js';
 
-let searchInput = document.querySelector(".search-input-div>input");
+let searchInput = document.querySelector(".search-input>input");
 let suggestionsDiv = document.querySelector(".suggestions-div");
 let suggestionsUl = document.querySelector(".search-suggestions-ul");
-let searchButton = document.querySelector(".search-input-div>button");
+let searchButton = document.querySelector(".search-input>button");
 
 suggestionsEvents.suggestionsScroller(searchInput, suggestionsUl);
 
 searchInput.addEventListener('input', () => {
     if (searchInput.value.length > 0) {
-        suggestionsDiv.classList.remove("suggestions-hidden");
+        suggestionsDiv.classList.remove("opacity0");
         searchSuggestions();
     } else {
-        suggestionsDiv.classList.add("suggestions-hidden");
+        suggestionsDiv.classList.add("opacity0");
     }
 });
 

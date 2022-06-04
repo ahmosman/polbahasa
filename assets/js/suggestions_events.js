@@ -5,7 +5,7 @@ function suggestionsScroller(input, suggestionsUl) {
 
     $(input).keydown(function (e){
         if([38,40].includes(e.which)) {
-            let suggestionSelected = $(suggestionsUl.querySelector('li.suggestion-selected'));
+            let suggestionSelected = $(suggestionsUl.querySelector('li.suggestions-selected'));
             let nextSuggestionSelected;
             let ultimateSuggestionElement;
             switch (e.which) {
@@ -19,19 +19,19 @@ function suggestionsScroller(input, suggestionsUl) {
                     break;
             }
 
-            suggestionSelected.removeClass('suggestion-selected');
+            suggestionSelected.removeClass('suggestions-selected');
 
             if (nextSuggestionSelected.length > 0)
                 suggestionSelected = nextSuggestionSelected;
             else
                 suggestionSelected = ultimateSuggestionElement;
 
-            suggestionSelected.addClass('suggestion-selected');
+            suggestionSelected.addClass('suggestions-selected');
         }
 
         //on enter down assign text from suggestion to input
         if([13].includes(e.which)){
-            let suggestionSelected = $(suggestionsUl.querySelector('li.suggestion-selected'));
+            let suggestionSelected = $(suggestionsUl.querySelector('li.suggestions-selected'));
             if(suggestionSelected.length > 0)
                 input.value = suggestionSelected.text();
             input.blur();
@@ -48,13 +48,13 @@ function suggestionsMouseEvents(suggestionsUl){
         li.addEventListener('mouseover',()=>{
 
             //delete existing suggestion (if exists) in current suggestionsUl
-            let suggestionSelected = suggestionsUl.querySelector('li.suggestion-selected');
-            suggestionSelected ? suggestionSelected.classList.remove('suggestion-selected'):'';
+            let suggestionSelected = suggestionsUl.querySelector('li.suggestions-selected');
+            suggestionSelected ? suggestionSelected.classList.remove('suggestions-selected'):'';
 
-            li.classList.add('suggestion-selected');
+            li.classList.add('suggestions-selected');
         });
         li.addEventListener('mouseout',()=>{
-            li.classList.remove('suggestion-selected');
+            li.classList.remove('suggestions-selected');
         });
     }
 }

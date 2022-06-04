@@ -44,7 +44,7 @@
 </head>
 <body>
 {% include 'header.html.twig' %}
-<div class="main-container">
+<main class="main">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="alert alert-{{ label }} alert-dismissible fade show">
@@ -54,6 +54,6 @@
     {% endfor %}
 
     {% block body %}{% endblock %}
-</div>
+</main>
 </body>
 </html>

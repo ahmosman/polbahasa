@@ -1,4 +1,4 @@
-let searchInput = document.querySelector(".search-input-div>input");
+let searchInput = document.querySelector(".search-input>input");
 let adminWordTable = document.querySelector(".admin-word-table");
 let copyAdminWordTable = adminWordTable.innerHTML;
 let previousLabel = document.querySelector(".pagination__item.pagination__item--previous-page");
@@ -26,13 +26,13 @@ async function autocompleteWords() {
 }
 
 function displayWords(words) {
-    $(".admin-word-tr").remove();
+    $(".word-tr").remove();
 
     for (const word of words) {
         let adminWordTr = document.createElement("tr");
-        adminWordTr.classList.add("admin-word-tr");
-        adminWordTr.innerHTML = `<td class="word-name-td">${word}</td>
-                    <td class="word-action-td">
+        adminWordTr.classList.add("word-tr");
+        adminWordTr.innerHTML = `<td class="word-name">${word}</td>
+                    <td class="word-action">
                         <a href="${Routing.generate('preview_word', {name: word})}" class="btn btn-hotpink">Podgląd</a>
                         <a href="${Routing.generate('edit_word', {name: word})}" class="btn btn-orchid">Edytuj</a>
                         <a href="${Routing.generate('delete_word', {name: word})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word.text}?')">Usuń</a>
