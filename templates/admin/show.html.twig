@@ -2,14 +2,14 @@
 
 {% block title %}Lista słów{% endblock %}
 {% block body %}
-    <div class="admin-word">
+    <div class="word-list-container">
         <div class="search-input">
             <input type="text" name="q" placeholder="Znajdź wyrażenie" autocomplete="off">
             <a href="{{ path('addword') }}" class="btn btn-darkviolet add-word-btn">Dodaj wyrażenie</a>
         </div>
-        <div class="admin-word-list">
-            <div class="admin-word-counter">Ilość słów: {{ wordsCount }}</div>
-            <table class="admin-word-table">
+        <div class="word-list admin-word-list">
+            <div class="word-counter">Ilość słów: {{ wordsCount }}</div>
+            <table class="word-table">
                 <tr>
                     <th>Wyrażenie</th>
                     <th>Akcje</th>
@@ -35,4 +35,5 @@
 {% endblock %}
 {% block javascripts %}
     {{ encore_entry_script_tags('admin_word_list') }}
+    {{ encore_entry_script_tags('word_list') }}
 {% endblock %}

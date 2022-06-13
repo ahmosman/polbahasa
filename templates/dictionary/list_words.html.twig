@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'wordList'|trans }} - {{ 'title.subtitle'|trans }}{% endblock %}
+{% block body %}
+    <div class="word-list-container">
+        <div class="word-list">
+            {# <div class="word-counter">Ilość słów: {{ wordsCount }}</div> #}
+            <table class="word-table">
+                <tr>
+                    <th>{{ 'wordList'|trans }}</th>
+                </tr>
+                {% for word in pager %}
+                    <tr class="word-tr">
+                        <td class="word-name">
+                            <a href="{{ path('dictionary') }}?q={{ word.name }}">{{ word.name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="pagination-container">
+            {{ pagerfanta(pager) }}
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('word_list') }}
+{% endblock %}

@@ -1,7 +1,7 @@
 import {getRootWordsForAutocomplete} from "./root_word.js";
 
 let searchInput = document.querySelector(".search-input>input");
-let adminWordTable = document.querySelector(".admin-word-table");
+let adminWordTable = document.querySelector(".admin-word-list .word-table");
 let copyAdminWordTable = adminWordTable.innerHTML;
 
 
@@ -26,7 +26,7 @@ async function displayRootWords(){
                         <a href="${Routing.generate('admin_root_word_edit', {name: rootWord})}" class="btn btn-orchid">Edytuj</a>
                         <a href="${Routing.generate('admin_root_word_delete', {name: rootWord})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${rootWord.text}?')">Usuń</a>
                     </td>`;
-            $(".admin-word-table").append(adminWordTr);
+            $(".admin-word-list .word-table").append(adminWordTr);
         }
     }else
         adminWordTable.innerHTML = copyAdminWordTable;

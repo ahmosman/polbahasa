@@ -1,5 +1,5 @@
 let searchInput = document.querySelector(".search-input>input");
-let adminWordTable = document.querySelector(".admin-word-table");
+let adminWordTable = document.querySelector(".admin-word-list .word-table");
 let copyAdminWordTable = adminWordTable.innerHTML;
 let previousLabel = document.querySelector(".pagination__item.pagination__item--previous-page");
 let nextLabel = document.querySelector(".pagination__item.pagination__item--next-page");
@@ -37,6 +37,6 @@ function displayWords(words) {
                         <a href="${Routing.generate('edit_word', {name: word})}" class="btn btn-orchid">Edytuj</a>
                         <a href="${Routing.generate('delete_word', {name: word})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word.text}?')">Usuń</a>
                     </td>`;
-        $(".admin-word-table").append(adminWordTr);
+        $(".admin-word-list .word-table").append(adminWordTr);
     }
 }

@@ -20,42 +20,6 @@
     }
   }
 
-  &-word {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 2% 0;
-
-    &-list {
-      display: flex;
-      flex-direction: column;
-      width: 70%;
-    }
-
-    &-counter {
-      margin: 10px 0;
-    }
-
-    &-table {
-      border-collapse: collapse;
-      width: 100%;
-
-      td, th {
-        border: 2px solid #d08cf3;
-        padding: 8px;
-      }
-
-      .btn {
-        margin: 5px 0;
-      }
-
-      .word-action {
-        width: 20%;
-      }
-    }
-  }
-
   &-root-word {
     &-edit-div {
       display: flex;

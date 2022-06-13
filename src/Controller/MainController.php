@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Elasticsearch\Search;
 use App\Elasticsearch\Suggestions;
+use App\Repository\WordRepository;
 use App\Service\Dictionary;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,6 +60,20 @@ class MainController extends AbstractController
             'native' => $nativeData,
             'rootWord' => $foreignData['rootWord'],
             'suggestions' => $phraseSuggestions
+        ]));
+    }
+
+    #[Route('/{_locale<%app.supported_locales%>}/list/{page<\d+>}', name: 'list_words')]
+    public function listWords(WordRepository $wordRepository, int $page = 1): Response
+    {
+        $queryBuilder = $wordRepository->createWordListQueryBuilder();
+        $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
+        $pager->setMaxPerPage(15);
+        $pager->setCurrentPage($page);
+        $wordsCount = $pager->count();
+        return new Response($this->twig->render('dictionary/list_words.html.twig', [
+            'pager' => $pager,
+            'wordsCount' => $wordsCount
         ]));
     }
 }
