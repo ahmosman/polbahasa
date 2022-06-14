@@ -67,6 +67,12 @@
       top: 35vh;
       right: 40vh;
     }
+
+    &-btn {
+      button {
+        margin: 10px;
+      }
+    }
   }
 
   &-btn {
@@ -87,6 +93,8 @@
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    position: fixed;
+    bottom: 15px;
 
     &-btn {
       display: flex;
