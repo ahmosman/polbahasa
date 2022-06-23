@@ -35,7 +35,7 @@ function displayWords(words) {
                     <td class="word-action">
                         <a href="${Routing.generate('preview_word', {name: word})}" class="btn btn-hotpink">Podgląd</a>
                         <a href="${Routing.generate('edit_word', {name: word})}" class="btn btn-orchid">Edytuj</a>
-                        <a href="${Routing.generate('delete_word', {name: word})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word.text}?')">Usuń</a>
+                        <a href="${Routing.generate('delete_word', {name: word})}" class="btn btn-danger" onclick="return confirm('Czy na pewno usunąć ${word}?')">Usuń</a>
                     </td>`;
         $(".admin-word-list .word-table").append(adminWordTr);
     }

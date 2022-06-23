@@ -26,8 +26,12 @@ pos:
   przysłówek: przysłówek
   partykuła: partykuła
   spójnik: spójnik
+  liczebnik: liczebnik
+  kolokacja: kolokacja
+  wyrażenie: wyrażenie
   zaimek: zaimek
   zaimek rzeczowny: zaimek rzeczowny
   zaimek przymiotny: zaimek przymiotny
   zaimek dzierżawczy: zaimek dzierżawczy
+  zaimek liczebny: zaimek liczebny
 wordList: Lista słów

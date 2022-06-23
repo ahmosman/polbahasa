@@ -1,14 +1,14 @@
 {
     "devDependencies": {
-        "@symfony/stimulus-bridge": "^2.0.0",
-        "@symfony/webpack-encore": "^1.4.0",
+        "@symfony/stimulus-bridge": "^3.2.1",
+        "@symfony/webpack-encore": "^2.1.0",
         "bootstrap": "^5.0.1",
         "core-js": "^3.0.0",
-        "node-sass": "^6.0.0",
+        "node-sass": "^7.0.1",
         "regenerator-runtime": "^0.13.2",
         "sass": "^1.35.1",
-        "sass-loader": "10.0.0",
-        "stimulus": "^2.0.0",
+        "sass-loader": "^13.0.0",
+        "stimulus": "^3.0.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -23,7 +23,7 @@
         "@babel/core": "^7.14.6",
         "@popperjs/core": "^2.9.2",
         "babel-loader": "^8.2.2",
-        "css-what": "^5.0.1",
+        "css-what": "^6.1.0",
         "jquery": "^3.6.0"
     }
 }
