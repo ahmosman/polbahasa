@@ -14,19 +14,28 @@ class Search
     private TransformedFinder $meaningNamesFinder;
     private array $pronPrepToFilter;
 
-    public function __construct(TransformedFinder $wordsFinder, TransformedFinder $meaningNamesFinder, DataFileReader $data)
-    {
+    public function __construct(
+        TransformedFinder $wordsFinder,
+        TransformedFinder $meaningNamesFinder,
+        DataFileReader $data
+    ) {
         $this->wordsFinder = $wordsFinder;
         $this->meaningNamesFinder = $meaningNamesFinder;
-        $this->pronPrepToFilter = explode(',', $data->readData('pron_prep_to_filter.csv'));
+        $this->pronPrepToFilter = explode(
+            ',',
+            $data->readData(
+                'pron_prep_to_filter.csv'
+            )
+        );
     }
 
     public function findWords(string $q, int $fuzziness = 0)
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
-        if ($fuzziness)
+        if ($fuzziness) {
             $multiMatch->setFuzziness($fuzziness);
+        }
 
         return !empty($q) ? $this->wordsFinder->find($multiMatch) : [];
     }
@@ -35,8 +44,9 @@ class Search
     {
         $multiMatch = new MultiMatch();
         $multiMatch->setQuery($q);
-        if ($fuzziness)
+        if ($fuzziness) {
             $multiMatch->setFuzziness($fuzziness);
+        }
         $allMeaningNames = $this->meaningNamesFinder->find($multiMatch);
         $filteredMeaningNames = [];
         $meaningsFinal = [];
@@ -52,16 +62,20 @@ class Search
             //check if $q is pronoun or preposition out of the parenthesis
             if (!$isPronOrPrep || ($q === trim($beforeParenthesis))) {
                 $inParenthesis = $splitByParenthesis[1] ?? null;
-                if (preg_match('/\b' . $q . '\b/u', $beforeParenthesis) && !preg_match('/\b' . $q . '\b/u', $inParenthesis))
+                if (preg_match('/\b' . $q . '\b/u', $beforeParenthesis)
+                    && !preg_match('/\b' . $q . '\b/u', $inParenthesis)
+                ) {
                     array_push($filteredMeaningNames, $mName);
+                }
             }
         }
 
         foreach ($filteredMeaningNames as $mName) {
             $meanings = $mName->getMeaning();
             foreach ($meanings as $meaning) {
-                if (!in_array($meaning, $meaningsFinal))
+                if (!in_array($meaning, $meaningsFinal)) {
                     array_push($meaningsFinal, $meaning);
+                }
             }
         }
         return $meaningsFinal;

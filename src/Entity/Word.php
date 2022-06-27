@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\MeaningRepository;
 use App\Repository\WordRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -145,7 +146,7 @@ class Word
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?DateTimeImmutable
     {
         return $this->modifiedAt;
     }
@@ -157,7 +158,7 @@ class Word
      */
     public function setModifiedAt(): self
     {
-        $this->modifiedAt = new \DateTimeImmutable();
+        $this->modifiedAt = new DateTimeImmutable();
 
         return $this;
     }

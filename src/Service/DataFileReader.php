@@ -15,11 +15,11 @@ class DataFileReader
 
     public function saveData(string $filename, $data)
     {
-        file_put_contents($this->params->get('data_dir').$filename, $data);
+        file_put_contents($this->params->get('data_dir') . $filename, $data);
     }
 
     public function readData(string $filename)
     {
-        return file_get_contents($this->params->get('data_dir').$filename);
+        return file_get_contents($this->params->get('data_dir') . $filename);
     }
 }

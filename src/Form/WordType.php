@@ -13,15 +13,14 @@ class WordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',HiddenType::class)
-            ->add('json',HiddenType::class)
-        ;
+            ->add('name', HiddenType::class)
+            ->add('json', HiddenType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Word::class,
-        ]);
+                                   'data_class' => Word::class,
+                               ]);
     }
 }

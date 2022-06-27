@@ -19,7 +19,8 @@ class RootWordRepository extends ServiceEntityRepository
         parent::__construct($registry, RootWord::class);
     }
 
-    public function findAllOrderBy( string $orderByWhat, string $ascOrDesc){
-        return $this->findBy([],[$orderByWhat => $ascOrDesc]);
+    public function findAllOrderBy(string $orderByWhat, string $ascOrDesc)
+    {
+        return $this->findBy([], [$orderByWhat => $ascOrDesc]);
     }
 }

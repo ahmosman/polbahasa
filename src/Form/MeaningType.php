@@ -16,18 +16,17 @@ class MeaningType extends AbstractType
     {
         $builder
             ->add('name', HiddenType::class)
-            ->add('sentences',HiddenType::class)
+            ->add('sentences', HiddenType::class)
             ->add('word')
-            ->add('submit',SubmitType::class,[
+            ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz'
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Meaning::class,
-        ]);
+                                   'data_class' => Meaning::class,
+                               ]);
     }
 }

@@ -22,8 +22,12 @@ class MainController extends AbstractController
     private Dictionary $dictionary;
     private Suggestions $suggestions;
 
-    public function __construct(Environment $twig, Search $search, Suggestions $suggestions, Dictionary $dictionary)
-    {
+    public function __construct(
+        Environment $twig,
+        Search $search,
+        Suggestions $suggestions,
+        Dictionary $dictionary
+    ) {
         $this->twig = $twig;
         $this->search = $search;
         $this->dictionary = $dictionary;
@@ -43,37 +47,51 @@ class MainController extends AbstractController
     }
 
     #[Route('/{_locale<%app.supported_locales%>}/dictionary', name: 'dictionary')]
-    public function dictionary(Request $request, SessionInterface $session): Response
-    {
+    public function dictionary(
+        Request $request,
+        SessionInterface $session
+    ): Response {
         $q = $request->query->get('q', '');
         $meanings = $this->search->findMeanings($q);
         $words = $this->search->findWords($q);
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
         $phraseSuggestions = [];
-        if (count($nativeData) <= 0 && count($foreignData['wordsSections']) <= 0)
-            $phraseSuggestions = $this->suggestions->getAllSuggestions($q, 'phrase');
+        if (count($nativeData) <= 0
+            && count($foreignData['wordsSections']) <= 0
+        ) {
+            $phraseSuggestions = $this->suggestions->getAllSuggestions(
+                $q,
+                'phrase'
+            );
+        }
 
         $session->set('q', $q);
-        return new Response($this->twig->render('dictionary/search_result.html.twig', [
-            'foreign' => $foreignData['wordsSections'],
-            'native' => $nativeData,
-            'rootWord' => $foreignData['rootWord'],
-            'suggestions' => $phraseSuggestions
-        ]));
+        return new Response(
+            $this->twig->render('dictionary/search_result.html.twig', [
+                'foreign'     => $foreignData['wordsSections'],
+                'native'      => $nativeData,
+                'rootWord'    => $foreignData['rootWord'],
+                'suggestions' => $phraseSuggestions
+            ])
+        );
     }
 
     #[Route('/{_locale<%app.supported_locales%>}/list/{page<\d+>}', name: 'list_words')]
-    public function listWords(WordRepository $wordRepository, int $page = 1): Response
-    {
+    public function listWords(
+        WordRepository $wordRepository,
+        int $page = 1
+    ): Response {
         $queryBuilder = $wordRepository->createWordListQueryBuilder();
         $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
         $pager->setMaxPerPage(15);
         $pager->setCurrentPage($page);
         $wordsCount = $pager->count();
-        return new Response($this->twig->render('dictionary/list_words.html.twig', [
-            'pager' => $pager,
-            'wordsCount' => $wordsCount
-        ]));
+        return new Response(
+            $this->twig->render('dictionary/list_words.html.twig', [
+                'pager'      => $pager,
+                'wordsCount' => $wordsCount
+            ])
+        );
     }
 }

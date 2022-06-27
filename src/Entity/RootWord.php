@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\RootWordRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -92,7 +93,7 @@ class RootWord
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?DateTimeImmutable
     {
         return $this->modifiedAt;
     }
@@ -104,7 +105,7 @@ class RootWord
      */
     public function setModifiedAt(): self
     {
-        $this->modifiedAt = new \DateTimeImmutable();
+        $this->modifiedAt = new DateTimeImmutable();
 
         return $this;
     }

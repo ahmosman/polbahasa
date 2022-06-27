@@ -1,5 +1,4 @@
-@mixin media-base($base)
-{
+@mixin media-base($base) {
   .main {
     padding: 0 20px;
   }
@@ -29,6 +28,7 @@
     flex-direction: column;
     font-size: $base + 0.05rem;
     margin: 5px 0;
+
     td {
       padding-top: 0;
       width: auto;
@@ -48,14 +48,15 @@
     &-description {
       font-size: $base + 0.15rem;
     }
-    &-div{
+
+    &-div {
       margin-bottom: $base - 0.5rem;
     }
   }
   .header-word {
     font-size: $base + 0.45rem;
   }
-  .part-of-speech{
+  .part-of-speech {
     font-size: $base + 0.1rem;
   }
   .foreign {
@@ -63,11 +64,13 @@
       &-li {
         margin: 5px 0;
       }
-      &-name{
+
+      &-name {
         font-size: $base + 0.3rem;
       }
     }
-    &-word-ol{
+
+    &-word-ol {
       font-size: $base + 0.2rem;
       margin: 0;
     }
@@ -84,7 +87,7 @@
     margin-bottom: 10px;
     font-size: $base + 0.2rem;
   }
-  .empty-result-suggestion-div{
+  .empty-result-suggestion-div {
     width: 100%;
   }
 }

@@ -27,8 +27,10 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     private UrlGeneratorInterface $urlGenerator;
     private UserRepository $userRepository;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator, UserRepository $userRepository)
-    {
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator,
+        UserRepository $userRepository
+    ) {
         $this->urlGenerator = $urlGenerator;
         $this->userRepository = $userRepository;
     }
@@ -54,19 +56,24 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return $passport;
     }
 
-    public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
-    {
-        if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
+    public function onAuthenticationSuccess(
+        Request $request,
+        TokenInterface $token,
+        string $firewallName
+    ): ?Response {
+        if ($targetPath = $this->getTargetPath(
+            $request->getSession(),
+            $firewallName
+        )
+        ) {
             return new RedirectResponse($targetPath);
         }
-        if($token->getUser()->isAdmin())
-        {
+        if ($token->getUser()->isAdmin()) {
             return new RedirectResponse($this->urlGenerator->generate('admin'));
         }
 
 
         return new RedirectResponse($this->urlGenerator->generate('main'));
-
     }
 
     protected function getLoginUrl(Request $request): string

@@ -17,27 +17,32 @@ class SearchController extends AbstractController
         $this->suggestions = $suggestions;
     }
 
-    #[Route('/autocomplete', name: 'autocomplete', options: ['expose'=>true])]
+    #[Route('/autocomplete', name: 'autocomplete', options: ['expose' => true])]
     public function autocomplete(Request $request): Response
     {
         $type = 'completion';
-        $q = $request->query->get('q','');
+        $q = $request->query->get('q', '');
 
         $all = $request->query->get('all') ?? null;
 
-        if(isset($all))
+        if (isset($all)) {
             $suggestions = $this->suggestions->getAllSuggestions($q, $type);
-        else
-            $suggestions = $this->suggestions->getForeignCompletionSuggestions($q);
-        
+        } else {
+            $suggestions = $this->suggestions->getForeignCompletionSuggestions(
+                $q
+            );
+        }
+
         return $this->json($suggestions);
     }
 
-    #[Route('/autocomplete_rootwords', name: 'autocomplete_rootwords', options: ['expose'=>true])]
+    #[Route('/autocomplete_rootwords', name: 'autocomplete_rootwords', options: ['expose' => true])]
     public function autocompleteRootWords(Request $request): Response
     {
-        $q = $request->query->get('q','');
-        $suggestions = $this->suggestions->getRootWordsCompletionSuggestions($q);
+        $q = $request->query->get('q', '');
+        $suggestions = $this->suggestions->getRootWordsCompletionSuggestions(
+            $q
+        );
         return $this->json($suggestions);
     }
 }

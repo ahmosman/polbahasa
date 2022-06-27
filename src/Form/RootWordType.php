@@ -14,21 +14,20 @@ class RootWordType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',TextType::class,[
+            ->add('name', TextType::class, [
                 'label' => ' ',
-                'attr' => ['class' => 'admin-root-word-input']
+                'attr'  => ['class' => 'admin-root-word-input']
             ])
-            ->add('submit',SubmitType::class,[
+            ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz',
-                'attr' => ['class' => 'admin-root-word-submit-btn btn btn-mediumpurple']
-            ])
-        ;
+                'attr'  => ['class' => 'admin-root-word-submit-btn btn btn-mediumpurple']
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => RootWord::class,
-        ]);
+                                   'data_class' => RootWord::class,
+                               ]);
     }
 }

@@ -20,8 +20,8 @@ class DatabaseModifySubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-          Events::preUpdate,
-          Events::prePersist
+            Events::preUpdate,
+            Events::prePersist
         ];
     }
 
@@ -39,9 +39,10 @@ class DatabaseModifySubscriber implements EventSubscriber
     {
         $entity = $args->getObject();
 
-        if(method_exists($entity, 'setModifiedBy'))
-        {
-            $entity->setModifiedBy($this->security->getUser()->getUserIdentifier());
+        if (method_exists($entity, 'setModifiedBy')) {
+            $entity->setModifiedBy(
+                $this->security->getUser()->getUserIdentifier()
+            );
         }
     }
 

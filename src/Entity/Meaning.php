@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MeaningRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -55,7 +56,6 @@ class Meaning
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $modifiedBy;
-
 
 
     public function __construct()
@@ -143,7 +143,7 @@ class Meaning
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    public function getModifiedAt(): ?DateTimeImmutable
     {
         return $this->modifiedAt;
     }
@@ -155,7 +155,7 @@ class Meaning
      */
     public function setModifiedAt(): self
     {
-        $this->modifiedAt = new \DateTimeImmutable();
+        $this->modifiedAt = new DateTimeImmutable();
 
         return $this;
     }
