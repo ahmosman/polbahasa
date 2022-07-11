@@ -1,6 +1,9 @@
 title:
   main: Polbahasa
-  sub: Kamus bahasa Indonesia-bahasa Polandia
+  subtitle: Kamus bahasa Indonesia-bahasa Polandia
+  sub:
+    first: Kamus bahasa
+    sec: Indonesia-bahasa Polandia
 search:
   placeholder: Cari
   search-btn: Cari
