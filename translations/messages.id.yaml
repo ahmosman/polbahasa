@@ -1,0 +1,34 @@
+title:
+  main: Polbahasa
+  sub: Kamus bahasa Indonesia-bahasa Polandia
+search:
+  placeholder: Cari
+  search-btn: Cari
+results:
+  in:
+    polish: dalam bahasa Polandia
+    indo: dalam bahasa Indonesia
+  rootword: Kata dasar
+  didYouMean: Apa kamu maksud
+  empty: Tidak ada terjemahan yang ditemukan untuk frasa yang diberikan.
+header:
+  hello: Halo
+  logout: Keluar
+pos:
+  rzeczownik: kata benda
+  czasownik: kata kerja
+  przymiotnik: kata sifat
+  przyimek: preposisi
+  wykrzyknik: kata seru
+  przysłówek: adverbia
+  partykuła: partikel
+  spójnik: kata hubung
+  liczebnik: kata bilangan
+  kolokacja: kolokasi
+  wyrażenie: frasa
+  zaimek: kata ganti
+  zaimek rzeczowny: kata ganti orang
+  zaimek dzierżawczy: kata ganti kepemilikan
+  zaimek pytajny: kata ganti penanya
+  zaimek wskazujący: kata ganti petunjuk
+wordList: Daftar kosakata
