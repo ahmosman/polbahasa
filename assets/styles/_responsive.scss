@@ -9,6 +9,10 @@
 
     .sub-title {
       font-size: $base + 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
     }
   }
   .search {
@@ -89,6 +93,13 @@
   }
   .empty-result-suggestion-div {
     width: 100%;
+  }
+  .navbar a {
+    &.navbar-brand {
+      padding-left: 30px;
+    }
+
+    padding: 0 10px;
   }
 }
 

@@ -55,6 +55,9 @@ RUN set -eux \
 	&& mkdir -p var/cache var/log \
 	&& composer dump-autoload --classmap-authoritative
 
+RUN chown www-data:www-data -R /var/www/polbahasa/var/* /var/www/polbahasa/vendor/*
+RUN chmod -R 777 /var/www/polbahasa/assets/data/*
+
 VOLUME ${WORKDIR}/var
 
 CMD ["php-fpm"]

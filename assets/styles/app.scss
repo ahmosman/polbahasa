@@ -47,6 +47,7 @@ a {
 
 .navbar a {
   padding: 0 30px;
+  margin: 0;
 }
 
 .nav {
@@ -60,8 +61,12 @@ a {
       justify-content: center;
       margin-right: 5px;
 
-      * {
+      a, span {
         padding: 0 5px;
+      }
+
+      a {
+        color: rgba(0, 0, 0, 0.55);
       }
     }
 

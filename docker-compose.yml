@@ -66,8 +66,8 @@ services:
     restart: on-failure
     volumes:
       - ./public:/var/www/polbahasa/public
-#      - var:/var/www/polbahasa/var
-#      - vendor:/var/www/polbahasa/vendor
+      - var:/var/www/polbahasa/var
+      - vendor:/var/www/polbahasa/vendor
     depends_on:
       - php
     ports:

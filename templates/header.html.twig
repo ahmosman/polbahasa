@@ -4,17 +4,15 @@
         <a class="nav-item" href="{{ path('list_words') }}">{{ 'wordList'|trans }}</a>
         <div class="nav-language-container">
             {% if app.request.locale == 'pl' %}
-                <span class="nav-link nav-language-selected"> POL </span>
+                <span class="nav-language-selected"> POL </span>
                 |
-                <a class="nav-link"
-                   href="{{ path('main',{'_locale': 'id'}) }}">
+                <a href="{{ path('main',{'_locale': 'id'}) }}">
                     IND</a>
             {% elseif app.request.locale == 'id' %}
-                <a class="nav-link"
-                   href="{{ path('main',{'_locale': 'pl'}) }}">
+                <a href="{{ path('main',{'_locale': 'pl'}) }}">
                     POL</a>
                 |
-                <span class="nav-link nav-language-selected"> IND </span>
+                <span class="nav-language-selected"> IND </span>
 
             {% endif %}
         </div>
