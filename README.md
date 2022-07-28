@@ -1,6 +1,6 @@
 ![Alt text](public/images/polbahasa-logo.jpg)
 # Polbahasa
-## Polish-Indonesian Dictionary
+## Polish-Indonesian dictionary
 ![Alt text](https://img.shields.io/badge/release%20date-august%202021-blueviolet)
 
 ### About
