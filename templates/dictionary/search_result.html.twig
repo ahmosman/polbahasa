@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.session.get('q') }} - {{ 'title.subtitle'|trans }}{% endblock %}
+{% block title %}{{ app.request.get('q') }} - {{ 'title.subtitle'|trans }}{% endblock %}
 
 {% block body %}
     <div class="search-bar">
@@ -8,7 +8,7 @@
     </div>
     {% if foreign is not empty %}
         <section class="words-section">
-            <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.polish'|trans }}</div>
+            <div class="result-header-description">"{{ app.request.get('q') }}" {{ 'results.in.polish'|trans }}</div>
             {% if rootWord %}
                 <div class="root-word-div">
                     <div class="root-word-name">{{ rootWord }}</div>
@@ -45,7 +45,7 @@
         </section>
     {% endif %}
     {% if native is not empty %}
-        <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.indo'|trans }}</div>
+        <div class="result-header-description">"{{ app.request.get('q') }}" {{ 'results.in.indo'|trans }}</div>
         <div class="header-word">{{ app.request.get('q') }}</div>
         {% for  speechSection in native %}
             <div class="part-of-speech">{{ ('pos.'~speechSection.partOfSpeech)|trans}}</div>
@@ -57,7 +57,7 @@
                             <li class="native-meaning-li">
                                 <div class="native-meaning-name">
                                     {% for meaningName in meaning.meaningNames %}
-                                        {% if meaningName.name ==  app.session.get('q') %}<span>{{ meaningName.name }}</span>{% else %}<a href="{{ path('dictionary') }}" class="meaning-anchor">{{ meaningName.name }}</a>{% endif %}{% if loop.index < meaning.meaningNames|length %}<span>,</span>{% endif %}
+                                        {% if meaningName.name ==  app.request.get('q') %}<span>{{ meaningName.name }}</span>{% else %}<a href="{{ path('dictionary') }}" class="meaning-anchor">{{ meaningName.name }}</a>{% endif %}{% if loop.index < meaning.meaningNames|length %}<span>,</span>{% endif %}
                                     {% endfor %}
                                 </div>
                                 <table class="sentence-table">

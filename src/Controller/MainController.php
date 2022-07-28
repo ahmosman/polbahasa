@@ -3,15 +3,13 @@
 namespace App\Controller;
 
 use App\Elasticsearch\Search;
-use App\Elasticsearch\Suggestions;
+use App\Elasticsearch\Suggestions\PhraseSuggestions;
 use App\Repository\WordRepository;
 use App\Service\Dictionary;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
@@ -20,18 +18,18 @@ class MainController extends AbstractController
     private Environment $twig;
     private Search $search;
     private Dictionary $dictionary;
-    private Suggestions $suggestions;
+    private PhraseSuggestions $phraseSuggestions;
 
     public function __construct(
-        Environment $twig,
-        Search $search,
-        Suggestions $suggestions,
-        Dictionary $dictionary
+        Environment       $twig,
+        Search            $search,
+        PhraseSuggestions $phraseSuggestions,
+        Dictionary        $dictionary
     ) {
         $this->twig = $twig;
         $this->search = $search;
         $this->dictionary = $dictionary;
-        $this->suggestions = $suggestions;
+        $this->phraseSuggestions = $phraseSuggestions;
     }
 
     #[Route('/')]
@@ -47,11 +45,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/{_locale<%app.supported_locales%>}/dictionary', name: 'dictionary')]
-    public function dictionary(
-        Request $request,
-        SessionInterface $session
-    ): Response {
-        $q = $request->query->get('q', '');
+    public function dictionary(): Response {
         $meanings = $this->search->findFilteredMeanings();
         $words = $this->search->findWords();
 
@@ -63,10 +57,7 @@ class MainController extends AbstractController
         if (count($nativeData) <= 0
             && count($foreignData['wordsSections']) <= 0
         ) {
-            $phraseSuggestions = $this->suggestions->getAllSuggestions(
-                $q,
-                'phrase'
-            );
+            $phraseSuggestions = $this->phraseSuggestions->getAllSuggestions();
         }
 
         return new Response(
@@ -80,10 +71,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/{_locale<%app.supported_locales%>}/list/{page<\d+>}', name: 'list_words')]
-    public function listWords(
-        WordRepository $wordRepository,
-        int $page = 1
-    ): Response {
+    public function listWords(WordRepository $wordRepository, int $page = 1): Response {
         $queryBuilder = $wordRepository->createWordListQueryBuilder();
         $pager = new Pagerfanta(new QueryAdapter($queryBuilder));
         $pager->setMaxPerPage(15);

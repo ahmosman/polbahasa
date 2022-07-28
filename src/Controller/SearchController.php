@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Elasticsearch\Suggestions;
+use App\Elasticsearch\Suggestions\CompletionSuggestions;
+use App\Elasticsearch\Suggestions\RootWordsSuggestions;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,39 +11,34 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
 {
-    private $suggestions;
+    private CompletionSuggestions $completionSuggestions;
+    private RootWordsSuggestions $rootWordsSuggestions;
 
-    public function __construct(Suggestions $suggestions)
+    public function __construct(CompletionSuggestions $completionSuggestions, RootWordsSuggestions $rootWordsSuggestions)
     {
-        $this->suggestions = $suggestions;
+        $this->completionSuggestions = $completionSuggestions;
+        $this->rootWordsSuggestions = $rootWordsSuggestions;
     }
 
     #[Route('/autocomplete', name: 'autocomplete', options: ['expose' => true])]
     public function autocomplete(Request $request): Response
     {
-        $type = 'completion';
-        $q = $request->query->get('q', '');
 
         $all = $request->query->get('all') ?? null;
 
         if (isset($all)) {
-            $suggestions = $this->suggestions->getAllSuggestions($q, $type);
+            $suggestions = $this->completionSuggestions->getAllSuggestions();
         } else {
-            $suggestions = $this->suggestions->getForeignCompletionSuggestions(
-                $q
-            );
+            $suggestions = $this->completionSuggestions->getForeignSuggestions();
         }
 
         return $this->json($suggestions);
     }
 
     #[Route('/autocomplete_rootwords', name: 'autocomplete_rootwords', options: ['expose' => true])]
-    public function autocompleteRootWords(Request $request): Response
+    public function autocompleteRootWords(): Response
     {
-        $q = $request->query->get('q', '');
-        $suggestions = $this->suggestions->getRootWordsCompletionSuggestions(
-            $q
-        );
+        $suggestions = $this->rootWordsSuggestions->getForeignSuggestions();
         return $this->json($suggestions);
     }
 }
