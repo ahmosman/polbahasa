@@ -46,7 +46,7 @@
     {% endif %}
     {% if native is not empty %}
         <div class="result-header-description">"{{ app.session.get('q') }}" {{ 'results.in.indo'|trans }}</div>
-        <div class="header-word">{{ app.session.get('q') }}</div>
+        <div class="header-word">{{ app.request.get('q') }}</div>
         {% for  speechSection in native %}
             <div class="part-of-speech">{{ ('pos.'~speechSection.partOfSpeech)|trans}}</div>
                 {% for word in speechSection.words %}
@@ -57,7 +57,7 @@
                             <li class="native-meaning-li">
                                 <div class="native-meaning-name">
                                     {% for meaningName in meaning.meaningNames %}
-                                        {% if meaningName.name ==  app.session.get('q') %}<span>{{ meaningName.name }}</span>{% else %}<a href="{{ path('dictionary') }}"class="meaning-anchor">{{ meaningName.name }}</a>{% endif %}{% if loop.index < meaning.meaningNames|length %}<span>,</span>{% endif %}
+                                        {% if meaningName.name ==  app.session.get('q') %}<span>{{ meaningName.name }}</span>{% else %}<a href="{{ path('dictionary') }}" class="meaning-anchor">{{ meaningName.name }}</a>{% endif %}{% if loop.index < meaning.meaningNames|length %}<span>,</span>{% endif %}
                                     {% endfor %}
                                 </div>
                                 <table class="sentence-table">
@@ -72,7 +72,6 @@
                         {% endfor %}
                     </ul>
                 {% endfor %}
-            </ol>
         {% endfor %}
     {% endif %}
     {% if foreign is empty and native is empty %}

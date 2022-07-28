@@ -52,11 +52,14 @@ class MainController extends AbstractController
         SessionInterface $session
     ): Response {
         $q = $request->query->get('q', '');
-        $meanings = $this->search->findMeanings($q);
-        $words = $this->search->findWords($q);
+        $meanings = $this->search->findFilteredMeanings();
+        $words = $this->search->findWords();
+
         $nativeData = $this->dictionary->getNativeData($meanings);
         $foreignData = $this->dictionary->getForeignData($words);
+
         $phraseSuggestions = [];
+
         if (count($nativeData) <= 0
             && count($foreignData['wordsSections']) <= 0
         ) {
@@ -66,7 +69,6 @@ class MainController extends AbstractController
             );
         }
 
-        $session->set('q', $q);
         return new Response(
             $this->twig->render('dictionary/search_result.html.twig', [
                 'foreign'     => $foreignData['wordsSections'],
