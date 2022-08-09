@@ -154,11 +154,9 @@ a {
 }
 
 .home-page {
-  min-height: 90vh;
+  position: relative;
+  top: 20vh;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   &-search {
     display: flex;
@@ -216,6 +214,7 @@ a {
     &-ul {
       background-color: white;
       max-height: 185px;
+      margin: 0;
 
       li {
         border-radius: 10px;
@@ -244,10 +243,6 @@ input, textarea {
     bottom: 20px;
     right: 15px;
     justify-self: end;
-
-    &-main {
-      height: 200px;
-    }
   }
 
   &-ul li {

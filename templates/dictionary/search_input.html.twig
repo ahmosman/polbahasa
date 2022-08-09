@@ -3,9 +3,8 @@
         <input type="text" name="q" placeholder="{{ 'search.placeholder'|trans }}" value="{{ app.request.get('q') }}">
         <button type="submit" class="search-submit-btn fas fa-search" title="{{ 'search.search-btn'|trans }}"></button>
     </div>
-    <div class="suggestions-div opacity0 {% if app.request.attributes.get('_route') == "main" %} suggestions-div-main {% endif %}">
+    <div class="suggestions-div hidden" style="height: 200px">
         <ul class="search-suggestions-ul suggestions-ul">
-            <li></li>
         </ul>
     </div>
 </form>
