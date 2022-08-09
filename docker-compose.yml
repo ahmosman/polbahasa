@@ -49,8 +49,8 @@ services:
       APP_ENV: dev
       APP_DEBUG: 1
       PHP_DATE_TIMEZONE: ${PHP_DATE_TIMEZONE:-UTC}
-      XDEBUG_CONFIG: remote_host=docker.remote.localhost
-      PHP_IDE_CONFIG: serverName=localhost
+    extra_hosts:
+      - host.docker.internal:host-gateway
     volumes:
       - .:/var/www/polbahasa:rw,cached
       - var:/var/www/polbahasa/var

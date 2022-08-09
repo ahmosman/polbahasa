@@ -7,6 +7,11 @@ FROM php:${PHP_VERSION}-fpm-alpine AS app_php
 
 ARG WORKDIR=/var/www/polbahasa
 
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
+  && pecl install xdebug \
+  && docker-php-ext-enable xdebug \
+  && apk del pcre-dev ${PHPIZE_DEPS}
+
 RUN docker-php-source extract \
     && apk add --update --virtual .build-deps autoconf g++ make pcre-dev icu-dev openssl-dev libxml2-dev libmcrypt-dev git libpng-dev \
 # Enable mysql
@@ -35,7 +40,7 @@ RUN docker-php-source extract \
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 COPY docker/php/php.ini $PHP_INI_DIR/conf.d/php.ini
 COPY docker/php/php-cli.ini $PHP_INI_DIR/conf.d/php-cli.ini
-#COPY docker/php/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
+COPY docker/php/xdebug.ini $PHP_INI_DIR/conf.d/xdebug.ini
 
 COPY docker/php/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf
 

@@ -5,7 +5,7 @@ namespace App\Elasticsearch;
 
 
 use App\Service\DataFileReader;
-use Elastica\Query\MultiMatch;
+use Elastica\Query\MatchPhrase;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -15,6 +15,8 @@ class Search
     private TransformedFinder $meaningNamesFinder;
     private DataFileReader $data;
     private string $query;
+
+    private const FIELD = 'name';
 
     public function __construct(
         TransformedFinder $wordsFinder,
@@ -31,10 +33,7 @@ class Search
 
     public function findWords(): array
     {
-        $multiMatch = new MultiMatch();
-        $multiMatch->setQuery($this->query);
-
-        return !empty($this->query) ? $this->wordsFinder->find($multiMatch) : [];
+        return !empty($this->query) ? $this->wordsFinder->find($this->getMatchQuery()) : [];
     }
 
     public function findFilteredMeanings(): array
@@ -53,12 +52,16 @@ class Search
         return $filteredMeanings;
     }
 
+    private function getMatchQuery(): MatchPhrase
+    {
+        $match = new MatchPhrase();
+        return $match->setFieldQuery(self::FIELD,$this->query);
+    }
+
     private function getMeaningNamesBeyondParenthesise(): array
     {
-        $multiMatch = new MultiMatch();
-        $multiMatch->setQuery($this->query);
 
-        $allMeaningNames = $this->meaningNamesFinder->find($multiMatch);
+        $allMeaningNames = $this->meaningNamesFinder->find($this->getMatchQuery());
         $filteredMeaningNames = [];
         foreach ($allMeaningNames as $mName) {
 
