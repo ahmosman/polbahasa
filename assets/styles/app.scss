@@ -237,12 +237,17 @@ input, textarea {
   }
 }
 
+#searching-form {
+  position: relative;
+}
+
 .suggestions {
   &-div {
-    position: relative;
-    bottom: 20px;
-    right: 15px;
-    justify-self: end;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 500px;
+    z-index: 100;
   }
 
   &-ul li {
